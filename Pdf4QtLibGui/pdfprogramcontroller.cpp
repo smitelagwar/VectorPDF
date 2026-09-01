@@ -36,6 +36,7 @@
 #include "pdfviewersettings.h"
 #include "pdfundoredomanager.h"
 #include "pdfrendertoimagesdialog.h"
+#include "pdfconversioncenterdialog.h"
 #include "pdfoptimizedocumentdialog.h"
 #include "pdfoptimizeimagesdialog.h"
 #include "pdfsanitizedocumentdialog.h"
@@ -1437,6 +1438,103 @@ void PDFProgramController::onActionSendByEMailTriggered()
 void PDFProgramController::onActionRenderToImagesTriggered()
 {
     PDFRenderToImagesDialog dialog(m_pdfDocument.data(), m_pdfWidget->getDrawWidgetProxy(), m_progress, m_mainWindow);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionConversionCenterTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionExportDocxTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(0);
+    dialog.setExportFormat(vectorpdf::conversion::ConversionFormat::Docx);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionExportXlsxTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(0);
+    dialog.setExportFormat(vectorpdf::conversion::ConversionFormat::Xlsx);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionExportPptxTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(0);
+    dialog.setExportFormat(vectorpdf::conversion::ConversionFormat::Pptx);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionExportImagesTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(0);
+    dialog.setExportFormat(vectorpdf::conversion::ConversionFormat::Png);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionExportPdfATriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(0);
+    dialog.setExportFormat(vectorpdf::conversion::ConversionFormat::PdfA4);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionExportMonochromeTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(0);
+    dialog.setExportFormat(vectorpdf::conversion::ConversionFormat::MonochromePdf);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionExportFormDataTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(0);
+    dialog.setExportFormat(vectorpdf::conversion::ConversionFormat::Xfdf);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionCreatePdfFromFileTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(1);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionCreatePdfFromImagesTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(1);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionCreatePdfFromClipboardTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(1);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionCreatePdfFromScreenshotTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(1);
+    dialog.exec();
+}
+
+void PDFProgramController::onActionCreatePdfFromFolderTriggered()
+{
+    vectorpdf::gui::PDFConversionCenterDialog dialog(m_pdfDocument.data(), m_fileInfo.originalFileName, m_mainWindow);
+    dialog.setCurrentTab(1);
     dialog.exec();
 }
 

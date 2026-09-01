@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PDFConversionCenterDialog</class>
+ <widget class="QDialog" name="PDFConversionCenterDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>750</width>
+    <height>580</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Conversion &amp; Export Center</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tabExport">
+      <attribute name="title">
+       <string>Export from PDF</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="exportLayout">
+       <item>
+        <widget class="QGroupBox" name="exportSourceGroup">
+         <property name="title">
+          <string>Source Document</string>
+         </property>
+         <layout class="QHBoxLayout" name="exportSourceHLayout">
+          <item>
+           <widget class="QLineEdit" name="exportSourcePathEdit">
+            <property name="placeholderText">
+             <string>Path to source PDF document...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="exportSourceBrowseButton">
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="exportTargetGroup">
+         <property name="title">
+          <string>Target Format &amp; Settings</string>
+         </property>
+         <layout class="QGridLayout" name="exportTargetGrid">
+          <item row="0" column="0">
+           <widget class="QLabel" name="exportFormatLabel">
+            <property name="text">
+             <string>Format:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="exportFormatCombo"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="exportPagesLabel">
+            <property name="text">
+             <string>Page Range:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="exportPagesEdit">
+            <property name="placeholderText">
+             <string>All pages or e.g. 1-5, 8, 10-12</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="exportDpiLabel">
+            <property name="text">
+             <string>Resolution (DPI):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="exportDpiSpin">
+            <property name="minimum">
+             <number>72</number>
+            </property>
+            <property name="maximum">
+             <number>1200</number>
+            </property>
+            <property name="value">
+             <number>300</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="exportModeLabel">
+            <property name="text">
+             <string>Mode / Option:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QComboBox" name="exportModeCombo"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="exportOutputGroup">
+         <property name="title">
+          <string>Output Location</string>
+         </property>
+         <layout class="QHBoxLayout" name="exportOutputHLayout">
+          <item>
+           <widget class="QLineEdit" name="exportOutputPathEdit">
+            <property name="placeholderText">
+             <string>Output destination file or directory path...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="exportOutputBrowseButton">
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="exportCapabilityLabel">
+         <property name="text">
+          <string>Engine: Ready</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string>color: #555; padding: 4px;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="exportSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="exportBtnLayout">
+         <item>
+          <spacer name="exportBtnSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="exportStartButton">
+           <property name="text">
+            <string>Start Export</string>
+           </property>
+           <property name="default">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabCreate">
+      <attribute name="title">
+       <string>Create PDF</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="createLayout">
+       <item>
+        <widget class="QGroupBox" name="createSourceTypeGroup">
+         <property name="title">
+          <string>Source Type</string>
+         </property>
+         <layout class="QHBoxLayout" name="createSourceTypeHLayout">
+          <item>
+           <widget class="QComboBox" name="createSourceTypeCombo"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QStackedWidget" name="createStack">
+         <widget class="QWidget" name="createSingleFilePage">
+          <layout class="QVBoxLayout" name="createSingleFileLayout">
+           <item>
+            <layout class="QHBoxLayout" name="createSingleFileHLayout">
+             <item>
+              <widget class="QLineEdit" name="createSingleFilePathEdit">
+               <property name="placeholderText">
+                <string>Select file (DOCX, HTML, Markdown, Image)...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="createSingleFileBrowseButton">
+               <property name="text">
+                <string>Browse...</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="createMultiImagePage">
+          <layout class="QVBoxLayout" name="createMultiImageLayout">
+           <item>
+            <widget class="QListWidget" name="createImageListWidget"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="createImageBtnLayout">
+             <item>
+              <widget class="QPushButton" name="createAddImagesButton">
+               <property name="text">
+                <string>Add Images...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="createRemoveImageButton">
+               <property name="text">
+                <string>Remove Selected</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="createClearImagesButton">
+               <property name="text">
+                <string>Clear All</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="createClipboardPage">
+          <layout class="QVBoxLayout" name="createClipboardLayout">
+           <item>
+            <widget class="QLabel" name="createClipboardInfoLabel">
+             <property name="text">
+              <string>Paste image from system clipboard to convert to PDF.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="createClipboardPasteButton">
+             <property name="text">
+              <string>Load from Clipboard</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="createScreenshotPage">
+          <layout class="QVBoxLayout" name="createScreenshotLayout">
+           <item>
+            <widget class="QLabel" name="createScreenshotInfoLabel">
+             <property name="text">
+              <string>Capture screen or selected region to convert to PDF.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="createScreenshotBtnLayout">
+             <item>
+              <widget class="QPushButton" name="createCaptureScreenButton">
+               <property name="text">
+                <string>Capture Full Screen</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="createCaptureRegionButton">
+               <property name="text">
+                <string>Capture Region (Snip)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="createFolderPage">
+          <layout class="QVBoxLayout" name="createFolderLayout">
+           <item>
+            <layout class="QHBoxLayout" name="createFolderHLayout">
+             <item>
+              <widget class="QLineEdit" name="createFolderPathEdit">
+               <property name="placeholderText">
+                <string>Select folder containing documents, images, and PDFs...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="createFolderBrowseButton">
+               <property name="text">
+                <string>Browse...</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="createFolderRecursiveCheck">
+             <property name="text">
+              <string>Include subdirectories</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="createFolderBookmarksCheck">
+             <property name="text">
+              <string>Generate bookmarks from source filenames</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="createOutputGroup">
+         <property name="title">
+          <string>Target PDF Destination</string>
+         </property>
+         <layout class="QHBoxLayout" name="createOutputHLayout">
+          <item>
+           <widget class="QLineEdit" name="createOutputPathEdit">
+            <property name="placeholderText">
+             <string>Path for new PDF file...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="createOutputBrowseButton">
+            <property name="text">
+             <string>Browse...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="createBtnLayout">
+         <item>
+          <spacer name="createBtnSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="createStartButton">
+           <property name="text">
+            <string>Create PDF</string>
+           </property>
+           <property name="default">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabQueue">
+      <attribute name="title">
+       <string>Job Queue</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="queueLayout">
+       <item>
+        <widget class="QTableWidget" name="queueTableWidget">
+         <property name="columnCount">
+          <number>6</number>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <column>
+          <property name="text">
+           <string>Job ID</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Source</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Format</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Status</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Progress</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Output File</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="queueActionsLayout">
+         <item>
+          <widget class="QPushButton" name="queueCancelButton">
+           <property name="text">
+            <string>Cancel Selected</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="queueOpenFileButton">
+           <property name="text">
+            <string>Open File</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="queueOpenFolderButton">
+           <property name="text">
+            <string>Open Folder</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="queueSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="queueClearFinishedButton">
+           <property name="text">
+            <string>Clear Finished</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="dialogBottomLayout">
+     <item>
+      <spacer name="dialogSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="closeButton">
+       <property name="text">
+        <string>Close</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>closeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>PDFConversionCenterDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>700</x>
+     <y>550</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

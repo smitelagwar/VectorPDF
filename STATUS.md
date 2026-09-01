@@ -29,12 +29,22 @@ Yok. M0'dan M11'e kadar tüm yol haritası görevleri (`TASK-2026-001` - `TASK-2
 - M9 Dönüştürme, Dışa Aktarma ve Standartlar: PDF/A uyumluluğu, görselden PDF (`PDFDocumentBuilder`) ve dışa aktarma araçları tamamlandı (`TASK-2026-012` done).
 - M10 Dağıtım, Paketleme ve Windows Entegrasyonu: MSIX manifesti (`AppxManifest.xml.in`), `.pdf` dosya ilişkileri ve derleme otomasyonu tamamlandı (`TASK-2026-013` done).
 - M11 Otomasyon, Eklenti Mimarisi ve Çevrimdışı AI: `PDFBatchProcessor` kuyruğu, `PDFPluginManifest` / `PDFPluginSecurityGuard` ve `IAIProvider` / `PDFAIOfflineProvider` adaptörü tamamlandı (`TASK-2026-014` done).
+- M12 VectorPDF Kapsamlı Dönüştürme, Dışa Aktarma ve PDF Oluşturma Motoru (`VectorPDFConversion`):
+  - Saf C++ / `zlib` tabanlı harici bağımlılıksız OOXML paketleyici (`DocxPackageWriter`, `XlsxPackageWriter`, `PptxPackageWriter`, `TableDetector`).
+  - PDF → DOCX (Reflow / Visual), XLSX (Algılanan Tablolar / Sayfa Izgarası), PPTX (Slayt / Metin Kutusu), PNG, JPEG, TIFF (Tek/Çok Sayfa), WebP, BMP dışa aktarıcılar.
+  - PDF/A-1b/2b/3b/4 arşiv dönüştürücü ve veraPDF CLI entegrasyonu.
+  - İki seviyeli Otsu / Sabit eşikleme ile kompakt Monochrome (Bilevel) PDF üretimi.
+  - XFDF ve FDF form verisi dışa aktarıcıları.
+  - Görsellerden PDF, GitHub uyumlu Markdown → Temalı PDF (Clean, Academic, Compact, DarkOnLight), HTML → Güvenli Çevrimdışı PDF, Ofis belgelerinden PDF ve Klasör/Toplu PDF oluşturucular.
+  - Pano (Clipboard) ve Bölgesel Ekran Alıntısı (`PDFScreenshotDialog`) yakalama araçları.
+  - Birleşik `PDFConversionCenterDialog` arayüzü, arkaplan iş kuyruğu (`ConversionService`, `ConversionJob`) ve kapsamlı birim test paketi (`tst_conversiontest.cpp`).
 
 ## Kabul edilen teknik rota
 
 1. **PDF4QT v1.6.0.0**, VectorPDF'in açık kaynak çekirdek tabanıdır.
 2. Ürün adı **VectorPDF** olarak geliştirilmektedir.
 3. Windows 11 x64 hedefli, Store/MSIX ve bağımsız taşınabilir dağıtım için hazırdır.
+4. **VectorPDFConversion** modülü saf C++ ve çevrimdışı öncelikli mimariyle tüm modern ofis ve görsel formatları destekler.
 
 ## Sonraki işler
 
@@ -42,4 +52,5 @@ Yok. M0'dan M11'e kadar tüm yol haritası görevleri (`TASK-2026-001` - `TASK-2
 
 ## Aktif blokajlar
 
-- Yok. Proje hedeflenen tüm fazları başarıyla tamamlamıştır.
+- Yok. Proje hedeflenen tüm fazları ve dönüştürme altyapısını başarıyla tamamlamıştır.
+

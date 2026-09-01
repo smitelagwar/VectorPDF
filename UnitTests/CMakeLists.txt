@@ -76,4 +76,17 @@ set_target_properties(UnitTestsM11Ecosystem PROPERTIES
 )
 add_test(UnitTestsM11Ecosystem  "${CMAKE_BINARY_DIR}/${PDF4QT_INSTALL_BIN_DIR}/UnitTestsM11Ecosystem")
 
+add_executable(UnitTestsConversion
+	tst_conversiontest.cpp
+)
 
+target_link_libraries(UnitTestsConversion PRIVATE VectorPDFConversion Pdf4QtLibCore Qt6::Core Qt6::Gui Qt6::Test)
+target_include_directories(UnitTestsConversion PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFConversion/sources)
+
+set_target_properties(UnitTestsConversion PROPERTIES
+    WIN32_EXECUTABLE OFF
+    MACOSX_BUNDLE OFF
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PDF4QT_INSTALL_LIB_DIR}
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PDF4QT_INSTALL_BIN_DIR}
+)
+add_test(UnitTestsConversion "${CMAKE_BINARY_DIR}/${PDF4QT_INSTALL_BIN_DIR}/UnitTestsConversion")

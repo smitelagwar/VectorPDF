@@ -85,6 +85,11 @@ add_library(Pdf4QtLibGui SHARED
     pdfactioncombobox.cpp
     pdffullscreenwidget.h
     pdffullscreenwidget.cpp
+    pdfconversioncenterdialog.h
+    pdfconversioncenterdialog.cpp
+    pdfconversioncenterdialog.ui
+    pdfscreenshotdialog.h
+    pdfscreenshotdialog.cpp
 )
 
 add_compile_definitions(QT_INSTALL_DIRECTORY="${QT6_INSTALL_PREFIX}")
@@ -96,9 +101,9 @@ GENERATE_EXPORT_HEADER(Pdf4QtLibGui
                        PDF4QTLIBGUILIBSHARED_EXPORT
                        EXPORT_FILE_NAME "${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/pdf4qtlibgui_export.h")
 
-target_link_libraries(Pdf4QtLibGui PRIVATE Pdf4QtLibCore Pdf4QtLibWidgets Qt6::Core Qt6::Gui Qt6::Widgets Qt6::PrintSupport Qt6::TextToSpeech Qt6::Xml Qt6::Svg)
+target_link_libraries(Pdf4QtLibGui PRIVATE Pdf4QtLibCore Pdf4QtLibWidgets VectorPDFConversion Qt6::Core Qt6::Gui Qt6::Widgets Qt6::PrintSupport Qt6::TextToSpeech Qt6::Xml Qt6::Svg)
 target_include_directories(Pdf4QtLibGui INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(Pdf4QtLibGui PUBLIC ${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR})
+target_include_directories(Pdf4QtLibGui PUBLIC ${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR} ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFConversion/sources)
 
 set_target_properties(Pdf4QtLibGui PROPERTIES
                       VERSION ${PDF4QT_VERSION}

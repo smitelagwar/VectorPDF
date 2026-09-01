@@ -181,6 +181,7 @@ endif()
 
 if(NOT PDF4QT_BUILD_ONLY_CORE_LIBRARY)
     add_subdirectory(Pdf4QtLibWidgets)
+    add_subdirectory(VectorPDFConversion)
     add_subdirectory(CodeGenerator)
     add_subdirectory(JBIG2_Viewer)
     add_subdirectory(PdfExampleGenerator)
