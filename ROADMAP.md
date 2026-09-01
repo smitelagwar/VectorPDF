@@ -220,6 +220,8 @@ Revocation/AIA/timestamp için genel worker ağı açılmaz: explicit policy/con
 
 ## M11 — P3 otomasyon, plugin ve isteğe bağlı AI
 
+**Durum:** Tamamlandı — 2026-09-01 (`TASK-2026-014`)
+
 **Amaç:** Güvenilir temel bozulmadan ürünün genişlemesi.
 
 **Çıktılar**

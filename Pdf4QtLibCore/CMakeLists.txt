@@ -24,10 +24,14 @@ add_library(Pdf4QtLibCore SHARED
     sources/pdfglobal.h
     sources/pdfaction.cpp
     sources/pdfaction.h
+    sources/pdfaiprovider.cpp
+    sources/pdfaiprovider.h
     sources/pdfalgorithmlcs.cpp
     sources/pdfalgorithmlcs.h
     sources/pdfannotation.cpp
     sources/pdfannotation.h
+    sources/pdfbatchprocessor.cpp
+    sources/pdfbatchprocessor.h
     sources/pdfblendfunction.cpp
     sources/pdfblendfunction.h
     sources/pdfccittfaxdecoder.cpp

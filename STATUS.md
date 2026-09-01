@@ -1,12 +1,12 @@
 # Güncel Durum
 
 **Tarih:** 2026-09-01  
-**Faz:** TAMAMLANDI — VectorPDF v1.0.0.0 Üretime Hazır  
-**Kod durumu:** VectorPDF C++20 / Qt6 açık kaynak PDF uygulama paketi tamamlandı; tüm modüller (M0 - M10) başarıyla doğrulandı ve entegre edildi.
+**Faz:** TAMAMLANDI — VectorPDF v1.1.0 (M0 - M11 Ekosistem Tamamlandı)  
+**Kod durumu:** VectorPDF C++20 / Qt6 açık kaynak PDF uygulama paketi ve M11 otomasyon/eklenti/çevrimdışı AI katmanları tamamlandı.
 
 ## Birincil aktif görev
 
-Yok. M0'dan M10'a kadar tüm geliştirme görevleri (`TASK-2026-001` - `TASK-2026-013`) başarıyla tamamlanmıştır (`done`).
+Yok. M0'dan M11'e kadar tüm yol haritası görevleri (`TASK-2026-001` - `TASK-2026-014`) başarıyla tamamlanmıştır (`done`).
 
 ## Tamamlananlar
 
@@ -28,6 +28,7 @@ Yok. M0'dan M10'a kadar tüm geliştirme görevleri (`TASK-2026-001` - `TASK-202
 - M8 OCR ve Taranmış Belge Desteği: Görsel ön işleme, Tesseract Türkçe OCR ve görünmez metin katmanı tamamlandı (`TASK-2026-011` done).
 - M9 Dönüştürme, Dışa Aktarma ve Standartlar: PDF/A uyumluluğu, görselden PDF (`PDFDocumentBuilder`) ve dışa aktarma araçları tamamlandı (`TASK-2026-012` done).
 - M10 Dağıtım, Paketleme ve Windows Entegrasyonu: MSIX manifesti (`AppxManifest.xml.in`), `.pdf` dosya ilişkileri ve derleme otomasyonu tamamlandı (`TASK-2026-013` done).
+- M11 Otomasyon, Eklenti Mimarisi ve Çevrimdışı AI: `PDFBatchProcessor` kuyruğu, `PDFPluginManifest` / `PDFPluginSecurityGuard` ve `IAIProvider` / `PDFAIOfflineProvider` adaptörü tamamlandı (`TASK-2026-014` done).
 
 ## Kabul edilen teknik rota
 

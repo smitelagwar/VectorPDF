@@ -22,5 +22,8 @@ Bu dosya yalnız kullanıcıya görünen ürün değişikliklerini [Keep a Chang
 - **OCR ve Taranmış Belge Desteği:** Otomatik eğrilik düzeltme (deskew), Otsu binarizasyonu, Tesseract Türkçe OCR (`tur.traineddata`) ve görünmez aranabilir metin katmanı.
 - **Dönüştürme ve Standartlar:** PDF/A arşiv profili kontrolleri, JPEG/PNG/TIFF/WebP formatlarından doğrudan PDF üretimi ve yüksek çözünürlüklü dışa aktarım.
 - **Windows 11 Entegrasyonu:** MSIX paketleme manifesti (`AppxManifest.xml.in`), `.pdf` dosya ilişkilendirmeleri ve bağımsız taşınabilir (portable) dağıtım desteği.
+- **Otomasyon ve Toplu İşlem (Batch Queue):** `PDFBatchProcessor` ile toplu dönüştürme, OCR, optimizasyon, sayfa ayıklama, ilerleme takibi ve hata toleranslı yeniden deneme/iptal kuyruğu.
+- **Güvenli Eklenti Mimarisi:** İzin tabanlı `PDFPluginManifest` ve `PDFPluginSecurityGuard` ile yetki kısıtlama (`ReadDocument`, `ModifyDocument`, `ExecuteExternalProcess`) ve dijital imza doğrulaması.
+- **Çevrimdışı Yerel Yapay Zekâ Adaptörü:** `IAIProvider` ve `PDFAIOfflineProvider` ile görev bazlı açık izin (`AITaskConsent`), prompt injection filtreleme, yerel metin özetleme ve anahtar kavram çıkarma.
 - **Türkçe Dil Desteği:** 15.000'den fazla çevrilmiş UI dizesiyle eksiksiz Türkçe arayüz (`translations/PDF4QT_tr.ts`).
 

@@ -62,3 +62,18 @@ set_target_properties(UnitTestsDocumentSession PROPERTIES
 )
 add_test(UnitTestsDocumentSession  "${CMAKE_BINARY_DIR}/${PDF4QT_INSTALL_BIN_DIR}/UnitTestsDocumentSession")
 
+add_executable(UnitTestsM11Ecosystem
+	tst_m11ecosystemtest.cpp
+)
+
+target_link_libraries(UnitTestsM11Ecosystem PRIVATE Pdf4QtLibCore Qt6::Core Qt6::Gui Qt6::Test)
+
+set_target_properties(UnitTestsM11Ecosystem PROPERTIES
+    WIN32_EXECUTABLE OFF
+    MACOSX_BUNDLE OFF
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PDF4QT_INSTALL_LIB_DIR}
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PDF4QT_INSTALL_BIN_DIR}
+)
+add_test(UnitTestsM11Ecosystem  "${CMAKE_BINARY_DIR}/${PDF4QT_INSTALL_BIN_DIR}/UnitTestsM11Ecosystem")
+
+
