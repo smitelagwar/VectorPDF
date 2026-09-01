@@ -1,12 +1,12 @@
 # Güncel Durum
 
 **Tarih:** 2026-09-01  
-**Faz:** M5 — P1 Redaction, Metadata ve Gizlilik  
-**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; okuyucu, güvenlik, sayfa işlemleri ve formlar tamamlandı; kalıcı redaction ve metaveri temizleme yönetiliyor.
+**Faz:** M6 — P1 Gelişmiş Düzenleme ve Tipografi  
+**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; okuyucu, güvenlik, sayfa işlemleri, formlar ve redaction tamamlandı; metin düzenleme ve tipografi yönetiliyor.
 
 ## Birincil aktif görev
 
-[TASK-2026-008 — M5 Redaction, Metadata ve Gizlilik](docs/tasks/TASK-2026-008-m5-redaction-and-metadata.md)
+[TASK-2026-009 — M6 Gelişmiş Düzenleme ve Tipografi](docs/tasks/TASK-2026-009-m6-text-editing-and-typography.md)
 
 Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yukarıdaki görev kaydının `Devam checkpoint'i` bölümü okunur. Görev bağlantısı değişmedikçe ayrıntılı kaldığım-yer bilgisi görev dosyasındadır; bu bölüm aynı ayrıntıyı tekrar etmez.
 
@@ -24,6 +24,7 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 - M2 Okuyucu ve Arayüz Kalitesi: Sayfa düzenleri, arama motoru, metin seçimi ve Türkçe yerelleştirme tamamlandı (`TASK-2026-005` done).
 - M3 Sayfa İşlemleri ve Annotation: Sayfa manipülasyonu (`PDFDocumentManipulator`), 15+ açıklama tipi ve `PDFUndoRedoManager` tamamlandı (`TASK-2026-006` done).
 - M4 AcroForm ve Form Tasarımı: Form motoru (`PDFFormField`), widget yöneticisi (`PDFWidgetFormManager`) ve form kontrolleri tamamlandı (`TASK-2026-007` done).
+- M5 Redaction, Metadata ve Gizlilik: Gerçek kalıcı Redaction (`PDFRedact`), metaveri temizleme ve ek dosya yönetimi tamamlandı (`TASK-2026-008` done).
 
 ## Kabul edilen teknik rota
 
@@ -32,11 +33,11 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 
 ## Sonraki işler
 
-1. Gerçek kalıcı Redaction (glif/piksel düzeyinde kalıcı silme) motorunu yapılandır.
-2. Metaveri temizleme (Info, XMP, PieceInfo scrub) araçlarını doğrula.
-3. Ek dosya (attachment) yönetimi ve taramasını doğrula.
-4. M6 Gelişmiş Düzenleme ve Tipografi aşamasına geç.
+1. Metin akışı düzenleme motoru (`PDFDocumentTextFlowEditorModel`) ve blok ayrıştırmayı yapılandır.
+2. FreeType tabanlı font cache ve tipografi eşleme mekanizmasını doğrula.
+3. Görsel optimizasyon ve nesne manipülasyonu araçlarını doğrula.
+4. M7 Kripto, Güvenlik ve Dijital İmza aşamasına geç.
 
 ## Aktif blokajlar
 
-- Yok. Proje M5 redaction, metadata ve gizlilik geliştirme aşamasındadır.
+- Yok. Proje M6 gelişmiş düzenleme ve tipografi geliştirme aşamasındadır.
