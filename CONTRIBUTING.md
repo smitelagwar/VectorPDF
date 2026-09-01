@@ -37,4 +37,21 @@ Signed-off-by: Ad Soyad <e-posta>
 - Kabul edilmiş ADR geriye dönük yeniden yazılmaz; yeni ADR eskisini supersede eder.
 - Katkı kanalı açıldığında bütün commit'ler DCO sign-off taşımalıdır; bot geçişi insan review'ının yerine geçmez.
 
-Build ve test komutları Gate 1 sonunda, seçilen baseline temiz ortamda doğrulandıktan sonra buraya eklenecektir.
+## VectorPDF Derleme ve Test Komutları (Windows 11 x64)
+
+Gereksinimler: MSVC 2022 v143 (C++20), CMake 3.25+, Qt 6.9+ (Core, Gui, Widgets, Svg, Xml, PrintSupport, TextToSpeech, Concurrent) ve vcpkg.
+
+```powershell
+# 1. vcpkg bağımlılıklarını yükleyin:
+vcpkg install tbb openssl lcms zlib openjpeg freetype libjpeg-turbo libpng blend2d --triplet x64-windows
+
+# 2. CMake ile yapılandırın:
+cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DPDF4QT_QT_ROOT="$env:Qt6_DIR" -DPDF4QT_BUILD_TESTS=ON
+
+# 3. Projeyi derleyin:
+cmake --build build --config Release -j8
+
+# 4. Testleri çalıştırın:
+ctest --test-dir build -C Release --output-on-failure
+```
+

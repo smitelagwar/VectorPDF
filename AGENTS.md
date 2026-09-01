@@ -60,9 +60,21 @@ Checkpoint karar/sonuç/kanıt içerir; sohbet dökümü, gizli chain-of-thought
 5. Karar değiştiyse eski ADR'yi düzenlemek yerine yeni ADR ile supersede et.
 6. `STATUS.md` dosyasını yalnız mevcut faz, birincil aktif görev veya üst düzey sonraki eylem gerçekten değiştiyse güncelle.
 
-## Komutlar
+## Komutlar (VectorPDF Windows 11 x64)
 
-Teknik taban seçilmediği için kanonik build/test komutları henüz yoktur; komut uydurma. Gate 1 sonunda doğrulanmış komutlar bu bölüme ve `CONTRIBUTING.md` dosyasına yazılacaktır.
+```powershell
+# 1. vcpkg bağımlılıklarını kur:
+vcpkg install tbb openssl lcms zlib openjpeg freetype libjpeg-turbo libpng blend2d --triplet x64-windows
+
+# 2. CMake ile configure:
+cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DPDF4QT_QT_ROOT="$env:Qt6_DIR" -DPDF4QT_BUILD_TESTS=ON
+
+# 3. Derleme:
+cmake --build build --config Release -j8
+
+# 4. Test çalıştırma:
+ctest --test-dir build -C Release --output-on-failure
+```
 
 ## Kapsamlı belgeler
 
