@@ -1240,8 +1240,21 @@ void PDFProgramController::performSaveAs()
 
 void PDFProgramController::performSave()
 {
+    if (m_pdfDocument)
+    {
+        const pdf::PDFCatalog* catalog = m_pdfDocument->getCatalog();
+        if (catalog && catalog->getForm() && catalog->getForm()->hasSignatures())
+        {
+            QMessageBox::warning(m_mainWindow, tr("Signed Document Protection"),
+                tr("This document contains digital signatures. Direct in-place saving is disabled to protect cryptographic signature validity. Please save as a separate copy."));
+            performSaveAs();
+            return;
+        }
+    }
+
     saveDocument(m_fileInfo.originalFileName);
 }
+
 
 void PDFProgramController::saveDocument(const QString& fileName)
 {
