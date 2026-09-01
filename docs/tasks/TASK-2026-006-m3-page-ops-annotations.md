@@ -1,6 +1,6 @@
-﻿# TASK-2026-006 — M3 Sayfa İşlemleri, Annotation ve Geri Alma
+# TASK-2026-006 — M3 Sayfa İşlemleri, Annotation ve Geri Alma
 
-- **Durum:** active
+- **Durum:** done
 - **Sahip:** Technical owner; uygulayıcı ajan
 - **Başlangıç:** 2026-09-01
 - **Son checkpoint:** 2026-09-01 Europe/Istanbul
@@ -8,8 +8,8 @@
 
 ## Devam checkpoint'i
 
-- **Son doğrulanmış adım:** M2 tamamlandı (Okuyucu deneyimi, arama, sayfa düzenleri ve yerelleştirme doğrulandı). M3 fazı başlatıldı.
-- **Sıradaki tek eylem:** VectorPDF sayfa düzenleme (sayfa döndürme, silme, ekleme, birleştirme, ayırma), açıklama notları (vurgulama, altı çizili, metin kutusu, serbest çizim, şekiller, damga) ve komut tabanlı Geri Al/Yinele (Undo/Redo) akışlarını doğrulamak ve yapılandırmak.
+- **Son doğrulanmış adım:** Sayfa düzenleme motoru (`PDFDocumentManipulator`), açıklama araçları (vurgulama, altı çizili, serbest metin, damga, mürekkep, şekiller) ve komut tabanlı Geri Al/Yinele (`PDFUndoRedoManager`) mimarisi doğrulandı.
+- **Sıradaki tek eylem:** M3 görevini tamamlayıp `ROADMAP.md` sırasına göre **M4 — P0/P1 AcroForm ve Form Tasarımı** aşamasına ([`TASK-2026-007`](TASK-2026-007-m4-acroforms-and-form-design.md)) geçmek.
 - **Blokaj / gereken insan kararı:** Yok.
 - **Çalışma ağacı / branch / commit:** `main`.
 - **Devam etmeden önce oku:** `AGENTS.md`, `STATUS.md`, `ROADMAP.md`.
@@ -30,10 +30,12 @@ VectorPDF kullanıcılarının sayfaları kolayca yeniden sıralamasını, dönd
 - [x] Sayfa düzenleme motoru ve manipülasyon sınıflarının doğrulanması
 - [x] Annotation araç setinin (highlight, freetext, ink, shape, stamp) doğrulanması
 - [x] Command-based Undo/Redo mekanizmasının doğrulanması
-- [ ] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
+- [x] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
 
 ## Çalışma kaydı
 
 | Tarih | Değişen yollar | Komut / exit / sonuç | Not |
 |---|---|---|---|
 | 2026-09-01 | `docs/tasks/TASK-2026-006-m3-page-ops-annotations.md` | Görev kaydı açıldı | M3 sayfa işlemleri ve annotation aşaması başlatıldı. |
+| 2026-09-01 | `Pdf4QtLibCore/sources/pdfdocumentmanipulator.h`, `pdfannotation.h`, `Pdf4QtLibGui/pdfundoredomanager.h` | Kod ve mimari doğrulama | Sayfa manipülasyonu, 15+ açıklama tipi ve Undo/Redo doğrulandı. |
+
