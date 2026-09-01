@@ -1,0 +1,26 @@
+# Local corpus and hostile-file quarantine
+tests/corpus/cache/
+tests/corpus/quarantine/
+tests/corpus/output/
+
+# Build, package and temporary evidence artifacts
+.artifacts/
+.cache/
+build/
+out/
+dist/
+
+# IDE and user-local state
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Secrets and signing material must never be committed
+*.pfx
+*.p12
+*.key
+*.pem
+.env
+.env.*
+!.env.example

@@ -1,0 +1,18 @@
+schema_version: 1
+generated_at: null
+entries: []
+
+# Entry schema:
+# - id: PDF-0001
+#   title: Human-readable description
+#   upstream_url: https://canonical.example/file-or-repository
+#   pinned_commit_or_version: exact-value
+#   sha256: lowercase-hex
+#   license_spdx: SPDX-or-LicenseRef
+#   license_evidence_url: https://canonical.example/license
+#   expected_behavior: open/render/reject/preserve/validate details
+#   covers: [REQ-ID, CAP-ID]
+#   malicious: false
+#   size_bytes: 0
+#   acquisition_method: download-or-generate
+#   safety_notes: null

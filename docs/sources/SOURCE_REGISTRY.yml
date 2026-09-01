@@ -1,0 +1,230 @@
+schema_version: 1
+registry_verified_at: "2026-09-01"
+policy: "SOURCES.md, docs/templates/SOURCE_EVALUATION.md, and docs/sources/evaluations/README.md"
+scope: "Decision-critical, normative-core, or adoption-candidate sources only. Reference-only SOURCES.md rows need not have registry parity until proposed for import."
+
+sources:
+  - source_id: SRC-APP-001
+    title: PDF4QT
+    canonical_url: https://github.com/JakubMelka/PDF4QT
+    source_type: upstream_repository
+    authority: maintainer
+    version_tag_commit: "v1.6.0.0 / 23f3829ae0420da801824a0d53d82c53baa2bee9"
+    license_spdx: MIT
+    license_evidence_url: https://github.com/JakubMelka/PDF4QT/blob/23f3829ae0420da801824a0d53d82c53baa2bee9/LICENSE
+    evaluation_path: docs/sources/evaluations/SRC-APP-001-PDF4QT.md
+    purpose: baseline_candidate
+    decision: ADOPT-CANDIDATE
+    status: active_review
+    verified_at: "2026-08-31"
+    next_review: "2026-09-30"
+    advisory_url: https://github.com/JakubMelka/PDF4QT/security
+    notes: "Gate 1; Qt and all third-party obligations plus pre-2025 relicense provenance must be audited."
+
+  - source_id: SRC-APP-002
+    title: KillerPDF
+    canonical_url: https://github.com/SteveTheKiller/KillerPDF
+    source_type: upstream_repository
+    authority: maintainer
+    version_tag_commit: "v1.8.2 / fca9a6f4bd77d1fdde692bd9e402c07e0ec490de"
+    license_spdx: GPL-3.0-only
+    license_evidence_url: https://github.com/SteveTheKiller/KillerPDF/blob/fca9a6f4bd77d1fdde692bd9e402c07e0ec490de/LICENSE
+    evaluation_path: docs/sources/evaluations/SRC-APP-002-KillerPDF.md
+    purpose: behavior_and_test_reference
+    decision: REJECT-CURRENT
+    status: blocked_by_accepted_permissive_route
+    verified_at: "2026-08-31"
+    next_review: "only_if_ADR-0001_is_superseded"
+    notes: "GPL-3.0-only is outside accepted route. Local current-main tests: 1716 passed; not conformance/security proof."
+
+  - source_id: SRC-APP-003
+    title: Open PDF Studio
+    canonical_url: https://github.com/OpenAEC-Foundation/open-pdf-studio
+    source_type: upstream_repository
+    authority: maintainer
+    version_tag_commit: "v1.92.0 / 8919c8efaacffe43c5e59f2270ba9f038eb1ea17"
+    license_spdx: LicenseRef-Conflicting-LGPL-MIT-AGPL-Dependency
+    license_evidence_url: https://github.com/OpenAEC-Foundation/open-pdf-studio/blob/8919c8efaacffe43c5e59f2270ba9f038eb1ea17/LICENSE.md
+    evaluation_path: docs/sources/evaluations/SRC-APP-003-Open-PDF-Studio.md
+    purpose: architecture_reference
+    decision: WATCH
+    status: blocked
+    verified_at: "2026-08-31"
+    next_review: "2027-02-28"
+    notes: "Root LGPL, manifests report MIT, direct mupdf npm dependency is AGPL; do not copy until clarified."
+
+  - source_id: SRC-APP-004
+    title: Stirling-PDF
+    canonical_url: https://github.com/Stirling-Tools/Stirling-PDF
+    source_type: upstream_repository
+    authority: maintainer
+    version_tag_commit: "v2.14.3 / e556eba8326c8349aa0318034cfdb5c442dca21c"
+    license_spdx: LicenseRef-Open-Core-Mixed
+    license_evidence_url: https://github.com/Stirling-Tools/Stirling-PDF/blob/v2.14.3/LICENSE
+    purpose: workflow_reference
+    decision: REFERENCE
+    status: current_code_rejected_as_baseline
+    verified_at: "2026-08-31"
+    next_review: "on_reconsideration"
+    notes: "Desktop and engine paths have separate restrictive terms."
+
+  - source_id: SRC-ENG-001
+    title: PDFium
+    canonical_url: https://pdfium.googlesource.com/pdfium/
+    source_type: upstream_repository
+    authority: maintainer
+    version_tag_commit: "UNPINNED; pin canonical commit only at adoption"
+    license_spdx: LicenseRef-BSD-like-with-third-party-notices
+    license_evidence_url: https://pdfium.googlesource.com/pdfium/+/refs/heads/main/LICENSE
+    purpose: fallback_render_form_annotation_engine
+    decision: COMPONENT-CANDIDATE
+    status: watch
+    verified_at: "2026-08-31"
+    next_review: "at_adoption"
+    notes: "Canonical project is rolling; use commit pin and full third_party notice inventory."
+
+  - source_id: SRC-ENG-002
+    title: qpdf
+    canonical_url: https://github.com/qpdf/qpdf
+    source_type: upstream_repository
+    authority: maintainer
+    version_tag_commit: "v12.4.1 / c37f83ae468abb6cc741f43b2f6fdeb66e550ffb"
+    license_spdx: Apache-2.0
+    license_evidence_url: https://github.com/qpdf/qpdf/blob/v12.4.1/LICENSE.txt
+    purpose: structure_repair_encryption_validation
+    decision: COMPONENT-CANDIDATE
+    status: active
+    verified_at: "2026-08-31"
+    next_review: "2026-09-30"
+    advisory_url: https://github.com/qpdf/qpdf/security
+    notes: "Not a renderer or complete signature engine; incremental update/signing limitations remain."
+
+  - source_id: SRC-ENG-003
+    title: PDF.js
+    canonical_url: https://github.com/mozilla/pdf.js
+    source_type: upstream_repository
+    authority: maintainer
+    version_tag_commit: "v6.3.289 / 1c8020a7d4e43668ac287a3ecf9a8dbea17e4c56"
+    license_spdx: Apache-2.0
+    license_evidence_url: https://github.com/mozilla/pdf.js/blob/v6.3.289/LICENSE
+    purpose: web_viewer_or_reference
+    decision: COMPONENT-CANDIDATE
+    status: active
+    verified_at: "2026-08-31"
+    next_review: "at_adoption"
+    advisory_url: https://github.com/mozilla/pdf.js/security
+    notes: "Not a complete PDF content editor or desktop application."
+
+  - source_id: SRC-ENG-004
+    title: MuPDF
+    canonical_url: https://github.com/ArtifexSoftware/mupdf
+    source_type: upstream_repository
+    authority: maintainer
+    version_tag_commit: "unselected"
+    license_spdx: AGPL-3.0-or-later
+    license_evidence_url: https://mupdf.readthedocs.io/en/latest/license.html
+    purpose: excluded_engine
+    decision: REJECT-CURRENT
+    status: blocked_without_agpl_or_commercial_license
+    verified_at: "2026-08-31"
+    next_review: "on_license_strategy_change"
+
+  - source_id: SRC-OCR-001
+    title: Tesseract OCR
+    canonical_url: https://github.com/tesseract-ocr/tesseract
+    source_type: upstream_repository
+    authority: maintainer
+    version_tag_commit: "UNPINNED; verify release/tag mismatch at adoption"
+    license_spdx: Apache-2.0
+    license_evidence_url: https://github.com/tesseract-ocr/tesseract/blob/main/LICENSE
+    purpose: offline_ocr_provider
+    decision: COMPONENT-CANDIDATE
+    status: watch
+    verified_at: "2026-08-31"
+    next_review: "at_M5_start"
+    notes: "tur+eng traineddata artifacts require independent version, hash, license and provenance records."
+
+  - source_id: SRC-STD-001
+    title: ISO 32000-2:2020
+    canonical_url: https://www.iso.org/standard/75839.html
+    source_type: normative_standard
+    authority: ISO
+    version_tag_commit: "ISO 32000-2:2020 plus published errata"
+    license_spdx: LicenseRef-ISO-Standard
+    license_evidence_url: https://www.iso.org/standard/75839.html
+    purpose: normative_pdf_2_base
+    decision: AUTHORITATIVE
+    status: active
+    verified_at: "2026-08-31"
+    next_review: "at_each_release_planning"
+    errata_url: https://pdf-issues.pdfa.org/32000-2-2020/
+
+  - source_id: SRC-STD-006
+    title: ETSI EN 319 142-1 V1.2.1
+    canonical_url: https://www.etsi.org/deliver/etsi_en/319100_319199/31914201/01.02.01_60/en_31914201v010201p.pdf
+    source_type: normative_standard
+    authority: ETSI
+    version_tag_commit: "V1.2.1 (2024-01)"
+    license_spdx: LicenseRef-ETSI-Standard
+    license_evidence_url: https://www.etsi.org/intellectual-property-rights
+    purpose: published_pades_base
+    decision: AUTHORITATIVE
+    status: active
+    verified_at: "2026-08-31"
+    next_review: "at_M9_start"
+
+  - source_id: SRC-AI-001
+    title: Codex AGENTS.md guidance
+    canonical_url: https://learn.chatgpt.com/docs/agent-configuration/agents-md
+    source_type: official_documentation
+    authority: OpenAI
+    version_tag_commit: "live documentation"
+    license_spdx: LicenseRef-Documentation
+    license_evidence_url: https://openai.com/policies/terms-of-use/
+    purpose: agent_instruction_architecture
+    decision: AUTHORITATIVE-FOR-CODEX
+    status: active
+    verified_at: "2026-08-31"
+    next_review: "on_agent_workflow_change"
+
+  - source_id: SRC-REL-005
+    title: Supported versions of Windows client
+    canonical_url: https://learn.microsoft.com/en-us/windows/release-health/supported-versions-windows-client
+    source_type: official_documentation
+    authority: Microsoft
+    version_tag_commit: "live lifecycle table"
+    license_spdx: LicenseRef-Documentation
+    license_evidence_url: https://learn.microsoft.com/en-us/legal/termsofuse
+    purpose: supported_windows_release_matrix
+    decision: AUTHORITATIVE
+    status: active
+    verified_at: "2026-09-01"
+    next_review: "at_each_release_planning"
+
+  - source_id: SRC-REL-006
+    title: Windows 10 support ended
+    canonical_url: https://support.microsoft.com/en-US/Windows/Deployment/Updates-Lifecycle/windows-10-support-has-ended-on-october-14-2025
+    source_type: official_documentation
+    authority: Microsoft
+    version_tag_commit: "Windows 10 EOS 2025-10-14"
+    license_spdx: LicenseRef-Documentation
+    license_evidence_url: https://www.microsoft.com/en-us/legal/terms-of-use
+    purpose: exclude_windows_10_from_supported_matrix
+    decision: AUTHORITATIVE
+    status: active
+    verified_at: "2026-09-01"
+    next_review: "only_on_support_policy_change"
+
+  - source_id: SRC-GOV-001
+    title: Developer Certificate of Origin 1.1
+    canonical_url: https://developercertificate.org/
+    source_type: governance_policy
+    authority: Linux Foundation
+    version_tag_commit: "1.1"
+    license_spdx: LicenseRef-DCO-1.1
+    license_evidence_url: https://developercertificate.org/
+    purpose: inbound_contribution_provenance
+    decision: ADOPTED
+    status: active
+    verified_at: "2026-09-01"
+    next_review: "before_external_contributions_open"
