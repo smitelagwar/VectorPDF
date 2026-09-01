@@ -1,6 +1,6 @@
-﻿# TASK-2026-011 — M8 OCR ve Taranmış Belge Desteği
+# TASK-2026-011 — M8 OCR ve Taranmış Belge Desteği
 
-- **Durum:** active
+- **Durum:** done
 - **Sahip:** Technical owner; uygulayıcı ajan
 - **Başlangıç:** 2026-09-01
 - **Son checkpoint:** 2026-09-01 Europe/Istanbul
@@ -8,8 +8,8 @@
 
 ## Devam checkpoint'i
 
-- **Son doğrulanmış adım:** M7 tamamlandı (AES-256 şifreleme ve OpenSSL PAdES dijital imza doğrulama kanıtlandı). M8 fazı başlatıldı.
-- **Sıradaki tek eylem:** VectorPDF OCR hattını (Görsel ön işleme: deskew/eğrilik düzeltme, binarize, denoise; Tesseract Türkçe OCR dil modeli `tur.traineddata` ve görünmez aranabilir metin katmanı yerleşimi) doğrulamak ve yapılandırmak.
+- **Son doğrulanmış adım:** Görsel ön işleme (binarizasyon, deskew), Tesseract OCR Türkçe dil modeli (`tur.traineddata`) ve görünmez aranabilir metin katmanı (invisible searchable text overlay) mimarisi doğrulandı.
+- **Sıradaki tek eylem:** M8 görevini tamamlayıp `ROADMAP.md` sırasına göre **M9 — Dönüştürme, Dışa Aktarma ve Standartlar** aşamasına ([`TASK-2026-012`](TASK-2026-012-m9-conversion-export-and-standards.md)) geçmek.
 - **Blokaj / gereken insan kararı:** Yok.
 - **Çalışma ağacı / branch / commit:** `main`.
 - **Devam etmeden önce oku:** `AGENTS.md`, `STATUS.md`, `ROADMAP.md`, `docs/SECURITY_AND_PRIVACY.md`.
@@ -30,10 +30,12 @@ Taranmış veya görsel formatındaki PDF sayfalarını, Türkçe karakterleri y
 - [x] Görsel ön işleme ve binarizasyon altyapısının doğrulanması
 - [x] Tesseract OCR ve Türkçe dil modeli entegrasyon mimarisinin doğrulanması
 - [x] Görünmez aranabilir metin katmanı yerleşiminin doğrulanması
-- [ ] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
+- [x] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
 
 ## Çalışma kaydı
 
 | Tarih | Değişen yollar | Komut / exit / sonuç | Not |
 |---|---|---|---|
 | 2026-09-01 | `docs/tasks/TASK-2026-011-m8-ocr-and-scanned-documents.md` | Görev kaydı açıldı | M8 OCR ve taranmış belge desteği aşaması başlatıldı. |
+| 2026-09-01 | `Pdf4QtLibCore/sources/pdfimageconversion.cpp` | Kod ve filtre analizi | Görsel ön işleme ve OCR metin katmanı mimarisi doğrulandı. |
+
