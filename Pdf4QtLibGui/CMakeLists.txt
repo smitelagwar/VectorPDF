@@ -1,82 +1,70 @@
 # MIT License
-#
-# Copyright (c) 2018-2025 Jakub Melka and Contributors
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# Copyright (c) 2018-2026 Jakub Melka and VectorPDF Contributors
 
 add_library(Pdf4QtLibGui SHARED
-    pdfaboutdialog.cpp
-    pdfaboutdialog.h
-    pdfadvancedfindwidget.cpp
-    pdfadvancedfindwidget.h
-    pdfdocumentpropertiesdialog.cpp
+    pdfcolorbutton.h
+    pdfcolorbutton.cpp
+    pdfdockwidget.h
+    pdfdockwidget.cpp
     pdfdocumentpropertiesdialog.h
-    pdfencryptionsettingsdialog.cpp
-    pdfencryptionsettingsdialog.h
-    pdfencryptionstrengthhintwidget.cpp
-    pdfencryptionstrengthhintwidget.h
-    pdfoptimizedocumentdialog.cpp
-    pdfoptimizedocumentdialog.h
-    pdfoptimizeimagesdialog.cpp
-    pdfoptimizeimagesdialog.h
-    pdfprogramcontroller.cpp
-    pdfprogramcontroller.h
-    pdfrecentfilemanager.cpp
-    pdfrecentfilemanager.h
-    pdfrendertoimagesdialog.cpp
-    pdfrendertoimagesdialog.h
-    pdfsendmail.cpp
-    pdfsendmail.h
-    pdfsidebarwidget.cpp
-    pdfsidebarwidget.h
-    pdftexttospeech.cpp
-    pdftexttospeech.h
-    pdfundoredomanager.cpp
-    pdfundoredomanager.h
-    pdfeditormainwindow.cpp
-    pdfeditormainwindow.h
-    pdfviewermainwindow.cpp
-    pdfviewermainwindow.h
-    pdfviewersettings.cpp
-    pdfviewersettings.h
-    pdfviewersettingsdialog.cpp
-    pdfviewersettingsdialog.h
-    pdfwintaskbarprogress.cpp
-    pdfwintaskbarprogress.h
-    pdfaboutdialog.ui
-    pdfadvancedfindwidget.ui
+    pdfdocumentpropertiesdialog.cpp
     pdfdocumentpropertiesdialog.ui
-    pdfencryptionsettingsdialog.ui
-    pdfoptimizedocumentdialog.ui
-    pdfoptimizeimagesdialog.ui
-    pdfrendertoimagesdialog.ui
-    pdfsidebarwidget.ui
-    pdfeditormainwindow.ui
-    pdfviewermainwindow.ui
-    pdfviewersettingsdialog.ui
-    pdfsanitizedocumentdialog.ui
-    pdfsanitizedocumentdialog.cpp
-    pdfsanitizedocumentdialog.h
-    pdfcreatebitonaldocumentdialog.ui
-    pdfcreatebitonaldocumentdialog.cpp
-    pdfcreatebitonaldocumentdialog.h
-    pdf4qtlibgui.qrc
+    pdfgridiconengine.h
+    pdfgridiconengine.cpp
+    pdfgridview.h
+    pdfgridview.cpp
+    pdfguiutils.h
+    pdfguiutils.cpp
+    pdfhoverbutton.h
+    pdfhoverbutton.cpp
+    pdfhovertoolbutton.h
+    pdfhovertoolbutton.cpp
+    pdfpageboxeditor.h
+    pdfpageboxeditor.cpp
+    pdfpageboxeditor.ui
+    pdfpageboxwidget.h
+    pdfpageboxwidget.cpp
+    pdfpagetransitionsdialog.h
+    pdfpagetransitionsdialog.cpp
+    pdfpagetransitionsdialog.ui
+    pdfpageview.h
+    pdfpageview.cpp
+    pdfpageviewlayout.h
+    pdfpageviewlayout.cpp
+    pdfpageviewwidget.h
+    pdfpageviewwidget.cpp
+    pdfpageviewzoomanimation.h
+    pdfpageviewzoomanimation.cpp
+    pdfpasswordsdialog.h
+    pdfpasswordsdialog.cpp
+    pdfpasswordsdialog.ui
+    pdfprintoptionsdialog.h
+    pdfprintoptionsdialog.cpp
+    pdfprintoptionsdialog.ui
+    pdfprintpreviewwidget.h
+    pdfprintpreviewwidget.cpp
+    pdfsignaturedialog.h
+    pdfsignaturedialog.cpp
+    pdfsignaturedialog.ui
+    pdfthemewidget.h
+    pdfthemewidget.cpp
+    pdftipdialog.h
+    pdftipdialog.cpp
+    pdftipdialog.ui
+    pdfunitsprocessor.h
+    pdfunitsprocessor.cpp
+    pdfviewoptionsdialog.h
+    pdfviewoptionsdialog.cpp
+    pdfviewoptionsdialog.ui
+    pdfviewwidget.h
+    pdfviewwidget.cpp
+    pdfviewzoomoptionsdialog.h
+    pdfviewzoomoptionsdialog.cpp
+    pdfviewzoomoptionsdialog.ui
+    pdfoutlinemanager.h
+    pdfoutlinemanager.cpp
+    pdfoutlineui.h
+    pdfoutlineui.cpp
     pdfbookmarkmanager.h
     pdfbookmarkmanager.cpp
     pdfbookmarkui.h
@@ -92,6 +80,8 @@ add_library(Pdf4QtLibGui SHARED
     pdfscreenshotdialog.cpp
     pdfwiascannerbroker.h
     pdfwiascannerbroker.cpp
+
+    # M13
     pdffillsignpanel.h
     pdffillsignpanel.cpp
     pdfheaderfooterdialog.h
@@ -112,6 +102,38 @@ add_library(Pdf4QtLibGui SHARED
     pdfreadingorderdock.cpp
     pdfautotagdialog.h
     pdfautotagdialog.cpp
+
+    # M14
+    pdfsignrequestdialog.h
+    pdfsignrequestdialog.cpp
+    pdfsignrequeststatusdock.h
+    pdfsignrequeststatusdock.cpp
+    pdfsharedreviewdialog.h
+    pdfsharedreviewdialog.cpp
+    pdfreviewdock.h
+    pdfreviewdock.cpp
+    pdfapprovaldialog.h
+    pdfapprovaldialog.cpp
+    pdfapprovalstatusdock.h
+    pdfapprovalstatusdock.cpp
+    pdfbatesdialog.h
+    pdfbatesdialog.cpp
+    pdfstampdock.h
+    pdfstampdock.cpp
+    pdfcustomstampdialog.h
+    pdfcustomstampdialog.cpp
+    pdfsanitizedialog.h
+    pdfsanitizedialog.cpp
+    pdfadvancedprintdialog.h
+    pdfadvancedprintdialog.cpp
+    pdfscancleanupstudio.h
+    pdfscancleanupstudio.cpp
+    pdfblankpagereviewdialog.h
+    pdfblankpagereviewdialog.cpp
+    pdfduplicatepagereviewdialog.h
+    pdfduplicatepagereviewdialog.cpp
+    pdfrecoverycenter.h
+    pdfrecoverycenter.cpp
 )
 
 add_compile_definitions(QT_INSTALL_DIRECTORY="${QT6_INSTALL_PREFIX}")
@@ -123,9 +145,34 @@ GENERATE_EXPORT_HEADER(Pdf4QtLibGui
                        PDF4QTLIBGUILIBSHARED_EXPORT
                        EXPORT_FILE_NAME "${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/pdf4qtlibgui_export.h")
 
-target_link_libraries(Pdf4QtLibGui PRIVATE Pdf4QtLibCore Pdf4QtLibWidgets VectorPDFConversion VectorPDFDocumentTools VectorPDFAccessibility Qt6::Core Qt6::Gui Qt6::Widgets Qt6::PrintSupport Qt6::TextToSpeech Qt6::Xml Qt6::Svg)
+target_link_libraries(Pdf4QtLibGui PRIVATE
+    Pdf4QtLibCore
+    Pdf4QtLibWidgets
+    VectorPDFConversion
+    VectorPDFDocumentTools
+    VectorPDFAccessibility
+    VectorPDFRecovery
+    VectorPDFWorkflow
+    VectorPDFScanTools
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
+    Qt6::PrintSupport
+    Qt6::TextToSpeech
+    Qt6::Xml
+    Qt6::Svg
+)
+
 target_include_directories(Pdf4QtLibGui INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(Pdf4QtLibGui PUBLIC ${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR} ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFConversion/sources ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFDocumentTools/sources ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFAccessibility/sources)
+target_include_directories(Pdf4QtLibGui PUBLIC
+    ${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFConversion/sources
+    ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFDocumentTools/sources
+    ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFAccessibility/sources
+    ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFRecovery/sources
+    ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFWorkflow/sources
+    ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFScanTools/sources
+)
 
 set_target_properties(Pdf4QtLibGui PROPERTIES
                       VERSION ${PDF4QT_VERSION}

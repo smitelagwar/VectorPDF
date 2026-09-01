@@ -28,14 +28,24 @@ Bu dosya yalnız kullanıcıya görünen ürün değişikliklerini [Keep a Chang
 - **Türkçe Dil Desteği:** 15.000'den fazla çevrilmiş UI dizesiyle eksiksiz Türkçe arayüz (`translations/PDF4QT_tr.ts`).
 - **M12 Kapsamlı Dönüştürme Motoru (VectorPDFConversion):** PDF'den Word/DOCX, Excel/XLSX, PowerPoint/PPTX, Text, Markdown, HTML5, EPUB, JSON, CSV formatlarına iki yönlü dönüştürme ve WIA tarayıcı arayüzü.
 - **M13 Günlük Araçlar ve Erişilebilirlik (VectorPDFDocumentTools & VectorPDFAccessibility):**
-  - **Fill & Sign (Görsel İmza & Paraf):** Çizim (vektörel pürüzsüzleştirme), Metin (Türkçe el yazısı presetleri) ve Görsel (arka plan şeffaflık ayıklamalı) imza yönetimi, Windows DPAPI şifreli güvenli imza deposu ve tek tıkla silme.
-  - **Header / Footer / Sayfa Numarası:** 6 konum slotu, dinamik şablon token motoru (`{page}`, `{pages}`, `{date}`, `{time}`, `{filename}`, `{title}`), tek seferlik optimize kaynak paylaşımı.
-  - **Watermark (Filigran):** Metin, Görsel ve PDF Sayfa filigranı, açı/şeffaflık/karolama denetimi ve katman yönetimi.
-  - **PDF Background (Arka Plan):** Düz renk, Görsel (Fit/Fill/Stretch/Center/Tile) ve PDF sayfası arka planı.
-  - **Advanced Find & Replace:** Regex, tam kelime, büyük/küçük harf duyarlılığı, Türkçe İ/ı kurallı harf düzeni koruma, metin taşma (overflow) heuristiği ve tek işlemde geri alma (Undo).
-  - **Smart Find & Redact:** T.C. Kimlik (kesin matematiksel sağlama), IBAN (ISO 13616 MOD-97), Kredi/Banka Kartı (Luhn MOD-10), E-posta, Telefon, IP, URL, Tarih ve Araç Plakası otomatik algılayıcıları ve kullanıcı onaylı kalıcı karartma.
-  - **Flatten PDF:** AcroForm alanlarını, açıklamaları, damgaları ve katmanları sayfa içerik akışına dönüştürürken web köprülerini ve dijital imzaları koruyan güvenli düzleştirme motoru.
-  - **Accessibility Checker:** Başlık, doğal dil, etiket (/StructTreeRoot), okuma sırası, görsel alternatif metin ve tablo başlıkları için otomatik ön denetim; dürüst PDF/UA doğrulama arayüzü (veraPDF entegrasyonu).
-  - **Tags & Reading Order Editor:** Mantıksal yapı ağacı (/StructTreeRoot, /StructElem, /ParentTree, /MCID) düzenleme ve numaralandırılmış görsel okuma sırası katmanı.
-  - **Automatic Accessible PDF (Auto-Tagging):** Yerel sezgisel analizci (başlıklar, paragraflar, tablolar, görseller, tekrar eden başlık/altlık ayıklama), opsiyonel Docling worker arayüzü ve yerel AI alternatif metin önerisi.
+  - **Fill & Sign (Görsel İmza & Paraf):** Çizim, el yazısı fontları ve saydam görsel imza, Windows DPAPI şifreli güvenli imza deposu.
+  - **Header / Footer / Sayfa Numarası:** 6 konum slotu, dinamik şablon token motoru (`{page}`, `{pages}`, `{date}`, `{filename}`).
+  - **Watermark & Arka Plan:** Metin, Görsel ve PDF filigran ve arka plan katmanları.
+  - **Gelişmiş Bul ve Değiştir:** Büyük/küçük harf, regex, tam kelime ve Türkçe İ/ı korumalı toplu değişim.
+  - **Smart Find & Redact:** TCKN, IBAN, Kredi Kartı (Luhn), E-posta, Telefon, IP, URL ve Plaka algılayıcıları ile kalıcı karartma.
+  - **Flatten PDF:** Form alanları ve açıklamaları sayfa içeriğine dönüştüren güvenli düzleştirme motoru.
+  - **Accessibility Checker & Auto-Tagging:** Başlık, dil, tag ağacı, okuma sırası denetleyicisi ve dürüst PDF/UA (veraPDF) arayüzü.
+- **M14 İşbirliği, İnceleme, Adli İnceleme, Tarama ve Kurtarma (Collaboration, Review, Forensics, Scan & Recovery):**
+  - **Document Recovery & Crash Resilience (VectorPDFRecovery):** Otomatik kayıt günlüğü (autosave journal), Windows DPAPI şifreli kurtarma deposu, kaza sonrası açılış tarayıcısı (LaunchScanner) ve oturum kurtarma merkezi.
+  - **İmza İsteme ve Durum Takip:** İmzacı ve parafçı rolleri, çoklu imza alanları, iş akışı paketleme (`.vpdfwf`) ve çevrimdışı/LAN aktarım taşıyıcıları.
+  - **Paylaşımlı İnceleme (Shared Review):** XFDF yorum entegrasyonu, yorum zincirleri (threads), yanıtlar, durum takibi ve paylaşımlı klasör/WebDAV senkronizasyonu.
+  - **İnceleme ve Onaya Gönder (Approval Workflow):** Sıralı ve paralel onay zincirleri, onay/ret/şartlı onay durumları, değiştirilemez denetim izi (Audit Trail).
+  - **Bates Numbering (Adli Numaralandırma):** Ön ek, basamak sayısı, son ek, sayfa konumu, çoklu belge toplu numaralandırma planı ve aralık bazlı sıra takibi.
+  - **Dinamik ve Özel Damga Sistemi:** Standart iş damgaları, dinamik tarih/saat/kullanıcı damgaları, vektörel/resim/PDF özel damga oluşturucu ve damga kütüphanesi.
+  - **Belgeyi Paylaşmadan Önce Temizle (Sanitize Before Sharing):** Metaveri, gizli katmanlar, ekler, JavaScript kodları, harici form eylemleri ve silinmiş nesne artıklarını derinlemesine temizleme.
+  - **Gelişmiş Baskı Sistemi:** Kitapçık (Booklet), N-Up (sayfa başına çoklu sayfa), afiş/büyük boyut karo baskı ve prova önizleme.
+  - **Scan Cleanup Studio (VectorPDFScanTools):** Otomatik yön algılama (0/90/180/270), eğrilik düzeltme (Deskew), kenar temizleme/otomatik kırpma, delgeç lekesi silme, arka plan beyazlatma ve gürültü giderme.
+  - **Otomatik Boş Sayfa Bul ve Sil:** Eşik tabanlı varyans/içerik analizi, tersine taranmış/gölge toleransı ve kullanıcı onaylı toplu silme.
+  - **Duplicate Page Detector (Çift Sayfa Tespiti):** Perceptual hashing (dHash/pHash), metinsel parmak izi, benzerlik kümeleme ve kullanıcı onaylı tekilleştirme.
+
 

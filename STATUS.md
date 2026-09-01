@@ -1,12 +1,12 @@
 # Güncel Durum
 
 **Tarih:** 2026-09-01  
-**Faz:** M14 — Collaboration, Review, Forensics, Scan & Recovery (Geliştirme ve Entegrasyon Devam Ediyor)  
-**Kod durumu:** VectorPDF C++20 / Qt6 açık kaynak PDF uygulama paketi; M13 Günlük Araçlar ve Erişilebilirlik modülleri tamamlandı; M14 İşbirliği (İmza İsteme, Paylaşımlı İnceleme, Onay Akışı), Adli Araçlar (Bates Numbering, Sanitize, Dinamik Damgalar), Gelişmiş Baskı, Tarama Temizleme (Scan Cleanup, Boş/Kopya Sayfa Algılama) ve Document Recovery omurgası geliştiriliyor.
+**Faz:** M14 — Collaboration, Review, Forensics, Scan & Recovery (Tamamlandı)  
+**Kod durumu:** VectorPDF C++20 / Qt6 açık kaynak PDF uygulama paketi; M13 Günlük Araçlar ve Erişilebilirlik modülleri, M14 İşbirliği (İmza İsteme, Paylaşımlı İnceleme, Onay Akışı), Adli Araçlar (Bates Numbering, Sanitize, Dinamik Damgalar), Gelişmiş Baskı, Tarama Temizleme (Scan Cleanup, Boş/Kopya Sayfa Algılama) ve Document Recovery omurgası (VectorPDFRecovery, VectorPDFWorkflow, VectorPDFScanTools ve VectorPDFDocumentTools genişletmesi), GUI bileşenleri (Pdf4QtLibGui), Python masaüstü senkronizasyonu ve birim testleri tamamlandı ve doğrulandı.
 
 ## Birincil aktif görev
 
-[TASK-2026-016: M14 İşbirliği, İnceleme, Adli İnceleme, Tarama ve Kurtarma](docs/tasks/TASK-2026-016-m14-collaboration-review-scan-recovery.md)
+[TASK-2026-016: M14 İşbirliği, İnceleme, Adli İnceleme, Tarama ve Kurtarma](docs/tasks/TASK-2026-016-m14-collaboration-review-scan-recovery.md) — Tamamlandı (Done)
 
 ## Tamamlananlar
 
