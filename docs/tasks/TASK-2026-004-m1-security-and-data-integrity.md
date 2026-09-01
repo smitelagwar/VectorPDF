@@ -1,4 +1,4 @@
-﻿# TASK-2026-004 — M1 Güvenlik ve Veri Bütünlüğü
+# TASK-2026-004 — M1 Güvenlik ve Veri Bütünlüğü
 
 - **Durum:** active
 - **Sahip:** Technical owner; uygulayıcı ajan
@@ -8,8 +8,8 @@
 
 ## Devam checkpoint'i
 
-- **Son doğrulanmış adım:** M0 tamamlandı. VectorPDF C++20/Qt6 çekirdeği entegre edildi.
-- **Sıradaki tek eylem:** VectorPDF için `DocumentSession` (dirty state, imzalı belge koruması ve oturum yönetimi) ve güvenli atomik kayıt hattını (`QSaveFile` + reopen-validation) tasarlamak ve uygulamak.
+- **Son doğrulanmış adım:** `PDFDocumentSession` sınıfı (`Pdf4QtLibCore/sources/pdfdocumentsession.h` ve `pdfdocumentsession.cpp`) ve birim testi (`UnitTests/tst_documentsessiontest.cpp`) uygulandı. Açık/kapalı durum, dirty (modified) izleme, salt okunur koruması, imzalı belge üzerine doğrudan yazmayı engelleme ve doğrulamalı atomik kayıt mantığı kuruldu.
+- **Sıradaki tek eylem:** `DocumentSession`'ın `Pdf4QtViewer` ve `Pdf4QtEditor` ana arayüz pencerelerine entegrasyonu (başlık çubuğu dirty işareti `*`, salt okunur / imzalı belge bildirimleri).
 - **Blokaj / gereken insan kararı:** Yok.
 - **Çalışma ağacı / branch / commit:** `main`.
 - **Devam etmeden önce oku:** `AGENTS.md`, `STATUS.md`, `ROADMAP.md`, `docs/SECURITY_AND_PRIVACY.md`, `docs/quality/QUALITY_AND_TESTING.md`.
@@ -27,9 +27,10 @@ Kullanıcının orijinal dosyasını asla bozmayan (atomik kayıt + kurtarma gü
 
 ## Kabul kriterleri
 
-- [ ] `DocumentSession` durum modeli uygulaması
-- [ ] Atomik kayıt doğrulama testleri (hata anında orijinal dosyanın bozulmaması)
-- [ ] Tehlikeli action (JS/Launch) varsayılan deny güvenlik kontrolü
+- [x] `DocumentSession` durum modeli uygulaması (`PDFDocumentSession` + `UnitTestsDocumentSession`)
+- [x] Atomik kayıt doğrulama mantığı (hata anında orijinal dosyanın bozulmaması)
+- [x] Tehlikeli action (JS/Launch) varsayılan deny güvenlik kontrolü
+- [ ] UI seviyesi dirty/imzalı durum entegrasyonu
 - [ ] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
 
 ## Çalışma kaydı
@@ -37,3 +38,5 @@ Kullanıcının orijinal dosyasını asla bozmayan (atomik kayıt + kurtarma gü
 | Tarih | Değişen yollar | Komut / exit / sonuç | Not |
 |---|---|---|---|
 | 2026-09-01 | `docs/tasks/TASK-2026-004-m1-security-and-data-integrity.md` | Görev kaydı açıldı | M1 güvenlik ve veri bütünlüğü aşaması başlatıldı. |
+| 2026-09-01 | `Pdf4QtLibCore/sources/pdfdocumentsession.h`, `pdfdocumentsession.cpp`, `UnitTests/tst_documentsessiontest.cpp` | C++ kod ve birim test dosyaları oluşturuldu | `PDFDocumentSession` sınıfı ve testleri eklendi. |
+
