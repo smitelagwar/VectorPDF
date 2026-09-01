@@ -1,12 +1,12 @@
 # Güncel Durum
 
 **Tarih:** 2026-09-01  
-**Faz:** M9 — P1 Dönüştürme, Dışa Aktarma ve Standartlar  
-**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; okuyucu, güvenlik, sayfa işlemleri, formlar, redaction, metin düzenleme, kripto/imza ve OCR tamamlandı; PDF/A standart uyumluluğu ve format dönüştürme yönetiliyor.
+**Faz:** M10 — P1 Dağıtım, Paketleme ve Windows Entegrasyonu  
+**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; tüm fonksiyonel modüller (okuyucu, güvenlik, sayfa işlemleri, formlar, redaction, metin düzenleme, kripto/imza, OCR, PDF/A) tamamlandı; Windows 11 MSIX paketleme ve son dağıtım hazırlanıyor.
 
 ## Birincil aktif görev
 
-[TASK-2026-012 — M9 Dönüştürme, Dışa Aktarma ve Standartlar](docs/tasks/TASK-2026-012-m9-conversion-export-and-standards.md)
+[TASK-2026-013 — M10 Dağıtım, Paketleme ve Windows Entegrasyonu](docs/tasks/TASK-2026-013-m10-distribution-and-windows-integration.md)
 
 Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yukarıdaki görev kaydının `Devam checkpoint'i` bölümü okunur. Görev bağlantısı değişmedikçe ayrıntılı kaldığım-yer bilgisi görev dosyasındadır; bu bölüm aynı ayrıntıyı tekrar etmez.
 
@@ -28,6 +28,7 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 - M6 Gelişmiş Düzenleme ve Tipografi: Metin akışı düzenleme (`PDFDocumentTextFlowEditorModel`), FontCache ve görsel optimizasyon tamamlandı (`TASK-2026-009` done).
 - M7 Kripto, Güvenlik ve Dijital İmza: AES-256 (Rev 6) şifreleme, OpenSSL PAdES imza doğrulama (`PDFSignatureHandler`) ve sertifika yönetimi tamamlandı (`TASK-2026-010` done).
 - M8 OCR ve Taranmış Belge Desteği: Görsel ön işleme, Tesseract Türkçe OCR ve görünmez metin katmanı tamamlandı (`TASK-2026-011` done).
+- M9 Dönüştürme, Dışa Aktarma ve Standartlar: PDF/A uyumluluğu, görselden PDF (`PDFDocumentBuilder`) ve dışa aktarma araçları tamamlandı (`TASK-2026-012` done).
 
 ## Kabul edilen teknik rota
 
@@ -36,11 +37,10 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 
 ## Sonraki işler
 
-1. PDF/A-1b, PDF/A-2b, PDF/A-3b doğrulama kurallarını (`PDFDocumentValidator`) yapılandır.
-2. Raster görsel -> PDF (`PDFDocumentBuilder`) ve PDF -> raster görsel dönüştürme hattını doğrula.
-3. Yapılandırılmış metin ve metaveri dışa aktarma araçlarını doğrula.
-4. M10 Dağıtım ve Windows Entegrasyonu aşamasına geç.
+1. MSIX paketleme manifesti (`AppxManifest.xml.in`) ve Windows Store/Appx kimlik yapılandırmasını doğrula.
+2. Windows Shell dosya ilişkilendirmeleri (`.pdf`), thumbnail ve preview handler yapılandırmasını kontrol et.
+3. Windows 11 x64 derleme (`cmake`) ve birim test (`ctest`) paketleme hattını doğrula.
 
 ## Aktif blokajlar
 
-- Yok. Proje M9 dönüştürme ve standartlar geliştirme aşamasındadır.
+- Yok. Proje M10 dağıtım ve Windows entegrasyonu aşamasındadır.
