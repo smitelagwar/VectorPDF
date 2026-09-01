@@ -1,10 +1,11 @@
 # TASK-2026-004 — M1 Güvenlik ve Veri Bütünlüğü
 
-- **Durum:** active
+- **Durum:** done
 - **Sahip:** Technical owner; uygulayıcı ajan
 - **Başlangıç:** 2026-09-01
 - **Son checkpoint:** 2026-09-01 Europe/Istanbul
 - **İlgili REQ/ADR/SOURCE/RISK:** ADR-0001, ADR-0002, ADR-0003, ADR-0004; R-001, R-002, R-003, R-004, R-009, R-015; REQ-SEC-*, REQ-PRES-*
+
 
 ## Devam checkpoint'i
 
