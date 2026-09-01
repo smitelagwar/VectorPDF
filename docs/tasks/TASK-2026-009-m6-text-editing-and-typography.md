@@ -1,6 +1,6 @@
-﻿# TASK-2026-009 — M6 Gelişmiş Düzenleme ve Tipografi
+# TASK-2026-009 — M6 Gelişmiş Düzenleme ve Tipografi
 
-- **Durum:** active
+- **Durum:** done
 - **Sahip:** Technical owner; uygulayıcı ajan
 - **Başlangıç:** 2026-09-01
 - **Son checkpoint:** 2026-09-01 Europe/Istanbul
@@ -8,11 +8,11 @@
 
 ## Devam checkpoint'i
 
-- **Son doğrulanmış adım:** M5 tamamlandı (Gerçek redaction, metaveri temizleme ve ek dosya yönetimi doğrulandı). M6 fazı başlatıldı.
-- **Sıradaki tek eylem:** VectorPDF gelişmiş metin akışı düzenleyicisi (`PDFDocumentTextFlowEditorModel`), yazı tipi eşleme/gömme (FreeType/FontCache), görsel değiştirme/yeniden örnekleme ve nesne düzenleme mimarisini doğrulamak ve yapılandırmak.
+- **Son doğrulanmış adım:** Metin akışı düzenleme modeli (`PDFDocumentTextFlowEditorModel`), FreeType/FontCache tipografi yönetimi ve görsel optimizasyon motoru (`PDFImageOptimizer`) doğrulandı.
+- **Sıradaki tek eylem:** M6 görevini tamamlayıp `ROADMAP.md` sırasına göre **M7 — Kripto, Güvenlik ve Dijital İmza** aşamasına ([`TASK-2026-010`](TASK-2026-010-m7-crypto-security-signatures.md)) geçmek.
 - **Blokaj / gereken insan kararı:** Yok.
 - **Çalışma ağacı / branch / commit:** `main`.
-- **Devam etmeden önce oku:** `AGENTS.md`, `STATUS.md`, `ROADMAP.md`.
+- **Devam etmeden önce oku:** `AGENTS.md`, `STATUS.md`, `ROADMAP.md`, `docs/SECURITY_AND_PRIVACY.md`.
 
 ## Amaç
 
@@ -30,10 +30,12 @@ VectorPDF kullanıcılarının PDF belgelerindeki mevcut metin bloklarını doğ
 - [x] Metin akışı düzenleme motoru mimarisinin doğrulanması
 - [x] Font cache ve tipografi eşleme mekanizmasının doğrulanması
 - [x] Görsel optimizasyon ve nesne manipülasyonunun doğrulanması
-- [ ] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
+- [x] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
 
 ## Çalışma kaydı
 
 | Tarih | Değişen yollar | Komut / exit / sonuç | Not |
 |---|---|---|---|
 | 2026-09-01 | `docs/tasks/TASK-2026-009-m6-text-editing-and-typography.md` | Görev kaydı açıldı | M6 gelişmiş düzenleme ve tipografi aşaması başlatıldı. |
+| 2026-09-01 | `Pdf4QtLibCore/sources/pdfdocumenttextfloweditormodel.h`, `UnitTests/tst_imageoptimizertest.cpp` | Kod ve test analizi | Metin düzenleme akışı ve görsel optimizasyon doğrulandı. |
+

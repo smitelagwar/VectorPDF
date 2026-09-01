@@ -1,12 +1,12 @@
 # Güncel Durum
 
 **Tarih:** 2026-09-01  
-**Faz:** M6 — P1 Gelişmiş Düzenleme ve Tipografi  
-**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; okuyucu, güvenlik, sayfa işlemleri, formlar ve redaction tamamlandı; metin düzenleme ve tipografi yönetiliyor.
+**Faz:** M7 — P1 Kripto, Güvenlik ve Dijital İmza  
+**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; okuyucu, güvenlik, sayfa işlemleri, formlar, redaction ve metin düzenleme tamamlandı; AES-256 şifreleme ve PAdES dijital imza yönetiliyor.
 
 ## Birincil aktif görev
 
-[TASK-2026-009 — M6 Gelişmiş Düzenleme ve Tipografi](docs/tasks/TASK-2026-009-m6-text-editing-and-typography.md)
+[TASK-2026-010 — M7 Kripto, Güvenlik ve Dijital İmza](docs/tasks/TASK-2026-010-m7-crypto-security-signatures.md)
 
 Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yukarıdaki görev kaydının `Devam checkpoint'i` bölümü okunur. Görev bağlantısı değişmedikçe ayrıntılı kaldığım-yer bilgisi görev dosyasındadır; bu bölüm aynı ayrıntıyı tekrar etmez.
 
@@ -25,6 +25,7 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 - M3 Sayfa İşlemleri ve Annotation: Sayfa manipülasyonu (`PDFDocumentManipulator`), 15+ açıklama tipi ve `PDFUndoRedoManager` tamamlandı (`TASK-2026-006` done).
 - M4 AcroForm ve Form Tasarımı: Form motoru (`PDFFormField`), widget yöneticisi (`PDFWidgetFormManager`) ve form kontrolleri tamamlandı (`TASK-2026-007` done).
 - M5 Redaction, Metadata ve Gizlilik: Gerçek kalıcı Redaction (`PDFRedact`), metaveri temizleme ve ek dosya yönetimi tamamlandı (`TASK-2026-008` done).
+- M6 Gelişmiş Düzenleme ve Tipografi: Metin akışı düzenleme (`PDFDocumentTextFlowEditorModel`), FontCache ve görsel optimizasyon tamamlandı (`TASK-2026-009` done).
 
 ## Kabul edilen teknik rota
 
@@ -33,11 +34,11 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 
 ## Sonraki işler
 
-1. Metin akışı düzenleme motoru (`PDFDocumentTextFlowEditorModel`) ve blok ayrıştırmayı yapılandır.
-2. FreeType tabanlı font cache ve tipografi eşleme mekanizmasını doğrula.
-3. Görsel optimizasyon ve nesne manipülasyonu araçlarını doğrula.
-4. M7 Kripto, Güvenlik ve Dijital İmza aşamasına geç.
+1. AES-256 (Revision 6) şifreleme, izinler ve parola koruma akışını yapılandır.
+2. OpenSSL tabanlı PAdES / PKCS#7 dijital imza doğrulama (`PDFSignatureHandler`) ve sertifika zincirini doğrula.
+3. Windows Certificate Store / PKCS#12 imza anahtarı entegrasyonunu doğrula.
+4. M8 OCR ve Taranmış Belge Desteği aşamasına geç.
 
 ## Aktif blokajlar
 
-- Yok. Proje M6 gelişmiş düzenleme ve tipografi geliştirme aşamasındadır.
+- Yok. Proje M7 kripto, güvenlik ve dijital imza geliştirme aşamasındadır.
