@@ -48,14 +48,14 @@ PDF4QT v1.6.0.0'ın lisans/provenance, tekrarlanabilir Windows 11 x64 build, ger
 ## Kabul kriterleri
 
 - [x] Work Package 1: exact source, history, license/provenance ve nested dependency envanteri; karar-kritik bilinmeyen yok.
-- [ ] Work Package 2: belgelenmiş temiz Windows 11 x64 build iki bağımsız denemede; gerçek unit/integration test komut/exit/özetleri.
+- [x] Work Package 2: belgelenmiş temiz Windows 11 x64 build iki bağımsız denemede; gerçek unit/integration test komut/exit/özetleri.
 - [x] Work Package 3: en az 25 dosyalık, lisans/provenance manifestli corpus ve beklenen oracle.
 - [x] Work Package 4: zorunlu viewer/page/annotation/form/encrypted/signed/save-reopen senaryoları mimari analizi (QSaveFile atomik kayıt).
 - [x] Work Package 5: outline, metadata, attachment, tag tree, form appearance, annotation preservation mimarisi.
 - [x] Work Package 6: hostile input/resource-limit ve UI dışı headless worker isolation feasibility (Pdf4QtLibCore sıfır QWidget bağımlılığı).
 - [x] Work Package 7: clean rebrand, patch budget, bus factor, upstream sync ve modülerlik analizi.
-- [ ] Öldürücü gate'lerin hiçbiri açık değil veya sonuç Rejected olarak kaydedildi.
-- [ ] `ADR-0002`, source evaluation, engineering log, risk/status ve artifact hash kayıtları gerçek kanıtla güncellendi.
+- [x] Öldürücü gate'lerin hiçbiri açık değil veya sonuç Rejected olarak kaydedildi.
+- [x] `ADR-0002`, source evaluation, engineering log, risk/status ve artifact hash kayıtları gerçek kanıtla güncellendi.
 
 ## Doğrulama planı
 
