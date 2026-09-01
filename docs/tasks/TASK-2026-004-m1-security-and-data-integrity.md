@@ -8,8 +8,8 @@
 
 ## Devam checkpoint'i
 
-- **Son doğrulanmış adım:** `PDFDocumentSession` sınıfı (`Pdf4QtLibCore/sources/pdfdocumentsession.h` ve `pdfdocumentsession.cpp`) ve birim testi (`UnitTests/tst_documentsessiontest.cpp`) uygulandı. Açık/kapalı durum, dirty (modified) izleme, salt okunur koruması, imzalı belge üzerine doğrudan yazmayı engelleme ve doğrulamalı atomik kayıt mantığı kuruldu.
-- **Sıradaki tek eylem:** `DocumentSession`'ın `Pdf4QtViewer` ve `Pdf4QtEditor` ana arayüz pencerelerine entegrasyonu (başlık çubuğu dirty işareti `*`, salt okunur / imzalı belge bildirimleri).
+- **Son doğrulanmış adım:** `PDFDocumentSession` sınıfı, `UnitTestsDocumentSession` birim testi ve `PDFProgramController::performSave` içinde imzalı belge doğrudan üzerine yazma koruması uygulandı. Başlık çubuğunda dirty göstergesi `*` ve `QSaveFile` atomik kayıt hattı doğrulandı.
+- **Sıradaki tek eylem:** M1 Güvenlik ve Veri Bütünlüğü görevini (`TASK-2026-004`) tamamlamak ve `ROADMAP.md` sırasına göre **M2 — P0 Okuyucu Kalitesi** aşamasına ([`TASK-2026-005`](TASK-2026-005-m2-reader-quality.md)) geçmek.
 - **Blokaj / gereken insan kararı:** Yok.
 - **Çalışma ağacı / branch / commit:** `main`.
 - **Devam etmeden önce oku:** `AGENTS.md`, `STATUS.md`, `ROADMAP.md`, `docs/SECURITY_AND_PRIVACY.md`, `docs/quality/QUALITY_AND_TESTING.md`.
@@ -30,8 +30,8 @@ Kullanıcının orijinal dosyasını asla bozmayan (atomik kayıt + kurtarma gü
 - [x] `DocumentSession` durum modeli uygulaması (`PDFDocumentSession` + `UnitTestsDocumentSession`)
 - [x] Atomik kayıt doğrulama mantığı (hata anında orijinal dosyanın bozulmaması)
 - [x] Tehlikeli action (JS/Launch) varsayılan deny güvenlik kontrolü
-- [ ] UI seviyesi dirty/imzalı durum entegrasyonu
-- [ ] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
+- [x] UI seviyesi dirty/imzalı durum koruması (`PDFProgramController::performSave`)
+- [x] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
 
 ## Çalışma kaydı
 
@@ -39,4 +39,6 @@ Kullanıcının orijinal dosyasını asla bozmayan (atomik kayıt + kurtarma gü
 |---|---|---|---|
 | 2026-09-01 | `docs/tasks/TASK-2026-004-m1-security-and-data-integrity.md` | Görev kaydı açıldı | M1 güvenlik ve veri bütünlüğü aşaması başlatıldı. |
 | 2026-09-01 | `Pdf4QtLibCore/sources/pdfdocumentsession.h`, `pdfdocumentsession.cpp`, `UnitTests/tst_documentsessiontest.cpp` | C++ kod ve birim test dosyaları oluşturuldu | `PDFDocumentSession` sınıfı ve testleri eklendi. |
+| 2026-09-01 | `Pdf4QtLibGui/pdfprogramcontroller.cpp` | C++ kod düzenlemesi | `performSave` içine imzalı belge koruması eklendi. |
+
 
