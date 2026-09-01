@@ -242,11 +242,23 @@ docs/
 - **Smart Redact:** T.C. Kimlik (11 basamaklı sağlama), IBAN (ISO 13616 MOD-97), Kart (Luhn) ve PII algılayıcıları.
 - **Flatten PDF:** Form ve açıklama düzleştirme; web köprülerini ve dijital imzaları koruyan filtreleme.
 
-### 3. VectorPDFAccessibility (M13)
-- **Accessibility Checker:** Belge başlığı, dil, tag ağacı, okuma sırası, tablo ve görsel kuralları.
-- **Structure & Reading Order:** `/StructTreeRoot`, `/ParentTree`, `/MCID` yönetimi ve görsel okuma katmanı (`ReadingOrderOverlay`).
-- **Auto-Tagging:** Yerel sezgisel analizci (`NativeHeuristicTagger`), Docling köprüsü ve yerel AI alternatif metin motoru.
-- **Dürüst Doğrulama:** Harici `veraPDF` doğrulaması olmadan kesin PDF/UA uyumluluk iddiası verilmez.
+### 4. VectorPDFRecovery (M14.R)
+- **Document Recovery & Crash Resilience:** Otomatik snapshot yazıcı (`RecoverySnapshotWriter`), append-only işlem günlüğü (`RecoveryJournal`), Windows DPAPI korumalı kurtarma manifesti (`RecoveryManifest`), açılış kaza tarayıcısı (`RecoveryLaunchScanner`) ve güvenli kurtarma yöneticisi (`RecoveryManager`).
+
+### 5. VectorPDFWorkflow (M14.11 - M14.13)
+- **İşbirliği ve Onay Mimarisi:** İmzacı ve denetçi kimlik yönetimi (`ParticipantResolver`), bağımsız taşınabilir iş akışı paketleri (`WorkflowPackageWriter/Reader`), dinamik imza durum takibi (`SignRequestService`), XFDF tabanlı paylaşımlı inceleme motoru (`ReviewMergeEngine`) ve değiştirilemez sıralı/paralel onay denetim izi (`ApprovalAuditTrail`).
+- **Taşıma Katmanı (Transport):** Yerel dosya sistemi (`FileSystemTransport`), LAN paylaşım klasörü (`SharedFolderTransport`), WebDAV ve e-posta teslim adaptörleri.
+
+### 6. VectorPDFDocumentTools Genişlemesi (M14.14 - M14.17)
+- **Bates Numbering:** Hukuki ve adli çoklu belge sıralı numaralandırma (`BatesSequence`, `BatesBatchPlan`, `BatesRenderer`).
+- **Dinamik ve Özel Damgalar:** Vektörel/resim/PDF damga görünüm oluşturucu (`StampAppearanceBuilder`), dinamik zaman damgası ve yerel kütüphane (`StampAssetStore`).
+- **Sanitize Before Sharing:** Metaveri, ek dosya, JavaScript, dış eylemler ve gizli katmanları derinlemesine temizleme motoru (`SanitizeDocumentService`).
+- **Gelişmiş Baskı & Empoziyon:** Kitapçık (Booklet) ve sayfa başına N-Up düzen hesaplayıcısı (`PrintImpositionEngine`).
+
+### 7. VectorPDFScanTools (M14.18 - M14.20)
+- **Scan Cleanup Studio:** Otomatik yön algılama (`OrientationDetector`), eğrilik düzeltme (`DeskewProcessor`), kenar/içerik kırpma (`AutoCropDetector`) ve delgeç lekesi silici (`PunchHoleRemover`).
+- **Blank Page Detection:** Eşik tabanlı koyuluk ve varyans analizi (`BlankPageDetector`, `BlankPageFeatures`).
+- **Duplicate Page Detector:** Fark özetleme (dHash - `PageDuplicateFingerprint`), metin parmak izi ve benzerlik kümeleme (`DuplicatePageDetector`).
 
 ## Mimari başarı ölçütleri
 
@@ -256,3 +268,4 @@ docs/
 - Bir dependency tek adapter sınırından değiştirilebilir; ürün politikası engine içinde dağılmaz.
 - Capability/support iddiaları `PDF_SUPPORT_MATRIX` ve test ID'sine izlenebilir.
 - Hassas belge içeriği log/crash dump/telemetride görülmez.
+

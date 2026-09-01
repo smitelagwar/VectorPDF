@@ -49,7 +49,16 @@ VectorPDF; Windows 11 için geliştirilmiş modern, hızlı, yüksek güvenlikli
 - **Akıllı Veri Karartma (Smart Redact):** T.C. Kimlik, IBAN, Kredi Kartı (Luhn doğrulamalı), E-posta, Telefon ve Araç Plakalarını otomatik algılayıp kullanıcı onayıyla kalıcı silme.
 - **Belgeyi Düzleştir (Flatten PDF):** Form alanlarını ve açıklamaları sayfa içeriğine dönüştürürken web köprülerini ve dijital imzaları koruyan güvenli düzleştirme.
 - **Erişilebilirlik Denetçisi (Accessibility Checker):** Başlık, dil, etiket (/StructTreeRoot) ve tablo/görsel kurallarını denetleyen preflight aracı ve dürüst PDF/UA doğrulama arayüzü.
-- **Okuma Sırası & Otomatik Erişilebilir PDF:** Mantıksal tag ağacı düzenleme ve yerel sezgisel analizci ile tek tıkla erişilebilir PDF üretimi.
+### 1.8 İşbirliği, İnceleme, Tarama ve Kurtarma (Collaboration, Review, Forensics, Scan & Recovery - M14)
+- **Belge Kurtarma & Oturum Koruması (Recovery):** Beklenmeyen elektrik kesintisi veya sistem kapanmalarında, DPAPI ile şifrelenmiş kurtarma günlüğü sayesinde belgeleriniz tek tıkla eksiksiz geri yüklenir.
+- **İmza İsteme & Durum Takip (Request Signatures):** Katılımcılara rol ve imza alanı atayarak taşınabilir `.vpdfwf` paketleriyle çevrimdışı/LAN üzerinden imza isteme ve takip etme.
+- **Paylaşımlı İnceleme & Onay Akışları (Shared Review & Approval):** XFDF yorum akışı ve değiştirilemez denetim izi (Audit Trail) ile kurumsal onay süreçleri.
+- **Bates Numaralandırma (Bates Numbering):** Çoklu hukuk ve mahkeme belgelerinde ardışık ve aralıksız dosya numaralandırma.
+- **Dinamik & Özel Damgalar:** Otomatik tarih/saat basan dinamik damgalar ve kurumsal özel mühür tasarımı.
+- **Paylaşmadan Önce Temizle (Sanitize Before Sharing):** Metaveri, gizli katmanlar, ekler ve scriptleri tek tıkla temizleyerek güvenli paylaşım.
+- **Gelişmiş Baskı & Empoziyon:** Kitapçık (Booklet) ve çoklu sayfa (N-Up) profesyonel baskı prova düzenleri.
+- **Tarama Temizleme Stüdyosu (Scan Cleanup Studio):** Eğrilik düzeltme (Deskew), delgeç izi silme, kenar temizleme ve arka plan beyazlatma.
+- **Otomatik Boş Sayfa & Çift Sayfa Tespiti:** Taranmış yığınlardaki boş sayfaları ve benzer kopya sayfaları otomatik algılayıp tekilleştirme.
 
 ---
 
