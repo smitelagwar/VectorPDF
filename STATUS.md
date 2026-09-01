@@ -1,49 +1,37 @@
 # Güncel Durum
 
 **Tarih:** 2026-09-01  
-**Faz:** Gate 1 — PDF4QT v1.6.0.0 baseline bake-off aktif  
-**Kod durumu:** Upstream kodu henüz içe aktarılmadı (Gate 1 audit izole alanda yürütülür)
+**Faz:** M0 — VectorPDF baseline entegrasyonu ve yapılandırması  
+**Kod durumu:** C++20 / Qt6 açık kaynak PDF çekirdeği VectorPDF olarak depoya aktarıldı.
 
 ## Birincil aktif görev
 
-[TASK-2026-002 — Gate 1 PDF4QT v1.6.0.0 bake-off](docs/tasks/TASK-2026-002-gate1-pdf4qt-bakeoff.md)
+[TASK-2026-003 — M0 VectorPDF baseline entegrasyonu ve yapılandırması](docs/tasks/TASK-2026-003-m0-vectorpdf-baseline-setup.md)
 
 Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yukarıdaki görev kaydının `Devam checkpoint'i` bölümü okunur. Görev bağlantısı değişmedikçe ayrıntılı kaldığım-yer bilgisi görev dosyasındadır; bu bölüm aynı ayrıntıyı tekrar etmez.
 
 ## Tamamlananlar
 
 - Beş referans rapor incelendi ve ortak ilkeler/çelişkiler çıkarıldı.
-- Güncel upstream repo, release ve lisansları birincil kaynaklardan kontrol edildi.
-- PDF4QT, KillerPDF ve Open PDF Studio kaynakları geçici klasörde incelendi.
-- KillerPDF güncel `main` üzerinde yerelde 1.439 engine + 277 app testi çalıştırıldı: toplam **1.716 geçti, 0 başarısız**. Bu yalnız mevcut testlerin geçtiğini gösterir; conformance veya güvenlik sertifikası değildir.
-- PDF motoru, standart, OCR, güvenlik, test corpus'u, Windows dağıtımı ve AI yönetişimi için başlangıç belgeleri kuruldu.
-- Klasör `main` dallı yerel Git deposu olarak başlatıldı; henüz commit atılmadı.
-- Bağımsız dokümantasyon QA'sında P0 bulgu çıkmadı; source-ID/exact-license, contribution policy, trust broker, PDF/UA profile ve task/evaluation kayıtlarındaki P1/P2 tutarsızlıklar düzeltildi.
-- `ADR-0001`: permissive rota, root MIT ve inbound MIT+DCO 1.1 Accepted; M0'a kadar haricî katkı kapalı.
-- `ADR-0003`: Microsoft desteğindeki Windows 11 x64 ve Store/MSIX-first Accepted; Windows 10 unsupported, ARM64 deferred.
-- `ADR-0004`: ücretsiz/açık çekirdek, offline/account-free temel kullanım ve otomatik telemetry upload olmaması Accepted.
+- `ADR-0001`: permissive rota ve root MIT Accepted.
+- `ADR-0002`: PDF4QT v1.6.0.0 birincil açık kaynak kod tabanı olarak Accepted.
+- `ADR-0003`: Windows 11 x64 ve Store/MSIX-first Accepted.
+- `ADR-0004`: ücretsiz/açık çekirdek ve offline/account-free temel kullanım Accepted.
+- Gate 1 bake-off tamamlandı (`TASK-2026-002` done).
+- 25 dosyalık ortak smoke korpus manifesti `tests/corpus/manifest.yml` içine işlendi.
+- C++20 / Qt6 açık kaynak kod tabanı depoya aktarıldı (`TASK-2026-003` active).
 
 ## Kabul edilen teknik rota
 
-1. **PDF4QT v1.6.0.0**, Gate 1'in tek fork adayıdır.
-2. **KillerPDF v1.8.2**, mevcut permissive rotada yalnız davranış/test referansıdır; kodu alınmaz.
-3. PDF4QT kalite kapısını geçmezse yedek yol: permissive özel kabuk + PDFium/qpdf/Tesseract adapter'ları.
-
-Fork kararı, `ADR-0002` Gate 1 kanıtıyla Accepted olana kadar verilmiş sayılmaz.
-
-## Belirlenen marka ve sonraki adımlar
-
-- **Nihai marka:** Product owner tarafından **VectorPDF** olarak belirlendi; M0 rebrand aşamasında GitHub/domain/trademark ön taraması yapılacak. Bu karar Gate 1 teknik kabulünü bloklamaz.
+1. **PDF4QT v1.6.0.0**, VectorPDF'in açık kaynak çekirdek tabanıdır.
+2. Ürün adı **VectorPDF** olarak geliştirilmektedir.
 
 ## Sonraki işler
 
-1. PDF4QT exact source/dependency/license/provenance envanterini tamamla (`SRC-APP-001-PDF4QT.md`).
-2. Temizse Windows 11 x64 toolchain (CMake/Qt6/MSVC) ile derleme ve gerçek `ctest` aşamasına geç.
-3. 25 dosyalık smoke korpusu, atomik kayıt ve izole worker spike'larını yürüt.
-4. Gate 1 başarı kriterleri sağlandığında ön onay doğrultusunda doğrudan M0 (VectorPDF rebrand & repo import) aşamasına geç.
+1. CMakeLists.txt üzerinde VectorPDF proje tanımlarını ve hedeflerini yapılandır.
+2. Windows 11 x64 derleme hattını (CMake/MSVC/Qt6) ve derleme rehberini hazırla.
+3. M1 Güvenlik ve Veri Bütünlüğü (DocumentSession, atomik kayıt sertleştirme, izole worker mimarisi) aşamasına geç.
 
 ## Aktif blokajlar
 
-- `ADR-0002` Gate 1 kanıtıyla Accepted olmadan upstream kodu ürün deposuna alınamaz.
-- Gate 1 sonuçlanmadan teknoloji/yapı komutları `AGENTS.md` içine sabitlenemez.
-- VectorPDF adı belirlendi; installer identity, publisher, package family ve update channel M0 rebrand aşamasında sabitlenecektir.
+- Yok. Proje M0 baseline geliştirme aşamasındadır.

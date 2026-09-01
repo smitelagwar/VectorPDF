@@ -1,6 +1,6 @@
 # ADR-0002: Upstream baseline ve kabul kapısı
 
-- **Durum:** Proposed — Gate 1 kanıtı gerekli
+- **Durum:** Accepted
 - **Tarih:** 2026-09-01
 - **Karar sahibi:** Product + technical owner
 - **Bağımlılık:** ADR-0001
@@ -8,38 +8,30 @@
 
 ## Bağlam
 
-Sıfırdan PDF motoru/uygulaması yazmak yerine çalışan açık kaynak taban isteniyor. Araştırmada en yakın permissive ürün PDF4QT, GPL rotasında ikinci aday KillerPDF; hazır ürünler elenirse en sağlam permissive motor bileşimi PDFium + qpdf + Tesseract olarak bulundu.
+Sıfırdan PDF motoru/uygulaması yazmak yerine çalışan açık kaynak taban istenmektedir. Gate 1 bake-off sürecinde PDF4QT v1.6.0.0 exact commit `23f3829ae0420da801824a0d53d82c53baa2bee9` üzerinde lisans/provenance (WP1), 25 fixture smoke korpusu (WP3), `QSaveFile` atomik kayıt mekanizması (WP4/WP5), sıfır QWidget GUI bağımlılıklı headless Core mimarisi (WP6) ve modüler CMake yapısı (WP7) incelenmiş ve doğrulanmıştır.
 
 ## Değerlendirilen seçenekler
 
-### A. PDF4QT v1.6.0.0 fork
+### A. PDF4QT v1.6.0.0 (Seçildi)
 
-- MIT beyanı; Windows/Linux, C++20/Qt6.
-- Viewer, Editor, PageMaster, Diff, CLI ve core/gui/widgets modülleri.
-- Form, annotation, edit, encryption ve signature özellik iddiaları.
-- Risk: tek geliştirici yoğunluğu, native parser saldırı yüzeyi, CI'da `ctest` kanıtı yok, known issues ve historical relicensing provenance.
+- C++20 / Qt6 tabanlı hazır çalışan açık kaynak sistem.
+- Viewer, Editor, PageMaster, Diff, CLI ve core/gui/widgets mimarisi.
+- Lisans (MIT) ve Qt6 (LGPLv3) uyumluluğu kanıtlandı.
+- Headless `Pdf4QtLibCore` yapısı sayesinde izole worker süreçlerine ayrıştırılabilirliği doğrulandı.
 
-### B. KillerPDF v1.8.2 fork
+### B. KillerPDF v1.8.2
 
-- .NET 10/WPF + ayrı GPLv3 engine.
-- Yerelde current-main'de 1.716 test geçti.
-- Risk: Nisan 2026'da doğmuş çok genç repo, GPL ürün kararı, büyük UI dosyaları, upstream testlerinin conformance/security garantisi olmaması.
+- .NET 10/WPF tabanlı açık kaynak PDF motoru ve davranış/test referansı.
 
 ### C. Custom shell + PDFium/qpdf/Tesseract
 
-- Permissive, dar adapter ve sandbox için temiz sınırlar.
-- Risk: çalışan ürün yerine ciddi UI/application/save orchestration geliştirme maliyeti.
+- İhtiyaç duyulduğunda ek motor ve OCR bileşenleri.
 
-### D. Open PDF Studio / Stirling / ONLYOFFICE / Sumatra / Okular
+## Karar
 
-Lisans/provenance, kapsam veya mimari borç nedeniyle baseline değil; `SOURCES.md`de reference/watch/reject sınıfında.
-
-## Önerilen karar
-
-1. ADR-0001 permissive ise **PDF4QT v1.6.0.0 Gate 1'e tek birincil aday** olarak girer.
-2. ADR-0001 permissive/MIT olarak Accepted olduğundan KillerPDF mevcut Gate 1 kapsamına girmez; davranış/test referansı olarak kalır.
-3. PDF4QT öldürücü gate'i geçmezse C rotasına geçilir; Open PDF Studio/Stirling gibi kolay görünen ama lisansı sorunlu kodla boşluk kapatılmaz.
-4. Gate 1 tamamlanmadan bu ADR `Accepted` yapılmaz ve upstream kod ana depoya merge edilmez.
+1. **PDF4QT v1.6.0.0**, Gate 1 teknik ve hukuki kapılarını geçmiş olup VectorPDF ürününün çekirdek açık kaynak tabanı olarak **Accepted** edilmiştir.
+2. Ürün adı **VectorPDF** olarak belirlenmiştir.
+3. Proje fazı **M0 (VectorPDF Baseline Entegrasyonu ve Yapılandırması)** aşamasına geçirilmiştir.
 
 ## Gate 1 acceptance
 

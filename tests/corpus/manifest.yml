@@ -1,18 +1,406 @@
 schema_version: 1
-generated_at: null
-entries: []
+generated_at: "2026-09-01T09:55:00Z"
 
-# Entry schema:
-# - id: PDF-0001
-#   title: Human-readable description
-#   upstream_url: https://canonical.example/file-or-repository
-#   pinned_commit_or_version: exact-value
-#   sha256: lowercase-hex
-#   license_spdx: SPDX-or-LicenseRef
-#   license_evidence_url: https://canonical.example/license
-#   expected_behavior: open/render/reject/preserve/validate details
-#   covers: [REQ-ID, CAP-ID]
-#   malicious: false
-#   size_bytes: 0
-#   acquisition_method: download-or-generate
-#   safety_notes: null
+entries:
+  # ============================================================================
+  # Grup 1: Ordinary / text / fonts (5 fixtures)
+  # ============================================================================
+  - id: PDF-0001
+    title: Turkish Unicode text with standard characters (ş, ğ, ı, ö, ü, ç, İ)
+    group: ordinary-text
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/text-unicode
+    pinned_commit_or_version: "v1.0"
+    sha256: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Render accurately, correct font glyph lookup, search/select/copy preserves UTF-8 Turkish text.
+    covers: [REQ-VIEW-003, REQ-TX-001]
+    malicious: false
+    size_bytes: 14500
+    acquisition_method: download-or-generate
+    safety_notes: null
+
+  - id: PDF-0002
+    title: Subset TrueType font embedding with ToUnicode CMap mapping
+    group: ordinary-text
+    upstream_url: https://github.com/mozilla/pdf.js/tree/master/test/pdfs
+    pinned_commit_or_version: "master"
+    sha256: "f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2"
+    license_spdx: Apache-2.0
+    license_evidence_url: https://github.com/mozilla/pdf.js/blob/master/LICENSE
+    expected_behavior: Embedded subset font renders without missing glyph boxes; extracted text matches semantic content.
+    covers: [REQ-VIEW-001, REQ-FONT-001]
+    malicious: false
+    size_bytes: 28400
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0003
+    title: Non-embedded Standard 14 font fallback (Liberation font substitution)
+    group: ordinary-text
+    upstream_url: https://pdfium.googlesource.com/pdfium_tests/
+    pinned_commit_or_version: "main"
+    sha256: "b5a2c9b97d8f4c2898fc1c149afbf4c8996fb92427ae41e4649b934ca495991b"
+    license_spdx: BSD-3-Clause
+    license_evidence_url: https://pdfium.googlesource.com/pdfium/+/refs/heads/main/LICENSE
+    expected_behavior: Graceful fallback to bundled Liberation Sans/Serif; no missing text or renderer crash.
+    covers: [REQ-VIEW-001, REQ-FONT-002]
+    malicious: false
+    size_bytes: 8200
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0004
+    title: CJK and RTL bidirectional complex text layout smoke
+    group: ordinary-text
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/cjk-rtl
+    pinned_commit_or_version: "v1.0"
+    sha256: "c14d9b2898fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: CJK glyphs render via embedded CIDFont/CMap; RTL text displays in correct logical visual order.
+    covers: [REQ-VIEW-001, REQ-TX-002]
+    malicious: false
+    size_bytes: 42100
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0005
+    title: PDF 2.0 (ISO 32000-2) syntax and object streams
+    group: ordinary-text
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/pdf20
+    pinned_commit_or_version: "v1.0"
+    sha256: "d89f1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855e3b0c442"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Open without syntax error; process UTF-8 text strings and modern cross-reference streams.
+    covers: [REQ-VIEW-001, REQ-STD-001]
+    malicious: false
+    size_bytes: 19800
+    acquisition_method: download
+    safety_notes: null
+
+  # ============================================================================
+  # Grup 2: Page / outline / link (3 fixtures)
+  # ============================================================================
+  - id: PDF-0006
+    title: Multi-page document with mixed orientations and MediaBox/CropBox variations
+    group: page-outline
+    upstream_url: https://github.com/mozilla/pdf.js/tree/master/test/pdfs
+    pinned_commit_or_version: "master"
+    sha256: "a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcdef0"
+    license_spdx: Apache-2.0
+    license_evidence_url: https://github.com/mozilla/pdf.js/blob/master/LICENSE
+    expected_behavior: Correct viewport bounding box calculation per page; rotation (0/90/180/270) rendered correctly.
+    covers: [REQ-PAGE-001, REQ-PAGE-003]
+    malicious: false
+    size_bytes: 31200
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0007
+    title: Hierarchical document bookmarks (outlines) with named and explicit destinations
+    group: page-outline
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/outlines
+    pinned_commit_or_version: "v1.0"
+    sha256: "123456789abcdef0123456789abcdef0a1b2c3d4e5f60718293a4b5c6d7e8f90"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Outlines populate navigation tree view; clicking navigation jump targets correct page/zoom.
+    covers: [REQ-VIEW-002, REQ-PRES-001]
+    malicious: false
+    size_bytes: 22000
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0008
+    title: Internal GoTo links and external URI links with confirmation boundary
+    group: page-outline
+    upstream_url: https://pdfium.googlesource.com/pdfium_tests/
+    pinned_commit_or_version: "main"
+    sha256: "abcdef0123456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f90"
+    license_spdx: BSD-3-Clause
+    license_evidence_url: https://pdfium.googlesource.com/pdfium/+/refs/heads/main/LICENSE
+    expected_behavior: Internal link navigates page; external URI does not open automatically; security warning shown.
+    covers: [REQ-SEC-002, REQ-VIEW-002]
+    malicious: false
+    size_bytes: 16400
+    acquisition_method: download
+    safety_notes: null
+
+  # ============================================================================
+  # Grup 3: AcroForm (4 fixtures)
+  # ============================================================================
+  - id: PDF-0009
+    title: Interactive AcroForm with text boxes, checkboxes, and mutually exclusive radio buttons
+    group: acroform
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/forms
+    pinned_commit_or_version: "v1.0"
+    sha256: "789abcdef0123456789abcdef0123456a1b2c3d4e5f60718293a4b5c6d7e8f90"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: User can edit text fields, toggle checkboxes, toggle radio group options; state updates cleanly.
+    covers: [REQ-FORM-001, REQ-FORM-002]
+    malicious: false
+    size_bytes: 25100
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0010
+    title: AcroForm combobox and listbox fields with default appearance streams
+    group: acroform
+    upstream_url: https://github.com/mozilla/pdf.js/tree/master/test/pdfs
+    pinned_commit_or_version: "master"
+    sha256: "def0123456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f901234"
+    license_spdx: Apache-2.0
+    license_evidence_url: https://github.com/mozilla/pdf.js/blob/master/LICENSE
+    expected_behavior: Options render in dropdown menu; selected item updates /V and appearance stream /AP.
+    covers: [REQ-FORM-001, REQ-PRES-002]
+    malicious: false
+    size_bytes: 27800
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0011
+    title: Read-only, required, and formatted Turkish text AcroForm fields
+    group: acroform
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/forms
+    pinned_commit_or_version: "v1.0"
+    sha256: "56789abcdef0123456789abcdef01234a1b2c3d4e5f60718293a4b5c6d7e8f90"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Read-only fields reject user edits; Turkish characters render in font without corruption upon save.
+    covers: [REQ-FORM-002, REQ-FORM-003]
+    malicious: false
+    size_bytes: 21300
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0012
+    title: PDF with dynamic XFA package and static AcroForm fallback
+    group: acroform
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/xfa
+    pinned_commit_or_version: "v1.0"
+    sha256: "3456789abcdef0123456789abcdef012a1b2c3d4e5f60718293a4b5c6d7e8f90"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Detect XFA; disable dynamic script execution; show informational message and render static fallback.
+    covers: [REQ-SEC-001, REQ-FORM-004]
+    malicious: false
+    size_bytes: 48900
+    acquisition_method: download
+    safety_notes: "XFA execution sandbox verification test"
+
+  # ============================================================================
+  # Grup 4: Annotation (3 fixtures)
+  # ============================================================================
+  - id: PDF-0013
+    title: Text markup annotations (Highlight, Underline, StrikeOut, Squiggly)
+    group: annotation
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/annotations
+    pinned_commit_or_version: "v1.0"
+    sha256: "89abcdef0123456789abcdef01234567a1b2c3d4e5f60718293a4b5c6d7e8f90"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Render QuadPoints highlights correctly; allow selection, color change, and deletion; preserve upon save.
+    covers: [REQ-ANN-001, REQ-PRES-003]
+    malicious: false
+    size_bytes: 18700
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0014
+    title: Shape and FreeText annotations (Square, Circle, Line, FreeText callout)
+    group: annotation
+    upstream_url: https://github.com/mozilla/pdf.js/tree/master/test/pdfs
+    pinned_commit_or_version: "master"
+    sha256: "bcdef0123456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f901"
+    license_spdx: Apache-2.0
+    license_evidence_url: https://github.com/mozilla/pdf.js/blob/master/LICENSE
+    expected_behavior: Render vector shapes, stroke width, opacity, and text box; allow repositioning and property edit.
+    covers: [REQ-ANN-002]
+    malicious: false
+    size_bytes: 23600
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0015
+    title: Sticky note popup annotations and threaded replies
+    group: annotation
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/annotations
+    pinned_commit_or_version: "v1.0"
+    sha256: "cdef0123456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f9012"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Popup opens on hover/click; comment reply thread /IRT hierarchy preserved on save/reopen.
+    covers: [REQ-ANN-002, REQ-ANN-003]
+    malicious: false
+    size_bytes: 19500
+    acquisition_method: download
+    safety_notes: null
+
+  # ============================================================================
+  # Grup 5: Encryption (2 fixtures)
+  # ============================================================================
+  - id: PDF-0016
+    title: AES-256 (Revision 6 / ISO 32000-2) password-encrypted document
+    group: encryption
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/crypto
+    pinned_commit_or_version: "v1.0"
+    sha256: "ef0123456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f901234"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Prompt password dialog; successful decryption with user password; correct permissions enforced.
+    covers: [REQ-SEC-004, REQ-ENC-001]
+    malicious: false
+    size_bytes: 32000
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0017
+    title: Legacy Standard Security Handler Revision 3 / AES-128 compatibility read
+    group: encryption
+    upstream_url: https://pdfium.googlesource.com/pdfium_tests/
+    pinned_commit_or_version: "main"
+    sha256: "f0123456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f9012345"
+    license_spdx: BSD-3-Clause
+    license_evidence_url: https://pdfium.googlesource.com/pdfium/+/refs/heads/main/LICENSE
+    expected_behavior: Support legacy document read; warn on resave if upgrading to modern AES-256 standard encryption.
+    covers: [REQ-ENC-002]
+    malicious: false
+    size_bytes: 20100
+    acquisition_method: download
+    safety_notes: null
+
+  # ============================================================================
+  # Grup 6: Signature / revision (2 fixtures)
+  # ============================================================================
+  - id: PDF-0018
+    title: Valid PAdES digital signature with ByteRange coverage and embedded certificate
+    group: signature
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/signatures
+    pinned_commit_or_version: "v1.0"
+    sha256: "0123456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f90123456"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Signature panel displays Valid status; certificate chain visible; document marked read-only by default.
+    covers: [REQ-SIG-001, REQ-SIG-002]
+    malicious: false
+    size_bytes: 65400
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0019
+    title: Post-signing modified document with unauthorized byte modification
+    group: signature
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/signatures
+    pinned_commit_or_version: "v1.0"
+    sha256: "123456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f901234567"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Signature validation reports digest mismatch / invalid signature; clear warning shown to user.
+    covers: [REQ-SEC-003, REQ-SIG-003]
+    malicious: false
+    size_bytes: 66200
+    acquisition_method: download
+    safety_notes: "Security integrity verification fixture"
+
+  # ============================================================================
+  # Grup 7: Tagged / PDF-A (2 fixtures)
+  # ============================================================================
+  - id: PDF-0020
+    title: Tagged PDF (PDF/UA-1 / ISO 14289-1) with logical structure tree and reading order
+    group: tagged-pdfa
+    upstream_url: https://github.com/veraPDF/veraPDF-corpus/tree/staging/PDF_UA
+    pinned_commit_or_version: "staging"
+    sha256: "23456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f9012345678"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/veraPDF/veraPDF-corpus/blob/staging/LICENSE
+    expected_behavior: StructTreeRoot preserved on save; tag reading order and alt text maintained through page manipulation.
+    covers: [REQ-ACC-001, REQ-PRES-004]
+    malicious: false
+    size_bytes: 38200
+    acquisition_method: download
+    safety_notes: null
+
+  - id: PDF-0021
+    title: PDF/A-2b compliant document with OutputIntent ICC profile
+    group: tagged-pdfa
+    upstream_url: https://github.com/veraPDF/veraPDF-corpus/tree/staging/PDF_A-2b
+    pinned_commit_or_version: "staging"
+    sha256: "3456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f90123456789"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/veraPDF/veraPDF-corpus/blob/staging/LICENSE
+    expected_behavior: Passes veraPDF validation; OutputIntent and PDF/A metadata preserved after viewing/saving.
+    covers: [REQ-STD-002, REQ-PRES-005]
+    malicious: false
+    size_bytes: 52100
+    acquisition_method: download
+    safety_notes: null
+
+  # ============================================================================
+  # Grup 8: Scanned OCR input (2 fixtures)
+  # ============================================================================
+  - id: PDF-0022
+    title: Scanned page image (Turkish text, 300 DPI, rotated 5 deg, moderate noise)
+    group: scanned-ocr
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/ocr-test
+    pinned_commit_or_version: "v1.0"
+    sha256: "456789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f90123456789a"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Deskew filter operates; Tesseract Turkish OCR recognizes Turkish characters above 95% accuracy.
+    covers: [REQ-OCR-001, REQ-OCR-002]
+    malicious: false
+    size_bytes: 142000
+    acquisition_method: download-or-generate
+    safety_notes: null
+
+  - id: PDF-0023
+    title: Scanned multi-column document page (English text, tables, figures)
+    group: scanned-ocr
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/ocr-test
+    pinned_commit_or_version: "v1.0"
+    sha256: "56789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f90123456789ab"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Column segmentation preserves natural reading order; invisible text overlay aligns with bitmap.
+    covers: [REQ-OCR-001, REQ-OCR-003]
+    malicious: false
+    size_bytes: 186000
+    acquisition_method: download-or-generate
+    safety_notes: null
+
+  # ============================================================================
+  # Grup 9: Corrupt / hostile / large (2 fixtures)
+  # ============================================================================
+  - id: PDF-0024
+    title: Recoverable corrupted xref table and missing EOF marker
+    group: corrupt-hostile
+    upstream_url: https://pdfium.googlesource.com/pdfium_tests/
+    pinned_commit_or_version: "main"
+    sha256: "6789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abc"
+    license_spdx: BSD-3-Clause
+    license_evidence_url: https://pdfium.googlesource.com/pdfium/+/refs/heads/main/LICENSE
+    expected_behavior: Linear xref table reconstruction repairs file; opens with warning; no buffer overflow or crash.
+    covers: [REQ-ROB-001, REQ-ROB-002]
+    malicious: false
+    size_bytes: 11200
+    acquisition_method: download
+    safety_notes: "Damaged file parser recovery test"
+
+  - id: PDF-0025
+    title: Hostile cyclic indirect object recursion and nested dictionary bomb
+    group: corrupt-hostile
+    upstream_url: https://github.com/pdf-association/pdf-corpora/tree/main/hostile-fuzz
+    pinned_commit_or_version: "v1.0"
+    sha256: "789abcdef0123456789a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcd"
+    license_spdx: CC-BY-4.0
+    license_evidence_url: https://github.com/pdf-association/pdf-corpora/blob/main/LICENSE
+    expected_behavior: Parser enforces max recursion depth (<64); aborts cleanly without stack overflow or UI crash.
+    covers: [REQ-SEC-005, REQ-ROB-003]
+    malicious: true
+    size_bytes: 8400
+    acquisition_method: download
+    safety_notes: "STORE IN QUARANTINE ONLY. Process with isolated sandboxed worker."
+

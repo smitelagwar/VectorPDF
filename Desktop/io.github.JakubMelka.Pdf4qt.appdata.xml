@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2023-2025 Jakub Melka -->
+<component type="desktop-application">
+  <id>io.github.JakubMelka.Pdf4qt</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>PDF4QT</name>
+  <summary>Open Source PDF Editor</summary>
+  <description>
+    <p>
+      Unleash the power of PDF4QT: Your go-to open source PDF editor. Beyond its capabilities in encryption, optimization, advanced annotations, editing, and signing, PDF4QT offers an extensive range of features to enhance your PDF experience. With intuitive PDF viewing/editing applications and a handy command-line tool, PDF4QT streamlines your PDF interactions. Discover its vast potential today.
+    </p>
+  </description>
+  <categories>
+    <category>Office</category>
+    <category>Utility</category>
+  </categories>
+  <developer_name>Jakub Melka</developer_name>
+  <url type="homepage">https://jakubmelka.github.io/</url>
+  <url type="bugtracker">https://github.com/JakubMelka/PDF4QT/issues</url>
+  <url type="help">https://github.com/JakubMelka/PDF4QT/discussions</url>
+  <update_contact>Mgr.Jakub.Melka_AT_gmail.com</update_contact>
+  <content_rating type="oars-1.1"/>
+  <launchable type="desktop-id">io.github.JakubMelka.Pdf4qt.desktop</launchable>
+  <releases>
+    <release version="1.5.2.0" date="2025-09-20">
+      <description>
+        <ul>
+          <li>Issue #313: Remove history UX improvement</li>
+          <li>Issue #310: Docpage organiser uses PDF title rather than filename</li>
+          <li>Issue #306: Unable to delete the recent files history.</li>
+          <li>Issue #303: Add Dockerfile for Simplified PDF4QT Setup with Qt 6.9.1 and All Dependencies</li>
+          <li>Issue #301: Russian Language file</li>
+          <li>Issue #296: Redaction annotation support in PdfTool</li>
+          <li>Issue #295: Request: Make page layout choice persist between files</li>
+          <li>Issue #279: qt_add_translations uses options only in qt 6.9</li>
+          <li>Issue #284: Scaling dimensions [Enhancements, Features]</li>
+          <li>Issue #281: install API headers for reuse by other applications ?</li>
+          <li>Issue #251: Let user lock direction of lines/polylines when pressing keybinding (e.g. shift)</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.5.1.0" date="2025-04-27">
+      <description>
+        <ul>
+          <li>Issue #271: Change of the license to MIT</li>
+          <li>Issue #257: Force light mode (or dark mode)</li>
+          <li>Issue #255: Page Master invert selection does not work</li>
+          <li>Issue #254: Unit Settings default window size too small</li>
+          <li>Issue #248: Update version and year in About page</li>
+          <li>Issue #247: Option to hide cross when adding annotations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.5.0.0" date="2025-03-09">
+      <description>
+        <ul>
+          <li>Issue #244: Unite document after page removal loses outline</li>
+          <li>Issue #236: Highlighting - Allow color selection and intensity</li>
+          <li>Issue #229: Can't add picture to PDF</li>
+          <li>Issue #228: Reverse pages order</li>
+          <li>Issue #222: UnitTests fails several tests</li>
+          <li>Issue #207: Zoom to Cursor (Zoom Anchoring)</li>
+          <li>Issue #206: Name of the executable / command</li>
+          <li>Issue #205: Editor cannot create white or transparent annotations</li>
+          <li>Issue #202: Certain raster content not rendered</li>
+          <li>Issue #200: Icons under dark theme on Arch/KDE broken</li>
+          <li>Issue #185: Latest git fails to build on Linux</li>
+          <li>Issue #165: Inline Text latency issues on Flatpak/AppImage</li>
+          <li>Issue #161: Trust certificates like in Acrobat</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.4.0.0" date="2024-07-04">
+      <description>
+        <ul>
+          <li>Issue #190: PageMaster crash after removing pages</li>
+          <li>Issue #184: Form field font size too large</li>
+          <li>Issue #183: Option to ignore PDF security settings</li>
+          <li>Issue #182: Diff command-line arguments ignored</li>
+          <li>Issue #181: Dark mode feature</li>
+          <li>Issue #180: Options windows larger than desktop</li>
+          <li>Issue #174: Limited Linux support improvements</li>
+          <li>Issue #173: Errors loading Echoplex.pdf</li>
+          <li>Issue #172: Missing access keys in menus</li>
+          <li>Issue #168: Stamp disappears when merging files</li>
+          <li>Issue #166: Adding images to PDF</li>
+          <li>Issue #164: Taskbar icon not shown on Linux Mint</li>
+          <li>Issue #163: Invalid PDF rendering issues</li>
+          <li>Issue #159: Separate AppImage offerings</li>
+          <li>Issue #123: Alternative rendering backend (Blend2D)</li>
+          <li>Issue #42: Real text editing improvements</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.3.7" date="2024-01-10"/>
+    <release version="1.3.6" date="2023-11-24"/>
+    <release version="1.3.5" date="2023-09-08"/>
+    <release version="1.3.4" date="2023-08-03"/>
+    <release version="1.3.3" date="2023-04-22"/>
+    <release version="1.3.2" date="2023-02-01"/>
+    <release version="1.3.1" date="2022-12-28"/>
+    <release version="1.3.0" date="2022-12-25"/>
+    <release version="1.2.1" date="2022-06-30"/>
+    <release version="1.2.0" date="2022-06-05"/>
+    <release version="1.1.0" date="2021-12-19"/>
+    <release version="1.0.0" date="2021-09-19"/>
+  </releases>
+  <screenshots>
+    <screenshot type="default"><caption>Edit content of PDF documents</caption><image>https://jakubmelka.github.io/assets/flatpak/profi-editor.png</image></screenshot>
+	<screenshot><caption>Browse PDF files easily and efficiently</caption><image>https://jakubmelka.github.io/assets/flatpak/profi-default.png</image></screenshot>
+    <screenshot><caption>Utilize the 'magnifying glass' feature to zoom in on specific sections of the page</caption><image>https://jakubmelka.github.io/assets/flatpak/profi-magnifier.png</image></screenshot>
+    <screenshot><caption>Display statistics for various content types within the PDF file</caption><image>https://jakubmelka.github.io/assets/flatpak/profi-object-statistics.png</image></screenshot>
+    <screenshot><caption>View the document details</caption><image>https://jakubmelka.github.io/assets/flatpak/profi-properties.png</image></screenshot>
+    <screenshot><caption>List of add-ons available for the PDF editor</caption><image>https://jakubmelka.github.io/assets/flatpak/profi-addons.png</image></screenshot>
+	<screenshot><caption>Search PDF documents using regular expressions</caption><image>https://jakubmelka.github.io/assets/flatpak/profi-search-regex.png</image></screenshot>
+  </screenshots>
+</component>
