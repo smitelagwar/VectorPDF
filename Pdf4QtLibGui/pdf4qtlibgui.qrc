@@ -110,5 +110,7 @@
         <file>resources/bookmark-previous.svg</file>
         <file>resources/page.svg</file>
         <file>resources/bubble.svg</file>
+        <file>resources/fluent_dark.qss</file>
+        <file>resources/fluent_light.qss</file>
     </qresource>
 </RCC>
