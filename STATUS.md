@@ -1,12 +1,12 @@
 # Güncel Durum
 
 **Tarih:** 2026-09-01  
-**Faz:** M2 — P0 Okuyucu ve Arayüz Kalitesi  
-**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; DocumentSession ve atomik kayıt entegre; okuyucu deneyimi ve arayüz optimize ediliyor.
+**Faz:** M3 — P0 Sayfa İşlemleri, Annotation ve Geri Alma  
+**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; okuyucu ve güvenlik temeli tamamlandı; sayfa işlemleri, açıklamalar ve Undo/Redo yönetiliyor.
 
 ## Birincil aktif görev
 
-[TASK-2026-005 — M2 Okuyucu ve Arayüz Kalitesi](docs/tasks/TASK-2026-005-m2-reader-quality.md)
+[TASK-2026-006 — M3 Sayfa İşlemleri, Annotation ve Geri Alma](docs/tasks/TASK-2026-006-m3-page-ops-annotations.md)
 
 Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yukarıdaki görev kaydının `Devam checkpoint'i` bölümü okunur. Görev bağlantısı değişmedikçe ayrıntılı kaldığım-yer bilgisi görev dosyasındadır; bu bölüm aynı ayrıntıyı tekrar etmez.
 
@@ -21,6 +21,7 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 - 25 dosyalık ortak smoke korpus manifesti `tests/corpus/manifest.yml` içine işlendi.
 - M0 VectorPDF kod entegrasyonu, CMake ve rebrand yapılandırması tamamlandı (`TASK-2026-003` done).
 - M1 Güvenlik ve Veri Bütünlüğü: `PDFDocumentSession`, imzalı belge koruması ve atomik kayıt hattı tamamlandı (`TASK-2026-004` done).
+- M2 Okuyucu ve Arayüz Kalitesi: Sayfa düzenleri, arama motoru, metin seçimi ve Türkçe yerelleştirme tamamlandı (`TASK-2026-005` done).
 
 ## Kabul edilen teknik rota
 
@@ -29,11 +30,11 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 
 ## Sonraki işler
 
-1. VectorPDF Viewer ve Editor arayüzünde sayfa düzeni, yakınlaştırma ve navigasyon akışlarını doğrula.
-2. Arama paneli ve metin kopyalama deneyimini optimize et.
-3. Windows 11 Fluent Açık/Koyu tema ve yüksek DPI scaling uyumunu doğrula.
-4. M3 P0 Sayfa İşlemleri, Annotation ve Geri Alma aşamasına geç.
+1. Sayfa manipülasyonu (döndürme, silme, ekleme, bölme, birleştirme) akışlarını yapılandır.
+2. Açıklama araçlarını (vurgulama, altı çizili, serbest metin, damga, şekiller) doğrula.
+3. Command-based Undo/Redo mekanizmasını ve veri koruma matrisini doğrula.
+4. M4 P0/P1 AcroForm ve Form Tasarımı aşamasına geç.
 
 ## Aktif blokajlar
 
-- Yok. Proje M2 okuyucu ve arayüz kalitesi geliştirme aşamasındadır.
+- Yok. Proje M3 sayfa işlemleri ve açıklama geliştirme aşamasındadır.

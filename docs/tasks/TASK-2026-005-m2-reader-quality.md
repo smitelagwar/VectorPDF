@@ -1,10 +1,11 @@
 # TASK-2026-005 — M2 Okuyucu ve Arayüz Kalitesi
 
-- **Durum:** active
+- **Durum:** done
 - **Sahip:** Technical owner; uygulayıcı ajan
 - **Başlangıç:** 2026-09-01
 - **Son checkpoint:** 2026-09-01 Europe/Istanbul
 - **İlgili REQ/ADR/SOURCE/RISK:** ADR-0001, ADR-0002, ADR-0003, ADR-0004; REQ-READ-*, REQ-ACC-*, REQ-PERF-*
+
 
 ## Devam checkpoint'i
 
