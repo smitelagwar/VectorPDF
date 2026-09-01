@@ -1,12 +1,12 @@
 # Güncel Durum
 
 **Tarih:** 2026-09-01  
-**Faz:** M4 — P0/P1 AcroForm ve Form Tasarımı  
-**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; okuyucu, güvenlik ve sayfa manipülasyonu tamamlandı; AcroForm doldurma ve form tasarımı yönetiliyor.
+**Faz:** M5 — P1 Redaction, Metadata ve Gizlilik  
+**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; okuyucu, güvenlik, sayfa işlemleri ve formlar tamamlandı; kalıcı redaction ve metaveri temizleme yönetiliyor.
 
 ## Birincil aktif görev
 
-[TASK-2026-007 — M4 AcroForm ve Form Tasarımı](docs/tasks/TASK-2026-007-m4-acroforms-and-form-design.md)
+[TASK-2026-008 — M5 Redaction, Metadata ve Gizlilik](docs/tasks/TASK-2026-008-m5-redaction-and-metadata.md)
 
 Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yukarıdaki görev kaydının `Devam checkpoint'i` bölümü okunur. Görev bağlantısı değişmedikçe ayrıntılı kaldığım-yer bilgisi görev dosyasındadır; bu bölüm aynı ayrıntıyı tekrar etmez.
 
@@ -23,6 +23,7 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 - M1 Güvenlik ve Veri Bütünlüğü: `PDFDocumentSession`, imzalı belge koruması ve atomik kayıt hattı tamamlandı (`TASK-2026-004` done).
 - M2 Okuyucu ve Arayüz Kalitesi: Sayfa düzenleri, arama motoru, metin seçimi ve Türkçe yerelleştirme tamamlandı (`TASK-2026-005` done).
 - M3 Sayfa İşlemleri ve Annotation: Sayfa manipülasyonu (`PDFDocumentManipulator`), 15+ açıklama tipi ve `PDFUndoRedoManager` tamamlandı (`TASK-2026-006` done).
+- M4 AcroForm ve Form Tasarımı: Form motoru (`PDFFormField`), widget yöneticisi (`PDFWidgetFormManager`) ve form kontrolleri tamamlandı (`TASK-2026-007` done).
 
 ## Kabul edilen teknik rota
 
@@ -31,11 +32,11 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 
 ## Sonraki işler
 
-1. AcroForm alan tespiti, widget render ve form doldurma akışlarını yapılandır.
-2. Appearance stream (AP) oluşturma ve font fallback mekanizmasını doğrula.
-3. Form alanı ekleme, boyutlandırma ve özellik düzenleme araçlarını doğrula.
-4. M5 Redaction, Metadata ve Gizlilik aşamasına geç.
+1. Gerçek kalıcı Redaction (glif/piksel düzeyinde kalıcı silme) motorunu yapılandır.
+2. Metaveri temizleme (Info, XMP, PieceInfo scrub) araçlarını doğrula.
+3. Ek dosya (attachment) yönetimi ve taramasını doğrula.
+4. M6 Gelişmiş Düzenleme ve Tipografi aşamasına geç.
 
 ## Aktif blokajlar
 
-- Yok. Proje M4 AcroForm ve form tasarımı geliştirme aşamasındadır.
+- Yok. Proje M5 redaction, metadata ve gizlilik geliştirme aşamasındadır.

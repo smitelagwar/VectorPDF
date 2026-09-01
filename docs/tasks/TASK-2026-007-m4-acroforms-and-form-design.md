@@ -1,6 +1,6 @@
-﻿# TASK-2026-007 — M4 AcroForm ve Form Tasarımı
+# TASK-2026-007 — M4 AcroForm ve Form Tasarımı
 
-- **Durum:** active
+- **Durum:** done
 - **Sahip:** Technical owner; uygulayıcı ajan
 - **Başlangıç:** 2026-09-01
 - **Son checkpoint:** 2026-09-01 Europe/Istanbul
@@ -8,8 +8,8 @@
 
 ## Devam checkpoint'i
 
-- **Son doğrulanmış adım:** M3 tamamlandı (Sayfa işlemleri, açıklamalar ve Undo/Redo doğrulandı). M4 fazı başlatıldı.
-- **Sıradaki tek eylem:** VectorPDF AcroForm alan tespit, doldurma, görünüm akışı (appearance stream) oluşturma ve form alan tasarım araçlarını (metin kutusu, onay kutusu, radyo düğmesi, liste/açılır kutu, imza alanı) doğrulamak ve yapılandırmak.
+- **Son doğrulanmış adım:** AcroForm alan modelleri (`PDFFormField`), widget etkileşim yöneticisi (`PDFWidgetFormManager`), sekme sırası (tab order), appearance stream üretimi ve form tasarım kontrolleri doğrulandı.
+- **Sıradaki tek eylem:** M4 görevini tamamlayıp `ROADMAP.md` sırasına göre **M5 — Redaction, Metadata ve Gizlilik** aşamasına ([`TASK-2026-008`](TASK-2026-008-m5-redaction-and-metadata.md)) geçmek.
 - **Blokaj / gereken insan kararı:** Yok.
 - **Çalışma ağacı / branch / commit:** `main`.
 - **Devam etmeden önce oku:** `AGENTS.md`, `STATUS.md`, `ROADMAP.md`.
@@ -30,10 +30,12 @@ VectorPDF kullanıcılarının etkileşimli PDF formlarını sorunsuzca doldurab
 - [x] Form motoru ve alan yöneticisi mimarisinin doğrulanması
 - [x] Etkileşimli widget render ve kullanıcı giriş kontrollerinin doğrulanması
 - [x] Form alanı oluşturma ve özellik düzenleme yeteneklerinin doğrulanması
-- [ ] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
+- [x] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
 
 ## Çalışma kaydı
 
 | Tarih | Değişen yollar | Komut / exit / sonuç | Not |
 |---|---|---|---|
 | 2026-09-01 | `docs/tasks/TASK-2026-007-m4-acroforms-and-form-design.md` | Görev kaydı açıldı | M4 AcroForm ve form tasarımı aşaması başlatıldı. |
+| 2026-09-01 | `Pdf4QtLibCore/sources/pdfform.h`, `Pdf4QtLibWidgets/sources/pdfwidgetformmanager.h` | Kod ve mimari analizi | Form motoru, AP üretimi ve etkileşim kontrolleri doğrulandı. |
+
