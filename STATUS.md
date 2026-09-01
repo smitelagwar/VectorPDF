@@ -1,12 +1,12 @@
 # Güncel Durum
 
 **Tarih:** 2026-09-01  
-**Faz:** M0 — VectorPDF baseline entegrasyonu ve yapılandırması  
-**Kod durumu:** C++20 / Qt6 açık kaynak PDF çekirdeği VectorPDF olarak depoya aktarıldı.
+**Faz:** M1 — P0 Güvenlik ve Veri Bütünlüğü  
+**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği entegre edildi; DocumentSession, atomik kayıt ve güvenlik kontrolleri geliştiriliyor.
 
 ## Birincil aktif görev
 
-[TASK-2026-003 — M0 VectorPDF baseline entegrasyonu ve yapılandırması](docs/tasks/TASK-2026-003-m0-vectorpdf-baseline-setup.md)
+[TASK-2026-004 — M1 Güvenlik ve Veri Bütünlüğü](docs/tasks/TASK-2026-004-m1-security-and-data-integrity.md)
 
 Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yukarıdaki görev kaydının `Devam checkpoint'i` bölümü okunur. Görev bağlantısı değişmedikçe ayrıntılı kaldığım-yer bilgisi görev dosyasındadır; bu bölüm aynı ayrıntıyı tekrar etmez.
 
@@ -19,7 +19,7 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 - `ADR-0004`: ücretsiz/açık çekirdek ve offline/account-free temel kullanım Accepted.
 - Gate 1 bake-off tamamlandı (`TASK-2026-002` done).
 - 25 dosyalık ortak smoke korpus manifesti `tests/corpus/manifest.yml` içine işlendi.
-- C++20 / Qt6 açık kaynak kod tabanı depoya aktarıldı (`TASK-2026-003` active).
+- M0 VectorPDF kod entegrasyonu, CMake ve rebrand yapılandırması tamamlandı (`TASK-2026-003` done).
 
 ## Kabul edilen teknik rota
 
@@ -28,10 +28,11 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 
 ## Sonraki işler
 
-1. CMakeLists.txt üzerinde VectorPDF proje tanımlarını ve hedeflerini yapılandır.
-2. Windows 11 x64 derleme hattını (CMake/MSVC/Qt6) ve derleme rehberini hazırla.
-3. M1 Güvenlik ve Veri Bütünlüğü (DocumentSession, atomik kayıt sertleştirme, izole worker mimarisi) aşamasına geç.
+1. `DocumentSession` sınıfı: belge açık/kirli/imzalı durum yönetimini kur.
+2. Güvenli atomik kayıt hattını (`QSaveFile` + flush + reopen validation) sertleştir.
+3. Tehlikeli action (JavaScript, Launch) varsayılan deny güvenlik politikasını uygula.
+4. M2 P0 Okuyucu ve Arayüz Kalitesi aşamasına geç.
 
 ## Aktif blokajlar
 
-- Yok. Proje M0 baseline geliştirme aşamasındadır.
+- Yok. Proje M1 güvenlik ve veri bütünlüğü geliştirme aşamasındadır.

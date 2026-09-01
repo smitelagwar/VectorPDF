@@ -1,6 +1,6 @@
-﻿# TASK-2026-003 — M0 VectorPDF baseline entegrasyonu ve yapılandırması
+# TASK-2026-003 — M0 VectorPDF baseline entegrasyonu ve yapılandırması
 
-- **Durum:** active
+- **Durum:** done
 - **Sahip:** Technical owner; uygulayıcı ajan
 - **Başlangıç:** 2026-09-01
 - **Son checkpoint:** 2026-09-01 Europe/Istanbul
@@ -8,11 +8,11 @@
 
 ## Devam checkpoint'i
 
-- **Son doğrulanmış adım:** Gate 1 tamamlandı, ADR-0002 Accepted yapıldı. M0 fazı başlatıldı.
-- **Sıradaki tek eylem:** Açık kaynak baseline C++20 / Qt6 kod tabanını depoya aktarmak, VectorPDF CMake ve proje yapısını kurmak.
+- **Son doğrulanmış adım:** VectorPDF baseline C++20 / Qt6 kod tabanı, CMakeLists.txt, vcpkg.json ve AppxManifest proje yapılandırması tamamlandı.
+- **Sıradaki tek eylem:** [TASK-2026-004](TASK-2026-004-m1-security-and-data-integrity.md) açılarak M1 Güvenlik ve Veri Bütünlüğü (DocumentSession, atomik kayıt ve izole worker mimarisi) aşamasına geçilmesi.
 - **Blokaj / gereken insan kararı:** Yok.
 - **Çalışma ağacı / branch / commit:** `main`.
-- **Devam etmeden önce oku:** `AGENTS.md`, `STATUS.md`, `ROADMAP.md`, `docs/adr/0002-upstream-baseline.md`.
+- **Devam etmeden önce oku:** `AGENTS.md`, `STATUS.md`, `ROADMAP.md`, `docs/tasks/TASK-2026-004-m1-security-and-data-integrity.md`.
 
 ## Amaç
 
