@@ -1,68 +1,73 @@
 # VectorPDF
 
-Bu depo, Windows için ücretsiz, çevrimdışı çalışmayı önceleyen ve zamanla Acrobat sınıfı iş akışlarına yaklaşması hedeflenen bir PDF uygulamasının **ürün, mühendislik ve yapay zekâ çalışma sistemi**dir.
+**VectorPDF**, Windows 11 için tasarlanmış modern, hızlı, yüksek güvenlikli, çevrimdışı (offline-first) ve tam Türkçe destekli açık kaynak bir masaüstü PDF görüntüleme ve düzenleme uygulama paketidir.
 
-Henüz ürün kodu içe aktarılmadı. Bu bilinçli bir güvenlik kapısıdır: marka, dağıtım lisansı ve teknik taban kararı verilmeden bir projeyi fork etmek sonraki bütün kararları gereksiz yere kilitleyebilir.
+---
 
-## Şu anki hüküm
+## 🚀 Uygulamalar
 
-- Kabul edilen permissive/MIT rotanın tek birincil fork adayı **PDF4QT v1.6.0.0**'dır. Windows üzerinde çalışan viewer/editor/page manager/diff/CLI bileşenleri olan en yakın hazır tabandır. Kabulü otomatik değildir; `Gate 1` testlerinden geçmelidir.
-- **KillerPDF v1.8.2**, GPLv3 olduğu için mevcut ürün rotasında baseline değildir; yalnız davranış/test referansı olabilir. Yeni ve açık bir lisans ADR'si olmadan kodu alınmaz.
-- Sıfırdan kabuk yazmak varsayılan rota değildir. PDF4QT elenirse permissive yedek rota **PDFium + qpdf + Tesseract/Leptonica** bileşimidir.
-- Open PDF Studio ve Stirling-PDF güncel halleri lisans/provenance sorunları nedeniyle ürün tabanı değildir. MuPDF, AGPL uyumu veya ticari lisans olmadan kullanılamaz.
+VectorPDF paketi, günlük ihtiyaçlardan profesyonel belge yönetimine kadar uzanan 5 temel uygulamadan oluşur:
 
-Kararın ayrıntısı [MASTER_PLAN.md](MASTER_PLAN.md), uygulanma sırası [ROADMAP.md](ROADMAP.md), bugünkü durum [STATUS.md](STATUS.md) içindedir.
+1. **VectorPDF Viewer (Görüntüleyici):** Hızlı açılış, bellek dostu sayfa sanallaştırma, tek/çift sayfa ve sürekli kaydırma düzenleri, Regex destekli arama ve metin kopyalama.
+2. **VectorPDF Editor (Düzenleyici):** Belge içi metin bloklarını doğrudan düzenleme, 15+ açıklama aracı (vurgulama, altı çizili, mürekkep çizimi, serbest metin kutusu, damgalar), etkileşimli AcroForm doldurma/tasarımı ve kalıcı karartma (True Redaction).
+3. **VectorPDF PageMaster (Sayfa Yöneticisi):** Sürükle-bırak sayfa sıralama, döndürme, silme, bölme (split), birleştirme (merge) ve harici görsellerden sayfa ekleme.
+4. **VectorPDF Diff (Belge Karşılaştırma):** İki PDF belgesi arasındaki metin, görsel ve nesne farklarını piksel hassasiyetinde karşılaştırıp renklendirerek gösterme.
+5. **VectorPDF LaunchPad (Başlatıcı):** Tüm VectorPDF araçlarına ve son açılan belgelere tek ekrandan hızlı erişim.
 
-## Yapay zekâ ile başlat veya devam et
+---
 
-İlk kez Gemini/Codex/Claude ya da başka bir yerel ajanla başlayacaksan [AI ile Başlatma ve Devam Ettirme](docs/AI_START_HERE.md) dosyasındaki ilk prompt'u kullan. Sonraki yeni sohbetlerde çalışma alanına erişimi olan ajan için `Plana devam et.` yeterlidir: kök `AGENTS.md`, `STATUS.md` içindeki birincil aktif göreve ve onun checkpoint'ine yönlendirir.
+## 🛡️ Güvenlik ve Gizlilik Kırmızı Çizgileri
 
-Şu anki birincil kayıt her zaman [STATUS.md](STATUS.md) içinden bulunur. Sohbet geçmişi proje hafızası değildir; task checkpoint'i + Git diff/commit + gerçek test kayıtlarıdır.
+- **Atomik Kayıt Hattı:** Dosyalar asla doğrudan üzerine yazılmaz. Önce geçici dosyaya yazılır (`QSaveFile`), doğrulanır ve atomik olarak değiştirilir.
+- **Dijital İmza Koruması:** İmzalı belgeler açıldığında doğrudan üzerine yazma engellenir; imza bütünlüğünü korumak için yeni bir dosya olarak kaydedilir.
+- **Gerçek Kalıcı Redaction:** Hassas veriler yüzeysel siyah dikdörtgenle kapatılmaz; içerik akışındaki metin glifleri ve görsel pikselleri düzeyinde kalıcı silinir.
+- **Varsayılan Deny Kalkanı:** PDF JavaScript'leri, Launch action ve güvensiz dış bağlantılar varsayılan olarak engellenir.
+- **%100 Çevrimdışı:** Belgeleriniz asla internete veya harici sunuculara aktarılmaz.
 
-## Okuma sırası
+---
 
-1. [PROJECT.md](PROJECT.md) — ürünün değişmez niyeti ve sınırları
-2. [MASTER_PLAN.md](MASTER_PLAN.md) — nihai strateji ve karar ağacı
-3. [ROADMAP.md](ROADMAP.md) — aşamalar, çıktılar ve geçiş kapıları
-4. [STATUS.md](STATUS.md) — yalnızca güncel faz, açık kararlar ve sonraki işler
-5. [SOURCES.md](SOURCES.md) — doğrulanmış GitHub/standart kaynakları ve kanıt düzeyi
-6. [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — hedef teknik sınırlar
-7. [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md) — yapay zekâ hafızası ve değişiklik protokolü
-8. [docs/AI_START_HERE.md](docs/AI_START_HERE.md) — ilk prompt ve yeni sohbetten devam etme
-9. [docs/GATE1_BAKEOFF.md](docs/GATE1_BAKEOFF.md) — ilk repo kararını çalıştırma kılavuzu
+## 🛠️ Hızlı Derleme (Windows 11 x64)
 
-## Kanonik belge haritası
+### 1. Önkoşullar
+- **Derleyici:** Visual Studio 2022 (MSVC C++20)
+- **Framework & Araçlar:** Qt 6.5+, CMake 3.24+, vcpkg
 
-| Konu | Tek gerçek kaynağı |
-|---|---|
-| Vizyon, kullanıcı, kapsam dışı | `PROJECT.md` |
-| Güncel çalışma durumu | `STATUS.md` |
-| Uzun vadeli plan | `MASTER_PLAN.md` |
-| Aşama ve gate'ler | `ROADMAP.md` |
-| Mimari sınırlar | `docs/ARCHITECTURE.md` |
-| Ürün gereksinimleri | `docs/requirements/REQUIREMENTS.md` |
-| PDF özellik iddiaları | `docs/standards/PDF_SUPPORT_MATRIX.md` + `docs/standards/CONFORMANCE_POLICY.md` |
-| Kaynak ve repo gerçekleri | `SOURCES.md` + `docs/sources/SOURCE_REGISTRY.yml` + `docs/sources/evaluations/` |
-| Mimari kararların gerekçesi | `docs/adr/` |
-| Riskler | `docs/risks/RISK_REGISTER.md` |
-| Kullanıcıya görünen sürüm değişiklikleri | `CHANGELOG.md` |
-| İç mühendislik izi | `docs/ENGINEERING_LOG.md` |
-| Birincil aktif iş ve kaldığım yer | `STATUS.md` → bağlı `docs/tasks/TASK-...md` checkpoint'i |
+### 2. Tek Tıkla Derleme ve Test
+PowerShell üzerinden doğrudan:
+```powershell
+.\tools\build_vectorpdf.ps1
+```
 
-## Kanıt etiketleri
+### 3. Manuel CMake Komutları:
+```powershell
+# 1. vcpkg bağımlılıkları:
+vcpkg install tbb openssl lcms zlib openjpeg freetype libjpeg-turbo libpng blend2d --triplet x64-windows
 
-- **DOĞRULANDI:** Birincil kaynakta, belirtilen tarih/sürümde kontrol edildi.
-- **YERELDE KANITLANDI:** Komut, ortam ve sonuç kaydedildi.
-- **PROJE İDDİASI:** Upstream'in söylediği fakat bizim henüz bağımsız doğrulamadığımız özellik.
-- **ÖNERİ:** Henüz kabul edilmiş karar değil.
-- **BİLİNMİYOR:** Tahmin edilmez; araştırma veya PoC gerekir.
+# 2. CMake Yapılandırması:
+cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DPDF4QT_QT_ROOT="$env:Qt6_DIR" -DPDF4QT_BUILD_TESTS=ON
 
-## Değişmez ilkeler
+# 3. Derleme:
+cmake --build build --config Release -j8
 
-- Kullanıcı belgesinin orijinali üzerine doğrudan yazılmaz.
-- Her PDF güvensiz girdidir; parse/render/OCR/kriptografi uzun vadede düşük yetkili worker sınırında çalışır.
-- “Metin ekleme” ile “mevcut metni yeniden akıtma”, görsel imza ile kriptografik imza, siyah kutu ile gerçek redaction aynı özellik değildir.
-- Bir API'nin bulunması destek kanıtı değildir. Destek, fixture + test + kaydet/aç/karşılaştır kanıtıyla ilan edilir.
-- Dış kod, model, font veya binary exact sürüm/commit, lisans kapsamı, notice ve SBOM kaydı olmadan içe alınmaz.
+# 4. Birim Testleri & Korpus Doğrulaması:
+ctest --test-dir build -C Release --output-on-failure
+.\tests\run_smoke_tests.ps1
+```
 
-Referans olarak verilen beş eski rapor `referanslar/` altında korunur; onlar karar kaynağı değil, araştırma girdisidir.
+---
+
+## 📚 Belgeler
+
+- **Kullanıcı Rehberi:** [`docs/USER_GUIDE_TR.md`](docs/USER_GUIDE_TR.md)
+- **Mimari ve Tasarım:** [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+- **Güncel Durum:** [`STATUS.md`](STATUS.md)
+- **Yol Haritası:** [`ROADMAP.md`](ROADMAP.md)
+- **Güvenlik ve Gizlilik:** [`docs/SECURITY_AND_PRIVACY.md`](docs/SECURITY_AND_PRIVACY.md)
+- **Sürüm Notları:** [`CHANGELOG.md`](CHANGELOG.md)
+
+---
+
+## 📄 Lisans
+
+VectorPDF, **MIT Lisansı** altında dağıtılan özgür ve açık kaynaklı bir yazılımdır.
+
