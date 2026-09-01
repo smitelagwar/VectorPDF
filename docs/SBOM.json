@@ -1,0 +1,109 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.5.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:71c15591-9322-406c-99d2-a23471c1bdb5",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-01T10:00:00Z",
+    "tools": [
+      {
+        "vendor": "VectorPDF",
+        "name": "VectorPDF Build Tools",
+        "version": "1.1.0"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "VectorPDF",
+      "version": "1.1.0.0",
+      "description": "Modern, secure, offline-first PDF reader and editor for Windows 11",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "PDF4QT Core",
+      "version": "1.6.0.0",
+      "licenses": [{ "license": { "id": "MIT" } }],
+      "purl": "pkg:github/JakubMelka/PDF4QT@1.6.0.0"
+    },
+    {
+      "type": "library",
+      "name": "Blend2D",
+      "version": "0.10.0",
+      "licenses": [{ "license": { "id": "Zlib" } }],
+      "purl": "pkg:generic/blend2d@0.10.0"
+    },
+    {
+      "type": "library",
+      "name": "FreeType",
+      "version": "2.13.2",
+      "licenses": [{ "license": { "id": "FTL" } }],
+      "purl": "pkg:generic/freetype@2.13.2"
+    },
+    {
+      "type": "library",
+      "name": "Little CMS",
+      "version": "2.16",
+      "licenses": [{ "license": { "id": "MIT" } }],
+      "purl": "pkg:generic/lcms2@2.16"
+    },
+    {
+      "type": "library",
+      "name": "OpenJPEG",
+      "version": "2.5.0",
+      "licenses": [{ "license": { "id": "BSD-2-Clause" } }],
+      "purl": "pkg:generic/openjpeg@2.5.0"
+    },
+    {
+      "type": "library",
+      "name": "zlib",
+      "version": "1.3.1",
+      "licenses": [{ "license": { "id": "Zlib" } }],
+      "purl": "pkg:generic/zlib@1.3.1"
+    },
+    {
+      "type": "library",
+      "name": "OpenSSL",
+      "version": "3.2.0",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }],
+      "purl": "pkg:generic/openssl@3.2.0"
+    },
+    {
+      "type": "library",
+      "name": "Tesseract OCR",
+      "version": "5.3.3",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }],
+      "purl": "pkg:github/tesseract-ocr/tesseract@5.3.3"
+    },
+    {
+      "type": "library",
+      "name": "Leptonica",
+      "version": "1.83.1",
+      "licenses": [{ "license": { "id": "BSD-2-Clause" } }],
+      "purl": "pkg:generic/leptonica@1.83.1"
+    },
+    {
+      "type": "data",
+      "name": "Liberation Fonts",
+      "version": "2.1.5",
+      "licenses": [{ "license": { "id": "OFL-1.1" } }],
+      "purl": "pkg:generic/liberation-fonts@2.1.5"
+    },
+    {
+      "type": "framework",
+      "name": "Qt6",
+      "version": "6.6.1",
+      "licenses": [{ "license": { "id": "LGPL-3.0-only" } }],
+      "purl": "pkg:generic/qt@6.6.1"
+    }
+  ]
+}
