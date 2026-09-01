@@ -5,30 +5,31 @@
     <name>Application</name>
     <message>
         <location filename="../Pdf4QtEditor/main.cpp" line="48"/>
-        <source>PDF4QT Editor</source>
-        <translation>PDF4QT Editörü</translation>
+        <source>VectorPDF Editor</source>
+        <translation>VectorPDF Düzenleyici</translation>
     </message>
     <message>
         <location filename="../Pdf4QtViewer/main.cpp" line="41"/>
-        <source>PDF4QT Viewer</source>
-        <translation>PDF4QT Görüntüleyici</translation>
+        <source>VectorPDF Viewer</source>
+        <translation>VectorPDF Görüntüleyici</translation>
     </message>
     <message>
         <location filename="../Pdf4QtPageMaster/main.cpp" line="40"/>
-        <source>PDF4QT PageMaster</source>
-        <translation>PDF4QT SayfaYöneticisi</translation>
+        <source>VectorPDF PageMaster</source>
+        <translation>VectorPDF Sayfa Yöneticisi</translation>
     </message>
     <message>
         <location filename="../Pdf4QtDiff/main.cpp" line="41"/>
-        <source>PDF4QT Diff</source>
-        <translation>PDF4QT Fark</translation>
+        <source>VectorPDF Diff</source>
+        <translation>VectorPDF Belge Karşılaştırma</translation>
     </message>
     <message>
         <location filename="../Pdf4QtLaunchPad/main.cpp" line="35"/>
-        <source>PDF4QT LaunchPad</source>
-        <translation>PDF4QT Başlatma Paneli</translation>
+        <source>VectorPDF LaunchPad</source>
+        <translation>VectorPDF Başlatma Paneli</translation>
     </message>
 </context>
+
 <context>
     <name>AssembleOutputSettingsDialog</name>
     <message>
