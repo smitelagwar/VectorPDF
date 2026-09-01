@@ -1,0 +1,13 @@
+{
+  "Id": "com.vectorpdf.plugins.sampletextcounter",
+  "Name": "Metin ve Sayfa Analiz Eklentisi",
+  "Author": "VectorPDF SDK Team",
+  "Version": "1.0.0",
+  "MinAppVersion": "1.1.0",
+  "MaxAppVersion": "2.0.0",
+  "License": "MIT",
+  "Description": "PDF belgesinin toplam sayfa sayısını ve metin istatistiklerini raporlayan örnek eklenti.",
+  "Capabilities": [
+    "ReadDocument"
+  ]
+}
