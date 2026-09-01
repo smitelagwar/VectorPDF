@@ -1,4 +1,4 @@
-﻿# VectorPDF — Kullanıcı Rehberi (v1.0)
+# VectorPDF — Kullanıcı Rehberi (v1.0)
 
 VectorPDF; Windows 11 için geliştirilmiş modern, hızlı, yüksek güvenlikli ve Türkçe dil destekli açık kaynak bir PDF görüntüleme ve düzenleme yazılım paketidir.
 
@@ -32,6 +32,14 @@ VectorPDF; Windows 11 için geliştirilmiş modern, hızlı, yüksek güvenlikli
 
 ### 1.4 VectorPDF Belge Karşılaştırma (VectorPDF Diff)
 - İki farklı PDF belgesini yan yana açarak metin, görsel ve düzen farklarını piksel ve nesne bazında otomatik tespit edip renklendirerek gösterme.
+
+### 1.5 Otomasyon ve Toplu İşlem Kuyruğu (VectorPDF Batch CLI)
+- Komut satırından ve arayüzden birden çok PDF dosyasını aynı anda dönüştürme, OCR'dan geçirme, optimize etme, sayfa ayıklama ve PDF/A doğrulama kuyruğuna alma.
+- Gerçek zamanlı ilerleme yüzdesi, hata durumunda otomatik yeniden deneme (`retry`) ve JSON yürütme raporu çıktısı.
+
+### 1.6 Eklenti Mimarisi ve Çevrimdışı Yapay Zekâ (Plugins & Local AI)
+- **Güvenli Eklentiler:** İzin tabanlı manifest yapısıyla çalışan, yalnızca kullanıcının izin verdiği yetkilere (`ReadDocument`, `ModifyDocument`) erişebilen modüler eklenti sistemi.
+- **Çevrimdışı Yerel Yapay Zekâ:** Açık kullanıcı onayıyla çalışan, belgelerinizi internete aktarmadan yerel işlemci üzerinde özet çıkaran, anahtar kavramları listeleyen ve prompt injection güvenlik filtresine sahip AI yardımcı katmanı.
 
 ---
 
