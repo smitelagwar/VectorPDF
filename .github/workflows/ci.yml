@@ -1,0 +1,63 @@
+﻿name: VectorPDF CI/CD (Windows 11 x64)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup MSVC Compiler
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Setup Qt 6.8
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.8.0'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2022_64'
+
+      - name: Install vcpkg Dependencies
+        run: |
+          vcpkg install tbb openssl lcms zlib openjpeg freetype libjpeg-turbo libpng blend2d --triplet x64-windows
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -S . `
+            -DCMAKE_BUILD_TYPE=Release `
+            -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" `
+            -DPDF4QT_QT_ROOT="$env:Qt6_DIR" `
+            -DPDF4QT_BUILD_TESTS=ON
+
+      - name: Build VectorPDF (Release)
+        run: |
+          cmake --build build --config Release -j 4
+
+      - name: Run Unit Tests (CTest)
+        run: |
+          ctest --test-dir build -C Release --output-on-failure
+
+      - name: Run Smoke Corpus Tests
+        shell: powershell
+        run: |
+          .\tests\run_smoke_tests.ps1
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: VectorPDF-Windows-x64
+          path: |
+            build/bin/Release/*.exe
+            build/bin/Release/*.dll
