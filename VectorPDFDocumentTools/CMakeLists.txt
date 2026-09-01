@@ -77,6 +77,54 @@ add_library(VectorPDFDocumentTools SHARED
     sources/flatten/formflattener.cpp
     sources/flatten/optionalcontentflattener.h
     sources/flatten/optionalcontentflattener.cpp
+
+    sources/bates/batessequence.h
+    sources/bates/batessequence.cpp
+    sources/bates/batesdefinition.h
+    sources/bates/batesdefinition.cpp
+    sources/bates/batesrenderer.h
+    sources/bates/batesrenderer.cpp
+    sources/bates/batesbatchplan.h
+    sources/bates/batesbatchplan.cpp
+
+    sources/stamps/stampmetadata.h
+    sources/stamps/stampmetadata.cpp
+    sources/stamps/stampdefinition.h
+    sources/stamps/stampdefinition.cpp
+    sources/stamps/stampappearancebuilder.h
+    sources/stamps/stampappearancebuilder.cpp
+    sources/stamps/stampassetstore.h
+    sources/stamps/stampassetstore.cpp
+    sources/stamps/stampmanager.h
+    sources/stamps/stampmanager.cpp
+
+    sources/sanitize/sanitizerule.h
+    sources/sanitize/sanitizeresult.h
+    sources/sanitize/sanitizerreport.h
+    sources/sanitize/sanitizerreport.cpp
+    sources/sanitize/metadataremover.h
+    sources/sanitize/metadataremover.cpp
+    sources/sanitize/attachmentremover.h
+    sources/sanitize/attachmentremover.cpp
+    sources/sanitize/javascriptremover.h
+    sources/sanitize/javascriptremover.cpp
+    sources/sanitize/actionremover.h
+    sources/sanitize/actionremover.cpp
+    sources/sanitize/hiddencontentanalyzer.h
+    sources/sanitize/hiddencontentanalyzer.cpp
+    sources/sanitize/sanitizevalidator.h
+    sources/sanitize/sanitizevalidator.cpp
+    sources/sanitize/sanitizedocumentservice.h
+    sources/sanitize/sanitizedocumentservice.cpp
+
+    sources/print/printprofile.h
+    sources/print/printprofile.cpp
+    sources/print/printjobdefinition.h
+    sources/print/printjobdefinition.cpp
+    sources/print/printimpositionengine.h
+    sources/print/printimpositionengine.cpp
+    sources/print/printservice.h
+    sources/print/printservice.cpp
 )
 
 add_compile_definitions(VECTORPDF_DOCUMENTTOOLS_LIBRARY)

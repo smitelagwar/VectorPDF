@@ -1,0 +1,7 @@
+// MIT License
+#ifndef VECTORPDF_SANITIZERREPORT_H
+#define VECTORPDF_SANITIZERREPORT_H
+
+#include "sanitizeresult.h"
+
+#endif // VECTORPDF_SANITIZERREPORT_H
