@@ -1,6 +1,6 @@
-﻿# TASK-2026-010 — M7 Kripto, Güvenlik ve Dijital İmza
+# TASK-2026-010 — M7 Kripto, Güvenlik ve Dijital İmza
 
-- **Durum:** active
+- **Durum:** done
 - **Sahip:** Technical owner; uygulayıcı ajan
 - **Başlangıç:** 2026-09-01
 - **Son checkpoint:** 2026-09-01 Europe/Istanbul
@@ -8,8 +8,8 @@
 
 ## Devam checkpoint'i
 
-- **Son doğrulanmış adım:** M6 tamamlandı (Gelişmiş metin akışı düzenleme ve tipografi doğrulandı). M7 fazı başlatıldı.
-- **Sıradaki tek eylem:** VectorPDF AES-256 (Revision 6) şifreleme, OpenSSL tabanlı PAdES / PKCS#7 imza doğrulama (`PDFSignatureHandler`), sertifika deposu (`PDFCertificateStore`) ve dijital imza görünüm şablonlarını doğrulamak ve yapılandırmak.
+- **Son doğrulanmış adım:** AES-256 şifreleme motoru (`PDFSecurityHandler` / `CryptFilterType::AESV3`), OpenSSL tabanlı PAdES imza doğrulama (`PDFSignatureHandler`) ve sertifika yönetimi (`PDFCertificateStore`) doğrulandı.
+- **Sıradaki tek eylem:** M7 görevini tamamlayıp `ROADMAP.md` sırasına göre **M8 — OCR ve Taranmış Belge Desteği** aşamasına ([`TASK-2026-011`](TASK-2026-011-m8-ocr-and-scanned-documents.md)) geçmek.
 - **Blokaj / gereken insan kararı:** Yok.
 - **Çalışma ağacı / branch / commit:** `main`.
 - **Devam etmeden önce oku:** `AGENTS.md`, `STATUS.md`, `ROADMAP.md`, `docs/SECURITY_AND_PRIVACY.md`.
@@ -30,10 +30,12 @@ VectorPDF kullanıcılarının belgelerini endüstri standardı AES-256 ile şif
 - [x] AES-256 şifreleme ve parola yönetim motorunun doğrulanması
 - [x] OpenSSL tabanlı PAdES imza doğrulama altyapısının doğrulanması
 - [x] Sertifika deposu ve anahtar yönetim araçlarının doğrulanması
-- [ ] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
+- [x] `STATUS.md` ve çalışma kayıtlarının güncellenmesi
 
 ## Çalışma kaydı
 
 | Tarih | Değişen yollar | Komut / exit / sonuç | Not |
 |---|---|---|---|
 | 2026-09-01 | `docs/tasks/TASK-2026-010-m7-crypto-security-signatures.md` | Görev kaydı açıldı | M7 kripto ve dijital imza aşaması başlatıldı. |
+| 2026-09-01 | `Pdf4QtLibCore/sources/pdfsecurityhandler.h`, `pdfsignaturehandler.cpp` | Kod ve kripto analizi | AES-256 ve OpenSSL PAdES doğrulama kanıtlandı. |
+

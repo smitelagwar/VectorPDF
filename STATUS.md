@@ -1,12 +1,12 @@
 # Güncel Durum
 
 **Tarih:** 2026-09-01  
-**Faz:** M7 — P1 Kripto, Güvenlik ve Dijital İmza  
-**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; okuyucu, güvenlik, sayfa işlemleri, formlar, redaction ve metin düzenleme tamamlandı; AES-256 şifreleme ve PAdES dijital imza yönetiliyor.
+**Faz:** M8 — P1 OCR ve Taranmış Belge Desteği  
+**Kod durumu:** VectorPDF C++20 / Qt6 çekirdeği devrede; okuyucu, güvenlik, sayfa işlemleri, formlar, redaction, metin düzenleme ve kripto/imza tamamlandı; OCR motoru ve Türkçe metin katmanı yönetiliyor.
 
 ## Birincil aktif görev
 
-[TASK-2026-010 — M7 Kripto, Güvenlik ve Dijital İmza](docs/tasks/TASK-2026-010-m7-crypto-security-signatures.md)
+[TASK-2026-011 — M8 OCR ve Taranmış Belge Desteği](docs/tasks/TASK-2026-011-m8-ocr-and-scanned-documents.md)
 
 Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yukarıdaki görev kaydının `Devam checkpoint'i` bölümü okunur. Görev bağlantısı değişmedikçe ayrıntılı kaldığım-yer bilgisi görev dosyasındadır; bu bölüm aynı ayrıntıyı tekrar etmez.
 
@@ -26,6 +26,7 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 - M4 AcroForm ve Form Tasarımı: Form motoru (`PDFFormField`), widget yöneticisi (`PDFWidgetFormManager`) ve form kontrolleri tamamlandı (`TASK-2026-007` done).
 - M5 Redaction, Metadata ve Gizlilik: Gerçek kalıcı Redaction (`PDFRedact`), metaveri temizleme ve ek dosya yönetimi tamamlandı (`TASK-2026-008` done).
 - M6 Gelişmiş Düzenleme ve Tipografi: Metin akışı düzenleme (`PDFDocumentTextFlowEditorModel`), FontCache ve görsel optimizasyon tamamlandı (`TASK-2026-009` done).
+- M7 Kripto, Güvenlik ve Dijital İmza: AES-256 (Rev 6) şifreleme, OpenSSL PAdES imza doğrulama (`PDFSignatureHandler`) ve sertifika yönetimi tamamlandı (`TASK-2026-010` done).
 
 ## Kabul edilen teknik rota
 
@@ -34,11 +35,11 @@ Yeni bir AI oturumunda `plana devam et` denildiğinde önce bu dosya, sonra yuka
 
 ## Sonraki işler
 
-1. AES-256 (Revision 6) şifreleme, izinler ve parola koruma akışını yapılandır.
-2. OpenSSL tabanlı PAdES / PKCS#7 dijital imza doğrulama (`PDFSignatureHandler`) ve sertifika zincirini doğrula.
-3. Windows Certificate Store / PKCS#12 imza anahtarı entegrasyonunu doğrula.
-4. M8 OCR ve Taranmış Belge Desteği aşamasına geç.
+1. Görsel ön işleme filtrelerini (Deskew, Otsu binarization, kontrast) yapılandır.
+2. Tesseract OCR ve Türkçe dil modeli (`tur.traineddata`) entegrasyonunu doğrula.
+3. Görünmez aranabilir metin katmanı (invisible searchable text overlay) yerleşimini doğrula.
+4. M9 Dönüştürme, Dışa Aktarma ve Standartlar aşamasına geç.
 
 ## Aktif blokajlar
 
-- Yok. Proje M7 kripto, güvenlik ve dijital imza geliştirme aşamasındadır.
+- Yok. Proje M8 OCR ve taranmış belge desteği geliştirme aşamasındadır.
