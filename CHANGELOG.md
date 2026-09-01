@@ -26,4 +26,16 @@ Bu dosya yalnız kullanıcıya görünen ürün değişikliklerini [Keep a Chang
 - **Güvenli Eklenti Mimarisi:** İzin tabanlı `PDFPluginManifest` ve `PDFPluginSecurityGuard` ile yetki kısıtlama (`ReadDocument`, `ModifyDocument`, `ExecuteExternalProcess`) ve dijital imza doğrulaması.
 - **Çevrimdışı Yerel Yapay Zekâ Adaptörü:** `IAIProvider` ve `PDFAIOfflineProvider` ile görev bazlı açık izin (`AITaskConsent`), prompt injection filtreleme, yerel metin özetleme ve anahtar kavram çıkarma.
 - **Türkçe Dil Desteği:** 15.000'den fazla çevrilmiş UI dizesiyle eksiksiz Türkçe arayüz (`translations/PDF4QT_tr.ts`).
+- **M12 Kapsamlı Dönüştürme Motoru (VectorPDFConversion):** PDF'den Word/DOCX, Excel/XLSX, PowerPoint/PPTX, Text, Markdown, HTML5, EPUB, JSON, CSV formatlarına iki yönlü dönüştürme ve WIA tarayıcı arayüzü.
+- **M13 Günlük Araçlar ve Erişilebilirlik (VectorPDFDocumentTools & VectorPDFAccessibility):**
+  - **Fill & Sign (Görsel İmza & Paraf):** Çizim (vektörel pürüzsüzleştirme), Metin (Türkçe el yazısı presetleri) ve Görsel (arka plan şeffaflık ayıklamalı) imza yönetimi, Windows DPAPI şifreli güvenli imza deposu ve tek tıkla silme.
+  - **Header / Footer / Sayfa Numarası:** 6 konum slotu, dinamik şablon token motoru (`{page}`, `{pages}`, `{date}`, `{time}`, `{filename}`, `{title}`), tek seferlik optimize kaynak paylaşımı.
+  - **Watermark (Filigran):** Metin, Görsel ve PDF Sayfa filigranı, açı/şeffaflık/karolama denetimi ve katman yönetimi.
+  - **PDF Background (Arka Plan):** Düz renk, Görsel (Fit/Fill/Stretch/Center/Tile) ve PDF sayfası arka planı.
+  - **Advanced Find & Replace:** Regex, tam kelime, büyük/küçük harf duyarlılığı, Türkçe İ/ı kurallı harf düzeni koruma, metin taşma (overflow) heuristiği ve tek işlemde geri alma (Undo).
+  - **Smart Find & Redact:** T.C. Kimlik (kesin matematiksel sağlama), IBAN (ISO 13616 MOD-97), Kredi/Banka Kartı (Luhn MOD-10), E-posta, Telefon, IP, URL, Tarih ve Araç Plakası otomatik algılayıcıları ve kullanıcı onaylı kalıcı karartma.
+  - **Flatten PDF:** AcroForm alanlarını, açıklamaları, damgaları ve katmanları sayfa içerik akışına dönüştürürken web köprülerini ve dijital imzaları koruyan güvenli düzleştirme motoru.
+  - **Accessibility Checker:** Başlık, doğal dil, etiket (/StructTreeRoot), okuma sırası, görsel alternatif metin ve tablo başlıkları için otomatik ön denetim; dürüst PDF/UA doğrulama arayüzü (veraPDF entegrasyonu).
+  - **Tags & Reading Order Editor:** Mantıksal yapı ağacı (/StructTreeRoot, /StructElem, /ParentTree, /MCID) düzenleme ve numaralandırılmış görsel okuma sırası katmanı.
+  - **Automatic Accessible PDF (Auto-Tagging):** Yerel sezgisel analizci (başlıklar, paragraflar, tablolar, görseller, tekrar eden başlık/altlık ayıklama), opsiyonel Docling worker arayüzü ve yerel AI alternatif metin önerisi.
 

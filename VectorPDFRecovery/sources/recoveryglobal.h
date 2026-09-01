@@ -1,0 +1,14 @@
+// MIT License
+// Copyright (c) 2026 VectorPDF Contributors
+#ifndef VECTORPDF_RECOVERYGLOBAL_H
+#define VECTORPDF_RECOVERYGLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(VECTORPDF_RECOVERY_LIBRARY)
+#  define VECTORPDF_RECOVERY_EXPORT Q_DECL_EXPORT
+#else
+#  define VECTORPDF_RECOVERY_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // VECTORPDF_RECOVERYGLOBAL_H

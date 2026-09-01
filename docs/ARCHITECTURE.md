@@ -229,6 +229,25 @@ docs/
 
 İsimler fork diline göre uyarlanır. Mantıksal bağımlılık yönü korunur.
 
+## Modüler Eklenti ve Servis Mimarisi (M12 & M13)
+
+### 1. VectorPDFConversion (M12)
+- İki yönlü dönüştürme: PDF'den Office (DOCX/XLSX/PPTX), metin, HTML5, EPUB, JSON ve WIA tarayıcı arayüzü.
+
+### 2. VectorPDFDocumentTools (M13)
+- **Foundation & Transactions:** `DocumentToolTransaction`, `DocumentToolValidator` (imzalı belge koruması ve geçici dosya doğrulaması).
+- **Fill & Sign:** Çizim, metin ve görsel imza motoru, Windows DPAPI şifreli yerel depolama (`SignatureAssetStore`).
+- **Page Decorations:** Header/Footer, Watermark, Background ve dinamik şablon motoru (`DecorationTemplateEngine`).
+- **Content Tools:** Gelişmiş Bul/Değiştir, Türkçe yerel harf düzeni koruma (`İstanbul` -> `Ankara`), taşma heuristiği.
+- **Smart Redact:** T.C. Kimlik (11 basamaklı sağlama), IBAN (ISO 13616 MOD-97), Kart (Luhn) ve PII algılayıcıları.
+- **Flatten PDF:** Form ve açıklama düzleştirme; web köprülerini ve dijital imzaları koruyan filtreleme.
+
+### 3. VectorPDFAccessibility (M13)
+- **Accessibility Checker:** Belge başlığı, dil, tag ağacı, okuma sırası, tablo ve görsel kuralları.
+- **Structure & Reading Order:** `/StructTreeRoot`, `/ParentTree`, `/MCID` yönetimi ve görsel okuma katmanı (`ReadingOrderOverlay`).
+- **Auto-Tagging:** Yerel sezgisel analizci (`NativeHeuristicTagger`), Docling köprüsü ve yerel AI alternatif metin motoru.
+- **Dürüst Doğrulama:** Harici `veraPDF` doğrulaması olmadan kesin PDF/UA uyumluluk iddiası verilmez.
+
 ## Mimari başarı ölçütleri
 
 - Bir parser crash'i UI süreç kaybı yaratmaz.
@@ -237,14 +256,3 @@ docs/
 - Bir dependency tek adapter sınırından değiştirilebilir; ürün politikası engine içinde dağılmaz.
 - Capability/support iddiaları `PDF_SUPPORT_MATRIX` ve test ID'sine izlenebilir.
 - Hassas belge içeriği log/crash dump/telemetride görülmez.
-
-## Bilinçli ertelenenler
-
-- Plugin ABI
-- Cloud sync/collaboration
-- Provider-specific AI mimarisi
-- Word-benzeri layout engine
-- PAdES LT/LTA trust service
-- PDF/UA otomatik remediation motoru
-
-Bu maddeler temel sınırları ihlal ederek öne çekilemez.

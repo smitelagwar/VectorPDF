@@ -92,6 +92,26 @@ add_library(Pdf4QtLibGui SHARED
     pdfscreenshotdialog.cpp
     pdfwiascannerbroker.h
     pdfwiascannerbroker.cpp
+    pdffillsignpanel.h
+    pdffillsignpanel.cpp
+    pdfheaderfooterdialog.h
+    pdfheaderfooterdialog.cpp
+    pdfwatermarkdialog.h
+    pdfwatermarkdialog.cpp
+    pdfbackgrounddialog.h
+    pdfbackgrounddialog.cpp
+    pdffindreplacedock.h
+    pdffindreplacedock.cpp
+    pdfsmartredactdialog.h
+    pdfsmartredactdialog.cpp
+    pdfflattendialog.h
+    pdfflattendialog.cpp
+    pdfaccessibilitydock.h
+    pdfaccessibilitydock.cpp
+    pdfreadingorderdock.h
+    pdfreadingorderdock.cpp
+    pdfautotagdialog.h
+    pdfautotagdialog.cpp
 )
 
 add_compile_definitions(QT_INSTALL_DIRECTORY="${QT6_INSTALL_PREFIX}")
@@ -103,9 +123,9 @@ GENERATE_EXPORT_HEADER(Pdf4QtLibGui
                        PDF4QTLIBGUILIBSHARED_EXPORT
                        EXPORT_FILE_NAME "${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/pdf4qtlibgui_export.h")
 
-target_link_libraries(Pdf4QtLibGui PRIVATE Pdf4QtLibCore Pdf4QtLibWidgets VectorPDFConversion Qt6::Core Qt6::Gui Qt6::Widgets Qt6::PrintSupport Qt6::TextToSpeech Qt6::Xml Qt6::Svg)
+target_link_libraries(Pdf4QtLibGui PRIVATE Pdf4QtLibCore Pdf4QtLibWidgets VectorPDFConversion VectorPDFDocumentTools VectorPDFAccessibility Qt6::Core Qt6::Gui Qt6::Widgets Qt6::PrintSupport Qt6::TextToSpeech Qt6::Xml Qt6::Svg)
 target_include_directories(Pdf4QtLibGui INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(Pdf4QtLibGui PUBLIC ${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR} ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFConversion/sources)
+target_include_directories(Pdf4QtLibGui PUBLIC ${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR} ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFConversion/sources ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFDocumentTools/sources ${CMAKE_CURRENT_SOURCE_DIR}/../VectorPDFAccessibility/sources)
 
 set_target_properties(Pdf4QtLibGui PROPERTIES
                       VERSION ${PDF4QT_VERSION}

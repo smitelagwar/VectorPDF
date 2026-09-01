@@ -41,6 +41,16 @@ VectorPDF; Windows 11 için geliştirilmiş modern, hızlı, yüksek güvenlikli
 - **Güvenli Eklentiler:** İzin tabanlı manifest yapısıyla çalışan, yalnızca kullanıcının izin verdiği yetkilere (`ReadDocument`, `ModifyDocument`) erişebilen modüler eklenti sistemi.
 - **Çevrimdışı Yerel Yapay Zekâ:** Açık kullanıcı onayıyla çalışan, belgelerinizi internete aktarmadan yerel işlemci üzerinde özet çıkaran, anahtar kavramları listeleyen ve prompt injection güvenlik filtresine sahip AI yardımcı katmanı.
 
+### 1.7 Günlük Araçlar ve Erişilebilirlik (Daily Tools & Accessibility - M13)
+- **Görsel İmza & Paraf (Fill & Sign):** Çizim, el yazısı metin veya şeffaf görselle belge imzalama. İmzalar Windows DPAPI ile şifreli yerel depoda korunur; tek tıkla silinebilir.
+- **Üst Bilgi, Alt Bilgi ve Sayfa Numarası:** 6 konum slotu ve dinamik `{page}`, `{pages}`, `{date}`, `{filename}` şablonlarıyla profesyonel numaralandırma.
+- **Filigran & Sayfa Arka Planı:** Belgeye metin/görsel/PDF filigranı ve arka plan katmanı uygulama.
+- **Gelişmiş Bul ve Değiştir:** Büyük/küçük harf, tam kelime, regex ve Türkçe harf düzenini (`İ` / `ı`) koruyan toplu metin değişimi.
+- **Akıllı Veri Karartma (Smart Redact):** T.C. Kimlik, IBAN, Kredi Kartı (Luhn doğrulamalı), E-posta, Telefon ve Araç Plakalarını otomatik algılayıp kullanıcı onayıyla kalıcı silme.
+- **Belgeyi Düzleştir (Flatten PDF):** Form alanlarını ve açıklamaları sayfa içeriğine dönüştürürken web köprülerini ve dijital imzaları koruyan güvenli düzleştirme.
+- **Erişilebilirlik Denetçisi (Accessibility Checker):** Başlık, dil, etiket (/StructTreeRoot) ve tablo/görsel kurallarını denetleyen preflight aracı ve dürüst PDF/UA doğrulama arayüzü.
+- **Okuma Sırası & Otomatik Erişilebilir PDF:** Mantıksal tag ağacı düzenleme ve yerel sezgisel analizci ile tek tıkla erişilebilir PDF üretimi.
+
 ---
 
 ## 2. Güvenlik ve Gizlilik Politikası
