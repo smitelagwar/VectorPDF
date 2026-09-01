@@ -350,6 +350,123 @@
            </item>
           </layout>
          </widget>
+         <widget class="QWidget" name="createScannerPage">
+          <layout class="QVBoxLayout" name="createScannerLayout">
+           <item>
+            <layout class="QHBoxLayout" name="scannerDeviceHLayout">
+             <item>
+              <widget class="QLabel" name="scannerDeviceLabel">
+               <property name="text">
+                <string>Device:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="scannerDeviceCombo"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="scannerRefreshButton">
+               <property name="text">
+                <string>Refresh</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="scannerOptionsGrid">
+             <item row="0" column="0">
+              <widget class="QLabel" name="scannerDpiLabel">
+               <property name="text">
+                <string>Resolution:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QSpinBox" name="scannerDpiSpin">
+               <property name="minimum">
+                <number>72</number>
+               </property>
+               <property name="maximum">
+                <number>1200</number>
+               </property>
+               <property name="value">
+                <number>300</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="scannerColorLabel">
+               <property name="text">
+                <string>Color Mode:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QComboBox" name="scannerColorCombo"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="scannerActionsLayout">
+             <item>
+              <widget class="QPushButton" name="scannerScanButton">
+               <property name="text">
+                <string>Acquire Scan</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="scannerDuplexCheck">
+               <property name="text">
+                <string>Duplex (Both sides)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="scannerSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="scannerDeletePageButton">
+               <property name="text">
+                <string>Remove Page</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="scannerClearButton">
+               <property name="text">
+                <string>Clear</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QListWidget" name="scannerPagesListWidget"/>
+           </item>
+           <item>
+            <widget class="QLabel" name="scannerStatusLabel">
+             <property name="text">
+              <string>Scanner status: Ready</string>
+             </property>
+             <property name="styleSheet">
+              <string>color: #555;</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
        <item>

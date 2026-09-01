@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 #include "outputverification.h"
+#include "../office/ooxmlpackagevalidator.h"
 #include <QFile>
 #include <QFileInfo>
 #include <QImageReader>
@@ -154,57 +155,36 @@ bool OutputVerification::verifyDocx(const QString& filePath, QString* errorMessa
         return false;
     }
 
-    QByteArray header = file.read(4);
-    file.close();
-
-    if (!header.startsWith("PK\x03\x04"))
+bool OutputVerification::verifyDocx(const QString& filePath, QString* errorMessage)
+{
+    OoxmlValidationResult res = OoxmlPackageValidator::validatePackage(filePath, ConversionFormat::Docx);
+    if (!res.isValid)
     {
-        if (errorMessage) *errorMessage = QStringLiteral("DOCX file is not a valid ZIP/OOXML archive.");
+        if (errorMessage) *errorMessage = res.errorMessage;
         return false;
     }
-
     return true;
 }
 
 bool OutputVerification::verifyXlsx(const QString& filePath, QString* errorMessage)
 {
-    QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly))
+    OoxmlValidationResult res = OoxmlPackageValidator::validatePackage(filePath, ConversionFormat::Xlsx);
+    if (!res.isValid)
     {
-        if (errorMessage) *errorMessage = QStringLiteral("Cannot open XLSX file.");
+        if (errorMessage) *errorMessage = res.errorMessage;
         return false;
     }
-
-    QByteArray header = file.read(4);
-    file.close();
-
-    if (!header.startsWith("PK\x03\x04"))
-    {
-        if (errorMessage) *errorMessage = QStringLiteral("XLSX file is not a valid ZIP/OOXML archive.");
-        return false;
-    }
-
     return true;
 }
 
 bool OutputVerification::verifyPptx(const QString& filePath, QString* errorMessage)
 {
-    QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly))
+    OoxmlValidationResult res = OoxmlPackageValidator::validatePackage(filePath, ConversionFormat::Pptx);
+    if (!res.isValid)
     {
-        if (errorMessage) *errorMessage = QStringLiteral("Cannot open PPTX file.");
+        if (errorMessage) *errorMessage = res.errorMessage;
         return false;
     }
-
-    QByteArray header = file.read(4);
-    file.close();
-
-    if (!header.startsWith("PK\x03\x04"))
-    {
-        if (errorMessage) *errorMessage = QStringLiteral("PPTX file is not a valid ZIP/OOXML archive.");
-        return false;
-    }
-
     return true;
 }
 

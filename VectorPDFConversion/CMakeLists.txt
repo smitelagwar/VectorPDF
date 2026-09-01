@@ -50,8 +50,13 @@ add_library(VectorPDFConversion SHARED
     sources/utilities/outputverification.h
     sources/utilities/outputverification.cpp
 
+    sources/images/multipagetiffwriter.h
+    sources/images/multipagetiffwriter.cpp
+
     sources/office/ooxmlpackagewriter.h
     sources/office/ooxmlpackagewriter.cpp
+    sources/office/ooxmlpackagevalidator.h
+    sources/office/ooxmlpackagevalidator.cpp
     sources/office/docxpackagewriter.h
     sources/office/docxpackagewriter.cpp
     sources/office/pptxpackagewriter.h
@@ -60,6 +65,14 @@ add_library(VectorPDFConversion SHARED
     sources/office/xlsxpackagewriter.cpp
     sources/office/tabledetector.h
     sources/office/tabledetector.cpp
+
+    sources/pdfa/pdfaconformanceprofile.h
+    sources/pdfa/pdfaconformanceanalyzer.h
+    sources/pdfa/pdfaconformanceanalyzer.cpp
+    sources/pdfa/pdfaconformancetransformer.h
+    sources/pdfa/pdfaconformancetransformer.cpp
+    sources/pdfa/pdfaconversionreport.h
+    sources/pdfa/pdfaconversionreport.cpp
 
     sources/workers/conversionworkerprotocol.h
     sources/workers/libreofficeworker.h

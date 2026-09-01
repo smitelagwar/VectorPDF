@@ -26,6 +26,9 @@
 #include <QDialog>
 #include <QImage>
 #include <QRubberBand>
+#include <QStringList>
+
+class QScreen;
 
 namespace vectorpdf::gui
 {
@@ -38,8 +41,14 @@ public:
     explicit PDFScreenshotDialog(QWidget* parent = nullptr);
     virtual ~PDFScreenshotDialog() override = default;
 
-    static QImage captureFullScreen();
+    /// Captures virtual desktop containing all monitors (or specific monitor index)
+    static QImage captureFullScreen(int monitorIndex = -1);
+
+    /// Interactively snips a rectangular region across any monitor in the virtual desktop
     static QImage captureRegion(QWidget* parent = nullptr);
+
+    /// Returns list of detected monitor names
+    static QStringList availableScreenNames();
 
     QImage capturedImage() const;
 
@@ -48,9 +57,13 @@ protected:
     virtual void mouseMoveEvent(QMouseEvent* event) override;
     virtual void mouseReleaseEvent(QMouseEvent* event) override;
     virtual void paintEvent(QPaintEvent* event) override;
+    virtual void keyPressEvent(QKeyEvent* event) override;
 
 private:
-    QPixmap m_fullScreenPixmap;
+    void grabVirtualDesktop();
+
+    QPixmap m_virtualDesktopPixmap;
+    QRect m_virtualGeometry;
     QPoint m_origin;
     QRubberBand* m_rubberBand = nullptr;
     QImage m_capturedImage;

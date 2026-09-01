@@ -29,15 +29,18 @@ Yok. M0'dan M11'e kadar tüm yol haritası görevleri (`TASK-2026-001` - `TASK-2
 - M9 Dönüştürme, Dışa Aktarma ve Standartlar: PDF/A uyumluluğu, görselden PDF (`PDFDocumentBuilder`) ve dışa aktarma araçları tamamlandı (`TASK-2026-012` done).
 - M10 Dağıtım, Paketleme ve Windows Entegrasyonu: MSIX manifesti (`AppxManifest.xml.in`), `.pdf` dosya ilişkileri ve derleme otomasyonu tamamlandı (`TASK-2026-013` done).
 - M11 Otomasyon, Eklenti Mimarisi ve Çevrimdışı AI: `PDFBatchProcessor` kuyruğu, `PDFPluginManifest` / `PDFPluginSecurityGuard` ve `IAIProvider` / `PDFAIOfflineProvider` adaptörü tamamlandı (`TASK-2026-014` done).
-- M12 VectorPDF Kapsamlı Dönüştürme, Dışa Aktarma ve PDF Oluşturma Motoru (`VectorPDFConversion`):
-  - Saf C++ / `zlib` tabanlı harici bağımlılıksız OOXML paketleyici (`DocxPackageWriter`, `XlsxPackageWriter`, `PptxPackageWriter`, `TableDetector`).
-  - PDF → DOCX (Reflow / Visual), XLSX (Algılanan Tablolar / Sayfa Izgarası), PPTX (Slayt / Metin Kutusu), PNG, JPEG, TIFF (Tek/Çok Sayfa), WebP, BMP dışa aktarıcılar.
-  - PDF/A-1b/2b/3b/4 arşiv dönüştürücü ve veraPDF CLI entegrasyonu.
+- M12 VectorPDF Kapsamlı Dönüştürme, Dışa Aktarma ve PDF Oluşturma Motoru (`VectorPDFConversion`) — TAM KAPANIŞ VE DOĞRULAMA:
+  - Saf C++ / `zlib` tabanlı harici bağımlılıksız OOXML paketleyici (`DocxPackageWriter`, `XlsxPackageWriter`, `PptxPackageWriter`, `TableDetector`) ve derin OPC/XML doğrulayıcı (`OoxmlPackageValidator`).
+  - PDF → DOCX (Reflow / Visual), XLSX (Algılanan Tablolar / Sayfa Izgarası), PPTX (Slayt / Metin Kutusu), PNG, JPEG, TIFF (Çok Sayfalı `MultiPageTiffWriter` ile IFD zincirleme), WebP, BMP dışa aktarıcılar.
+  - PDF/A Conformance Motoru (`PdfAConformanceAnalyzer`, `PdfAConformanceTransformer`, `PdfAConversionReport`) ve dürüst durum bildiren `VeraPdfWorker` (`ValidationAvailability`, `ConformanceState`).
   - İki seviyeli Otsu / Sabit eşikleme ile kompakt Monochrome (Bilevel) PDF üretimi.
   - XFDF ve FDF form verisi dışa aktarıcıları.
-  - Görsellerden PDF, GitHub uyumlu Markdown → Temalı PDF (Clean, Academic, Compact, DarkOnLight), HTML → Güvenli Çevrimdışı PDF, Ofis belgelerinden PDF ve Klasör/Toplu PDF oluşturucular.
-  - Pano (Clipboard) ve Bölgesel Ekran Alıntısı (`PDFScreenshotDialog`) yakalama araçları.
-  - Birleşik `PDFConversionCenterDialog` arayüzü, arkaplan iş kuyruğu (`ConversionService`, `ConversionJob`) ve kapsamlı birim test paketi (`tst_conversiontest.cpp`).
+  - WIA 2.0 Tarayıcı Broker'ı (`PDFScanBroker`, `IScannerBackend`, `FakeScannerBackend`, `WiaScannerBackend`) ve doğrudan PDF oluşturma.
+  - Sanal masaüstü birleşik geometrisi ile Çoklu Monitör Ekran Alıntısı (`PDFScreenshotDialog`).
+  - Doğal sayısal sıralama (`QCollator` numeric mode) ile Klasör/Toplu PDF oluşturucu (`FolderPdfCreator`).
+  - Sahip olunan geçici dosya ömür yönetimi (`ownedTemporaryInputPaths`) ve tamamlanan işlerin budanması (`ConversionService`).
+  - Birleşik `PDFConversionCenterDialog` arayüzü, arkaplan iş kuyruğu ve 22/22 kriteri doğrulayan genişletilmiş birim test paketi (`tst_conversiontest.cpp`).
+  - GitHub Actions Windows 11 x64 CI iş akışı (`.github/workflows/windows-build-test.yml`).
 
 ## Kabul edilen teknik rota
 

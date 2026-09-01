@@ -21,6 +21,10 @@
 // SOFTWARE.
 
 #include "pdfaexporter.h"
+#include "../pdfa/pdfaconformanceprofile.h"
+#include "../pdfa/pdfaconformanceanalyzer.h"
+#include "../pdfa/pdfaconformancetransformer.h"
+#include "../pdfa/pdfaconversionreport.h"
 #include "../workers/verapdfworker.h"
 #include "../utilities/tempfileguard.h"
 #include "../utilities/filenamepolicy.h"
@@ -28,8 +32,6 @@
 
 #include <pdfdocument.h>
 #include <pdfdocumentreader.h>
-#include <pdfdocumentwriter.h>
-#include <pdfdocumentsanitizer.h>
 
 #include <QFile>
 #include <QFileInfo>
@@ -72,7 +74,9 @@ ConversionResult PdfAExporter::execute(const ConversionRequest& request,
                                          QStringLiteral("Failed to parse PDF document: %1").arg(readRes.getMessage()));
     }
 
-    if (progress) progress(ConversionStage::Analyzing, 20, QStringLiteral("Applying PDF/A conformance rules..."));
+    const PdfAProfile targetProfile = conversionFormatToPdfAProfile(request.format);
+
+    if (progress) progress(ConversionStage::Analyzing, 20, QStringLiteral("Analyzing document for %1 conformance...").arg(pdfAProfileToString(targetProfile)));
 
     if (cancelToken && cancelToken->load()) return ConversionResult::cancelled();
 
@@ -84,31 +88,49 @@ ConversionResult PdfAExporter::execute(const ConversionRequest& request,
 
     const QString tempPdfPath = tempGuard.createTempFilePath(QStringLiteral("pdf"));
 
-    if (progress) progress(ConversionStage::Rendering, 40, QStringLiteral("Building PDF/A document..."));
+    if (progress) progress(ConversionStage::Rendering, 40, QStringLiteral("Applying PDF/A transform and XMP packet..."));
 
-    pdf::PDFDocumentWriter writer(nullptr);
-    auto writeRes = writer.write(tempPdfPath, &document, true);
-    if (!writeRes.isSuccessful())
+    PdfAConversionReport convReport;
+    QString transformErr;
+    bool transformed = PdfAConformanceTransformer::transform(&document,
+                                                             targetProfile,
+                                                             PdfATransformationMode::PreserveVector,
+                                                             tempPdfPath,
+                                                             &convReport,
+                                                             &transformErr);
+    if (!transformed)
     {
-        return ConversionResult::failure(QStringLiteral("WriteFailed"),
-                                         QStringLiteral("Failed to write PDF/A document: %1").arg(writeRes.getMessage()));
+        return ConversionResult::failure(QStringLiteral("TransformFailed"),
+                                         QStringLiteral("Failed to transform document to %1: %2").arg(pdfAProfileToString(targetProfile)).arg(transformErr));
     }
 
-    if (progress) progress(ConversionStage::Validating, 70, QStringLiteral("Validating PDF/A compliance..."));
+    if (progress) progress(ConversionStage::Validating, 70, QStringLiteral("Executing veraPDF compliance certification..."));
 
     VeraPdfWorker veraWorker;
-    VeraPdfValidationReport report = veraWorker.validate(tempPdfPath, request.format, cancelToken);
+    VeraPdfValidationReport validationReport = veraWorker.validate(tempPdfPath, request.format, cancelToken);
 
     if (cancelToken && cancelToken->load()) return ConversionResult::cancelled();
 
     QStringList warnings;
-    if (!report.isCompliant)
+
+    if (validationReport.availability == ValidationAvailability::Available)
     {
-        warnings.append(QStringLiteral("PDF/A validation reported potential compliance issues: %1").arg(report.statement));
+        convReport.isValidatedByVeraPdf = true;
+        convReport.isVeraPdfCompliant = validationReport.isCompliant;
+        convReport.veraPdfStatement = validationReport.statement;
+        convReport.validationErrors = validationReport.failedRules;
+
+        if (!validationReport.isCompliant)
+        {
+            return ConversionResult::failure(QStringLiteral("FailedValidation"),
+                                             QStringLiteral("veraPDF certification rejected document for %1: %2").arg(pdfAProfileToString(targetProfile)).arg(validationReport.statement));
+        }
     }
-    else if (!veraWorker.isAvailable())
+    else
     {
-        warnings.append(QStringLiteral("PDF/A generated; external veraPDF validator is not installed for independent certification."));
+        convReport.isValidatedByVeraPdf = false;
+        convReport.isVeraPdfCompliant = false;
+        warnings.append(QStringLiteral("PDF/A file prepared; external veraPDF validator is not installed, validation state is UNVALIDATED."));
     }
 
     QString finalOutPath = request.outputPath.isEmpty()
@@ -132,8 +154,8 @@ ConversionResult PdfAExporter::execute(const ConversionRequest& request,
     res.totalPagesProcessed = static_cast<int>(document.getCatalog()->getPageCount());
     res.elapsedMilliseconds = timer.elapsed();
     res.outputSizeBytes = QFileInfo(finalOutPath).size();
-    res.metrics[QStringLiteral("VeraPdfValidated")] = report.isValidated;
-    res.metrics[QStringLiteral("VeraPdfCompliant")] = report.isCompliant;
+    res.metrics[QStringLiteral("VeraPdfValidated")] = validationReport.isValidated;
+    res.metrics[QStringLiteral("VeraPdfCompliant")] = validationReport.isCompliant;
     return res;
 }
 

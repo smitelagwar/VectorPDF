@@ -25,6 +25,7 @@
 
 #include <QDialog>
 #include <QList>
+#include <QImage>
 #include <conversiontypes.h>
 #include <conversionrequest.h>
 #include <conversionresult.h>
@@ -74,6 +75,10 @@ private slots:
     void onCreateClearImages();
     void onCreatePasteClipboard();
     void onCreateCaptureScreenshot();
+    void onCreateRefreshScanners();
+    void onCreateAcquireScan();
+    void onCreateDeleteScannedPage();
+    void onCreateClearScannedPages();
     void onCreateTargetBrowse();
     void onStartCreate();
 
@@ -90,6 +95,7 @@ private slots:
 private:
     void initUi();
     void updateExportCapabilityInfo();
+    void updateScannerUi();
     void addJobToTable(conversion::ConversionJob* job);
     int findJobRow(const QString& jobId);
 
@@ -97,6 +103,9 @@ private:
     const pdf::PDFDocument* m_activeDocument = nullptr;
     QString m_activeDocumentPath;
     QStringList m_createSelectedImageFiles;
+    QList<QImage> m_scannedPages;
+    QImage m_clipboardImage;
+    QImage m_screenshotImage;
 };
 
 } // namespace vectorpdf::gui

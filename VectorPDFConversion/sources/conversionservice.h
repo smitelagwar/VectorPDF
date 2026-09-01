@@ -38,6 +38,17 @@
 namespace vectorpdf::conversion
 {
 
+struct ConversionJobSummary
+{
+    QString jobId;
+    ConversionFormat format = ConversionFormat::Pdf;
+    ConversionStatus status = ConversionStatus::Queued;
+    QString sourcePath;
+    QString outputPath;
+    qint64 elapsedMs = 0;
+    qint64 outputSizeBytes = 0;
+};
+
 class VECTORPDF_CONVERSION_EXPORT ConversionService : public QObject
 {
     Q_OBJECT
@@ -57,11 +68,14 @@ public:
     /// Cancels all active conversion jobs
     void cancelAll();
 
-    /// Returns list of all active jobs
+    /// Returns list of currently active (queued/running/cancelling) jobs
     QList<ConversionJob*> getActiveJobs() const;
 
     /// Returns job by ID, or nullptr if not found
     ConversionJob* getJob(const QString& jobId) const;
+
+    /// Returns bounded history of completed jobs
+    QList<ConversionJobSummary> getJobHistory() const;
 
 signals:
     void jobEnqueued(ConversionJob* job);
@@ -75,7 +89,8 @@ private:
 
     QThreadPool m_threadPool;
     mutable QMutex m_mutex;
-    QMap<QString, ConversionJob*> m_jobs;
+    QMap<QString, ConversionJob*> m_activeJobs;
+    QList<ConversionJobSummary> m_history;
 };
 
 } // namespace vectorpdf::conversion

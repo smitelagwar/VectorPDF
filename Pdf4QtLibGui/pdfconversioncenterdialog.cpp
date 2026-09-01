@@ -23,6 +23,7 @@
 #include "pdfconversioncenterdialog.h"
 #include "ui_pdfconversioncenterdialog.h"
 #include "pdfscreenshotdialog.h"
+#include "pdfwiascannerbroker.h"
 
 #include <conversioncapability.h>
 #include <utilities/filenamepolicy.h>
@@ -37,6 +38,7 @@
 #include <QGuiApplication>
 #include <QHeaderView>
 #include <QProgressBar>
+#include <QDateTime>
 
 namespace vectorpdf::gui
 {
@@ -71,28 +73,33 @@ PDFConversionCenterDialog::~PDFConversionCenterDialog()
 void PDFConversionCenterDialog::initUi()
 {
     // Populate Export Formats
-    ui->exportFormatCombo->addItem(QStringLiteral("Word Document (.docx)"), QVariant::fromValue(conversion::ConversionFormat::Docx));
-    ui->exportFormatCombo->addItem(QStringLiteral("Excel Spreadsheet (.xlsx)"), QVariant::fromValue(conversion::ConversionFormat::Xlsx));
-    ui->exportFormatCombo->addItem(QStringLiteral("PowerPoint Presentation (.pptx)"), QVariant::fromValue(conversion::ConversionFormat::Pptx));
-    ui->exportFormatCombo->addItem(QStringLiteral("PNG Image (.png)"), QVariant::fromValue(conversion::ConversionFormat::Png));
-    ui->exportFormatCombo->addItem(QStringLiteral("JPEG Image (.jpg)"), QVariant::fromValue(conversion::ConversionFormat::Jpeg));
-    ui->exportFormatCombo->addItem(QStringLiteral("TIFF Image (.tiff)"), QVariant::fromValue(conversion::ConversionFormat::Tiff));
-    ui->exportFormatCombo->addItem(QStringLiteral("WebP Image (.webp)"), QVariant::fromValue(conversion::ConversionFormat::WebP));
-    ui->exportFormatCombo->addItem(QStringLiteral("BMP Image (.bmp)"), QVariant::fromValue(conversion::ConversionFormat::Bmp));
-    ui->exportFormatCombo->addItem(QStringLiteral("PDF/A-1b Archival"), QVariant::fromValue(conversion::ConversionFormat::PdfA1));
-    ui->exportFormatCombo->addItem(QStringLiteral("PDF/A-2b Archival"), QVariant::fromValue(conversion::ConversionFormat::PdfA2));
-    ui->exportFormatCombo->addItem(QStringLiteral("PDF/A-3b Archival"), QVariant::fromValue(conversion::ConversionFormat::PdfA3));
-    ui->exportFormatCombo->addItem(QStringLiteral("PDF/A-4 Archival"), QVariant::fromValue(conversion::ConversionFormat::PdfA4));
-    ui->exportFormatCombo->addItem(QStringLiteral("Monochrome PDF (Bilevel)"), QVariant::fromValue(conversion::ConversionFormat::MonochromePdf));
-    ui->exportFormatCombo->addItem(QStringLiteral("Form Data XFDF (.xfdf)"), QVariant::fromValue(conversion::ConversionFormat::Xfdf));
-    ui->exportFormatCombo->addItem(QStringLiteral("Form Data FDF (.fdf)"), QVariant::fromValue(conversion::ConversionFormat::Fdf));
+    ui->exportFormatCombo->addItem(tr("Word Document (.docx)"), QVariant::fromValue(conversion::ConversionFormat::Docx));
+    ui->exportFormatCombo->addItem(tr("Excel Spreadsheet (.xlsx)"), QVariant::fromValue(conversion::ConversionFormat::Xlsx));
+    ui->exportFormatCombo->addItem(tr("PowerPoint Presentation (.pptx)"), QVariant::fromValue(conversion::ConversionFormat::Pptx));
+    ui->exportFormatCombo->addItem(tr("PNG Image (.png)"), QVariant::fromValue(conversion::ConversionFormat::Png));
+    ui->exportFormatCombo->addItem(tr("JPEG Image (.jpg)"), QVariant::fromValue(conversion::ConversionFormat::Jpeg));
+    ui->exportFormatCombo->addItem(tr("TIFF Image (.tiff)"), QVariant::fromValue(conversion::ConversionFormat::Tiff));
+    ui->exportFormatCombo->addItem(tr("WebP Image (.webp)"), QVariant::fromValue(conversion::ConversionFormat::WebP));
+    ui->exportFormatCombo->addItem(tr("BMP Image (.bmp)"), QVariant::fromValue(conversion::ConversionFormat::Bmp));
+    ui->exportFormatCombo->addItem(tr("PDF/A-1b Archival"), QVariant::fromValue(conversion::ConversionFormat::PdfA1));
+    ui->exportFormatCombo->addItem(tr("PDF/A-2b Archival"), QVariant::fromValue(conversion::ConversionFormat::PdfA2));
+    ui->exportFormatCombo->addItem(tr("PDF/A-3b Archival"), QVariant::fromValue(conversion::ConversionFormat::PdfA3));
+    ui->exportFormatCombo->addItem(tr("PDF/A-4 Archival"), QVariant::fromValue(conversion::ConversionFormat::PdfA4));
+    ui->exportFormatCombo->addItem(tr("Monochrome PDF (Bilevel)"), QVariant::fromValue(conversion::ConversionFormat::MonochromePdf));
+    ui->exportFormatCombo->addItem(tr("Form Data XFDF (.xfdf)"), QVariant::fromValue(conversion::ConversionFormat::Xfdf));
+    ui->exportFormatCombo->addItem(tr("Form Data FDF (.fdf)"), QVariant::fromValue(conversion::ConversionFormat::Fdf));
 
     // Populate Create Source Types
-    ui->createSourceTypeCombo->addItem(QStringLiteral("Single Document / Image File"), 0);
-    ui->createSourceTypeCombo->addItem(QStringLiteral("Multiple Images (Combine)"), 1);
-    ui->createSourceTypeCombo->addItem(QStringLiteral("From System Clipboard"), 2);
-    ui->createSourceTypeCombo->addItem(QStringLiteral("From Screen Capture"), 3);
-    ui->createSourceTypeCombo->addItem(QStringLiteral("From Folder (Batch Merge)"), 4);
+    ui->createSourceTypeCombo->addItem(tr("Single Document / Image File"), 0);
+    ui->createSourceTypeCombo->addItem(tr("Multiple Images (Combine)"), 1);
+    ui->createSourceTypeCombo->addItem(tr("From System Clipboard"), 2);
+    ui->createSourceTypeCombo->addItem(tr("From Screen Capture"), 3);
+    ui->createSourceTypeCombo->addItem(tr("From Folder (Batch Merge)"), 4);
+    ui->createSourceTypeCombo->addItem(tr("From Scanner"), 5);
+
+    // Scanner Color options
+    ui->scannerColorCombo->addItem(tr("Color (24-bit RGB)"), true);
+    ui->scannerColorCombo->addItem(tr("Grayscale (8-bit)"), false);
 
     if (!m_activeDocumentPath.isEmpty())
     {
@@ -123,6 +130,12 @@ void PDFConversionCenterDialog::initUi()
     connect(ui->createOutputBrowseButton, &QPushButton::clicked, this, &PDFConversionCenterDialog::onCreateTargetBrowse);
     connect(ui->createStartButton, &QPushButton::clicked, this, &PDFConversionCenterDialog::onStartCreate);
 
+    // Wire Scanner connections
+    connect(ui->scannerRefreshButton, &QPushButton::clicked, this, &PDFConversionCenterDialog::onCreateRefreshScanners);
+    connect(ui->scannerScanButton, &QPushButton::clicked, this, &PDFConversionCenterDialog::onCreateAcquireScan);
+    connect(ui->scannerDeletePageButton, &QPushButton::clicked, this, &PDFConversionCenterDialog::onCreateDeleteScannedPage);
+    connect(ui->scannerClearButton, &QPushButton::clicked, this, &PDFConversionCenterDialog::onCreateClearScannedPages);
+
     // Wire Queue connections
     connect(ui->queueCancelButton, &QPushButton::clicked, this, &PDFConversionCenterDialog::onCancelSelectedJob);
     connect(ui->queueOpenFileButton, &QPushButton::clicked, this, &PDFConversionCenterDialog::onOpenFileSelected);
@@ -130,6 +143,7 @@ void PDFConversionCenterDialog::initUi()
     connect(ui->queueClearFinishedButton, &QPushButton::clicked, this, &PDFConversionCenterDialog::onClearFinishedJobs);
 
     onExportFormatChanged(0);
+    onCreateRefreshScanners();
 }
 
 void PDFConversionCenterDialog::setCurrentTab(int tabIndex)
@@ -157,42 +171,42 @@ void PDFConversionCenterDialog::onExportFormatChanged(int index)
 
     if (format == conversion::ConversionFormat::Docx)
     {
-        ui->exportModeCombo->addItem(QStringLiteral("Reflow (Editable Text)"), 0);
-        ui->exportModeCombo->addItem(QStringLiteral("Visual Fidelity (Exact Page Image)"), 1);
+        ui->exportModeCombo->addItem(tr("Reflow (Editable Text)"), 0);
+        ui->exportModeCombo->addItem(tr("Visual Fidelity (Exact Page Image)"), 1);
         ui->exportModeCombo->setEnabled(true);
         ui->exportDpiSpin->setEnabled(true);
     }
     else if (format == conversion::ConversionFormat::Xlsx)
     {
-        ui->exportModeCombo->addItem(QStringLiteral("Detected Tables Only"), 0);
-        ui->exportModeCombo->addItem(QStringLiteral("Full Page Layout Grid"), 1);
+        ui->exportModeCombo->addItem(tr("Detected Tables Only"), 0);
+        ui->exportModeCombo->addItem(tr("Full Page Layout Grid"), 1);
         ui->exportModeCombo->setEnabled(true);
         ui->exportDpiSpin->setEnabled(false);
     }
     else if (format == conversion::ConversionFormat::Pptx)
     {
-        ui->exportModeCombo->addItem(QStringLiteral("Visual Slide per Page"), 0);
-        ui->exportModeCombo->addItem(QStringLiteral("Editable Text Boxes Preview"), 1);
+        ui->exportModeCombo->addItem(tr("Visual Slide per Page"), 0);
+        ui->exportModeCombo->addItem(tr("Editable Text Boxes Preview"), 1);
         ui->exportModeCombo->setEnabled(true);
         ui->exportDpiSpin->setEnabled(true);
     }
     else if (format == conversion::ConversionFormat::MonochromePdf)
     {
-        ui->exportModeCombo->addItem(QStringLiteral("Otsu Auto Threshold (Default)"), 0);
-        ui->exportModeCombo->addItem(QStringLiteral("Fixed Threshold 128"), 1);
+        ui->exportModeCombo->addItem(tr("Otsu Auto Threshold (Default)"), 0);
+        ui->exportModeCombo->addItem(tr("Fixed Threshold 128"), 1);
         ui->exportModeCombo->setEnabled(true);
         ui->exportDpiSpin->setEnabled(true);
     }
     else if (format == conversion::ConversionFormat::Tiff)
     {
-        ui->exportModeCombo->addItem(QStringLiteral("Multi-Page TIFF File"), 0);
-        ui->exportModeCombo->addItem(QStringLiteral("Single Page per TIFF File"), 1);
+        ui->exportModeCombo->addItem(tr("Multi-Page TIFF File"), 0);
+        ui->exportModeCombo->addItem(tr("Single Page per TIFF File"), 1);
         ui->exportModeCombo->setEnabled(true);
         ui->exportDpiSpin->setEnabled(true);
     }
     else
     {
-        ui->exportModeCombo->addItem(QStringLiteral("Default"), 0);
+        ui->exportModeCombo->addItem(tr("Default"), 0);
         ui->exportModeCombo->setEnabled(false);
         ui->exportDpiSpin->setEnabled(format == conversion::ConversionFormat::Png ||
                                       format == conversion::ConversionFormat::Jpeg ||
@@ -214,10 +228,10 @@ void PDFConversionCenterDialog::updateExportCapabilityInfo()
     conversion::ConversionFormat format = ui->exportFormatCombo->currentData().value<conversion::ConversionFormat>();
     auto info = conversion::ConversionCapability::instance().getExportCapability(format);
 
-    QString text = QStringLiteral("<b>Engine:</b> %1 — %2").arg(info.engineName).arg(info.note);
+    QString text = QStringLiteral("<b>%1:</b> %2 — %3").arg(tr("Engine")).arg(info.engineName).arg(info.note);
     if (info.isLossy)
     {
-        text.append(QStringLiteral(" <span style='color: #d97706;'>(Lossy/Rasterized)</span>"));
+        text.append(QStringLiteral(" <span style='color: #d97706;'>%1</span>").arg(tr("(Lossy/Rasterized)")));
     }
     ui->exportCapabilityLabel->setText(text);
 }
@@ -360,14 +374,13 @@ void PDFConversionCenterDialog::onCreatePasteClipboard()
         return;
     }
 
-    conversion::TempFileGuard tempGuard(QStringLiteral("vpdf_clip_"));
-    QString tempPng = tempGuard.createTempFilePath(QStringLiteral("png"));
-    img.save(tempPng, "PNG");
-    tempGuard.release();
-
-    ui->createSourceTypeCombo->setCurrentIndex(0);
-    ui->createSingleFilePathEdit->setText(tempPng);
-    ui->createOutputPathEdit->setText(QDir::homePath() + QStringLiteral("/Clipboard_Document.pdf"));
+    m_clipboardImage = img;
+    ui->createClipboardInfoLabel->setText(tr("Clipboard image ready: %1 x %2 pixels (%3)")
+                                          .arg(img.width()).arg(img.height()).arg(QDateTime::currentDateTime().toString(Qt::DefaultLocaleShortDate)));
+    if (ui->createOutputPathEdit->text().isEmpty())
+    {
+        ui->createOutputPathEdit->setText(QDir::homePath() + QStringLiteral("/Clipboard_Document.pdf"));
+    }
 }
 
 void PDFConversionCenterDialog::onCreateCaptureScreenshot()
@@ -376,18 +389,73 @@ void PDFConversionCenterDialog::onCreateCaptureScreenshot()
     bool isRegion = (btn == ui->createCaptureRegionButton);
 
     QImage img = isRegion ? PDFScreenshotDialog::captureRegion(this)
-                          : PDFScreenshotDialog::captureFullScreen();
+                          : PDFScreenshotDialog::captureFullScreen(-1);
 
     if (img.isNull()) return;
 
-    conversion::TempFileGuard tempGuard(QStringLiteral("vpdf_shot_"));
-    QString tempPng = tempGuard.createTempFilePath(QStringLiteral("png"));
-    img.save(tempPng, "PNG");
-    tempGuard.release();
+    m_screenshotImage = img;
+    ui->createScreenshotInfoLabel->setText(tr("Screenshot captured: %1 x %2 pixels (%3)")
+                                           .arg(img.width()).arg(img.height()).arg(QDateTime::currentDateTime().toString(Qt::DefaultLocaleShortDate)));
+    if (ui->createOutputPathEdit->text().isEmpty())
+    {
+        ui->createOutputPathEdit->setText(QDir::homePath() + QStringLiteral("/Screenshot_Document.pdf"));
+    }
+}
 
-    ui->createSourceTypeCombo->setCurrentIndex(0);
-    ui->createSingleFilePathEdit->setText(tempPng);
-    ui->createOutputPathEdit->setText(QDir::homePath() + QStringLiteral("/Screenshot_Document.pdf"));
+void PDFConversionCenterDialog::onCreateRefreshScanners()
+{
+    ui->scannerDeviceCombo->clear();
+    auto devices = PDFScanBroker::instance().getAvailableDevices();
+    for (const auto& dev : devices)
+    {
+        ui->scannerDeviceCombo->addItem(dev.name, dev.id);
+    }
+
+    ui->scannerStatusLabel->setText(PDFScanBroker::instance().capabilityString());
+    ui->scannerScanButton->setEnabled(!devices.isEmpty());
+}
+
+void PDFConversionCenterDialog::onCreateAcquireScan()
+{
+    QString devId = ui->scannerDeviceCombo->currentData().toString();
+    int dpi = ui->scannerDpiSpin->value();
+    bool color = ui->scannerColorCombo->currentData().toBool();
+    bool duplex = ui->scannerDuplexCheck->isChecked();
+
+    QString scanErr;
+    QList<QImage> acquired = PDFScanBroker::instance().acquireScan(devId, dpi, color, duplex, 1, &scanErr);
+    if (acquired.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Scan Failed"), scanErr.isEmpty() ? tr("No pages acquired from scanner.") : scanErr);
+        return;
+    }
+
+    for (const QImage& img : acquired)
+    {
+        m_scannedPages.append(img);
+        ui->scannerPagesListWidget->addItem(tr("Scanned Page %1 (%2 x %3)").arg(m_scannedPages.size()).arg(img.width()).arg(img.height()));
+    }
+
+    if (ui->createOutputPathEdit->text().isEmpty())
+    {
+        ui->createOutputPathEdit->setText(QDir::homePath() + QStringLiteral("/Scanned_Document.pdf"));
+    }
+}
+
+void PDFConversionCenterDialog::onCreateDeleteScannedPage()
+{
+    int row = ui->scannerPagesListWidget->currentRow();
+    if (row >= 0 && row < m_scannedPages.size())
+    {
+        m_scannedPages.removeAt(row);
+        delete ui->scannerPagesListWidget->takeItem(row);
+    }
+}
+
+void PDFConversionCenterDialog::onCreateClearScannedPages()
+{
+    m_scannedPages.clear();
+    ui->scannerPagesListWidget->clear();
 }
 
 void PDFConversionCenterDialog::onCreateTargetBrowse()
@@ -430,6 +498,36 @@ void PDFConversionCenterDialog::onStartCreate()
         }
         req.sourcePaths = m_createSelectedImageFiles;
     }
+    else if (type == 2) // Clipboard
+    {
+        if (m_clipboardImage.isNull())
+        {
+            QMessageBox::warning(this, tr("Clipboard Empty"), tr("Please load an image from clipboard first."));
+            return;
+        }
+        conversion::TempFileGuard guard(QStringLiteral("vpdf_clip_"));
+        QString tempPng = guard.createTempFilePath(QStringLiteral("png"));
+        m_clipboardImage.save(tempPng, "PNG");
+        guard.release();
+
+        req.sourcePath = tempPng;
+        req.ownedTemporaryInputPaths.append(tempPng);
+    }
+    else if (type == 3) // Screenshot
+    {
+        if (m_screenshotImage.isNull())
+        {
+            QMessageBox::warning(this, tr("No Screenshot"), tr("Please capture a screen or region first."));
+            return;
+        }
+        conversion::TempFileGuard guard(QStringLiteral("vpdf_shot_"));
+        QString tempPng = guard.createTempFilePath(QStringLiteral("png"));
+        m_screenshotImage.save(tempPng, "PNG");
+        guard.release();
+
+        req.sourcePath = tempPng;
+        req.ownedTemporaryInputPaths.append(tempPng);
+    }
     else if (type == 4) // Folder
     {
         req.sourcePath = ui->createFolderPathEdit->text().trimmed();
@@ -440,6 +538,27 @@ void PDFConversionCenterDialog::onStartCreate()
         }
         req.recursiveFolder = ui->createFolderRecursiveCheck->isChecked();
         req.createBookmarksFromFilenames = ui->createFolderBookmarksCheck->isChecked();
+    }
+    else if (type == 5) // Scanner
+    {
+        if (m_scannedPages.isEmpty())
+        {
+            QMessageBox::warning(this, tr("No Scanned Pages"), tr("Please scan at least one page before creating PDF."));
+            return;
+        }
+
+        conversion::TempFileGuard guard(QStringLiteral("vpdf_scan_"));
+        QStringList scannedFiles;
+        for (int i = 0; i < m_scannedPages.size(); ++i)
+        {
+            QString tempPng = guard.createTempFilePath(QStringLiteral("png"), QStringLiteral("page_"));
+            m_scannedPages[i].save(tempPng, "PNG");
+            scannedFiles.append(tempPng);
+        }
+        guard.release();
+
+        req.sourcePaths = scannedFiles;
+        req.ownedTemporaryInputPaths.append(scannedFiles);
     }
 
     conversion::ConversionService::instance().enqueue(req);

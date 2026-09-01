@@ -90,6 +90,8 @@ add_library(Pdf4QtLibGui SHARED
     pdfconversioncenterdialog.ui
     pdfscreenshotdialog.h
     pdfscreenshotdialog.cpp
+    pdfwiascannerbroker.h
+    pdfwiascannerbroker.cpp
 )
 
 add_compile_definitions(QT_INSTALL_DIRECTORY="${QT6_INSTALL_PREFIX}")

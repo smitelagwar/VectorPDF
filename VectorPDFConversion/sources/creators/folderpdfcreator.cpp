@@ -38,6 +38,7 @@
 #include <QDir>
 #include <QDirIterator>
 #include <QFileInfo>
+#include <QCollator>
 #include <QElapsedTimer>
 #include <memory>
 
@@ -73,9 +74,13 @@ QList<FolderItemInfo> FolderPdfCreator::scanFolder(const QString& folderPath, bo
         }
     }
 
-    // Natural sort by relative path
-    std::sort(items.begin(), items.end(), [](const FolderItemInfo& a, const FolderItemInfo& b) {
-        return QString::compare(a.relativePath, b.relativePath, Qt::CaseInsensitive) < 0;
+    // Natural numeric sort by relative path (e.g. 1.pdf, 2.pdf, 10.pdf, 11.pdf)
+    QCollator collator;
+    collator.setNumericMode(true);
+    collator.setCaseSensitivity(Qt::CaseInsensitive);
+
+    std::sort(items.begin(), items.end(), [&collator](const FolderItemInfo& a, const FolderItemInfo& b) {
+        return collator.compare(a.relativePath, b.relativePath) < 0;
     });
 
     return items;

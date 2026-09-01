@@ -26,6 +26,7 @@
 #include "../utilities/pagerangeparser.h"
 #include "../utilities/outputverification.h"
 #include "../utilities/imageprocessing.h"
+#include "../images/multipagetiffwriter.h"
 
 #include <pdfdocument.h>
 #include <pdfdocumentreader.h>
@@ -164,22 +165,16 @@ ConversionResult PdfImageExporter::execute(const ConversionRequest& request,
     {
         if (progress) progress(ConversionStage::Rendering, 20, QStringLiteral("Rendering pages for multi-page TIFF..."));
 
-        const QString tempTiffPath = tempGuard.createTempFilePath(QStringLiteral("tiff"));
-        QImageWriter writer(tempTiffPath, "TIFF");
-        writer.setCompression(request.imageCompression);
-
+        QList<QImage> renderedImages;
         for (int i = 0; i < totalPages; ++i)
         {
             if (cancelToken && cancelToken->load()) return ConversionResult::cancelled();
 
             int pageIdx = pagesToRender[i];
             QImage img = renderPageToImage(&document, pageIdx, request.dpi, request.transparentBackground, request.grayscale);
-            if (img.isNull()) continue;
-
-            if (!writer.write(img))
+            if (!img.isNull())
             {
-                return ConversionResult::failure(QStringLiteral("TiffWriteError"),
-                                                 QStringLiteral("Failed to write TIFF page %1: %2").arg(i + 1).arg(writer.errorString()));
+                renderedImages.append(img);
             }
 
             if (progress)
@@ -189,28 +184,38 @@ ConversionResult PdfImageExporter::execute(const ConversionRequest& request,
             }
         }
 
-        if (progress) progress(ConversionStage::Validating, 85, QStringLiteral("Validating TIFF file..."));
-
-        QString verifyErr;
-        if (!OutputVerification::verifyImage(tempTiffPath, &verifyErr))
+        const QString tempTiffPath = tempGuard.createTempFilePath(QStringLiteral("tiff"));
+        QString tiffErr;
+        if (!MultiPageTiffWriter::writeMultiPageTiff(renderedImages, tempTiffPath, request.dpi, &tiffErr))
         {
-            return ConversionResult::failure(QStringLiteral("ValidationFailed"), QStringLiteral("TIFF validation failed: %1").arg(verifyErr));
+            return ConversionResult::failure(QStringLiteral("TiffWriteFailed"), QStringLiteral("Failed to write multi-page TIFF: %1").arg(tiffErr));
         }
 
-        QString finalTiffPath = request.outputPath.isEmpty()
-                                    ? QDir(outDir).filePath(baseName + QStringLiteral(".tiff"))
-                                    : request.outputPath;
-        finalTiffPath = FilenamePolicy::resolveCollision(finalTiffPath, request.overwriteExisting);
+        int dirCount = MultiPageTiffWriter::countDirectories(tempTiffPath, &tiffErr);
+        if (dirCount != renderedImages.size())
+        {
+            return ConversionResult::failure(QStringLiteral("TiffVerificationFailed"),
+                                             QStringLiteral("TIFF directory count mismatch: expected %1, got %2").arg(renderedImages.size()).arg(dirCount));
+        }
 
-        if (progress) progress(ConversionStage::Committing, 95, QStringLiteral("Committing TIFF file..."));
+        QString finalOutPath = request.outputPath.isEmpty()
+                                   ? QDir(outDir).filePath(baseName + QStringLiteral(".tiff"))
+                                   : request.outputPath;
+        finalOutPath = FilenamePolicy::resolveCollision(finalOutPath, request.overwriteExisting);
 
         QString commitErr;
-        if (!TempFileGuard::atomicCommit(tempTiffPath, finalTiffPath, &commitErr))
+        if (!TempFileGuard::atomicCommit(tempTiffPath, finalOutPath, &commitErr))
         {
-            return ConversionResult::failure(QStringLiteral("CommitFailed"), QStringLiteral("Failed to commit final TIFF: %1").arg(commitErr));
+            return ConversionResult::failure(QStringLiteral("CommitFailed"), QStringLiteral("Failed to commit TIFF: %1").arg(commitErr));
         }
 
-        committedFiles.append(finalTiffPath);
+        if (progress) progress(ConversionStage::Completed, 100, QStringLiteral("Multi-page TIFF export completed."));
+
+        ConversionResult res = ConversionResult::success(finalOutPath);
+        res.totalPagesProcessed = renderedImages.size();
+        res.elapsedMilliseconds = timer.elapsed();
+        res.outputSizeBytes = QFileInfo(finalOutPath).size();
+        return res;
     }
     else
     {

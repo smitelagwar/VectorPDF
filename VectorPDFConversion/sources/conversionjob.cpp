@@ -125,10 +125,17 @@ void ConversionJob::run()
     };
 
     m_result = worker->execute(m_request, progressCallback, &m_cancelRequested);
-    m_result.jobId = m_request.jobId;
-
     m_status.store(m_result.status);
     m_stage.store(m_result.isSuccess() ? ConversionStage::Completed : ConversionStage::Failed);
+
+    // Clean up owned temporary input files on terminal state
+    for (const QString& tempInput : m_request.ownedTemporaryInputPaths)
+    {
+        if (!tempInput.isEmpty() && QFile::exists(tempInput))
+        {
+            QFile::remove(tempInput);
+        }
+    }
 
     emit finished(m_result);
 }

@@ -85,8 +85,10 @@ struct VECTORPDF_CONVERSION_EXPORT ConversionRequest
     // Folder options
     bool recursiveFolder = true;
     bool createBookmarksFromFilenames = true;
-    bool stopOnError = false;
     bool overwriteExisting = false;
+
+    // Tracked temporary input files to be automatically deleted when job reaches terminal state
+    QStringList ownedTemporaryInputPaths;
 
     // Generic options map for extensibility
     QVariantMap options;

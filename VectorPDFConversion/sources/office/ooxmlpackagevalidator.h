@@ -20,56 +20,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef VECTORPDF_VERAPDFWORKER_H
-#define VECTORPDF_VERAPDFWORKER_H
+#ifndef VECTORPDF_OOXMLPACKAGEVALIDATOR_H
+#define VECTORPDF_OOXMLPACKAGEVALIDATOR_H
 
-#include "conversionworkerprotocol.h"
+#include "../conversionglobal.h"
+#include "../conversiontypes.h"
 #include <QString>
 #include <QStringList>
 
 namespace vectorpdf::conversion
 {
 
-enum class ValidationAvailability
+struct OoxmlValidationResult
 {
-    Available,
-    Unavailable,
-    FailedToRun
+    bool isValid = false;
+    QStringList archiveEntries;
+    QStringList missingRequiredParts;
+    QStringList xmlValidationErrors;
+    QString errorMessage;
 };
 
-enum class ConformanceState
-{
-    Conformant,
-    NonConformant,
-    Unknown
-};
-
-struct VeraPdfValidationReport
-{
-    ValidationAvailability availability = ValidationAvailability::Unavailable;
-    ConformanceState conformance = ConformanceState::Unknown;
-    bool isValidated = false;
-    bool isCompliant = false;
-    QString profile;
-    QString statement;
-    QStringList failedRules;
-};
-
-class VECTORPDF_CONVERSION_EXPORT VeraPdfWorker
+class VECTORPDF_CONVERSION_EXPORT OoxmlPackageValidator
 {
 public:
-    explicit VeraPdfWorker(const QString& executablePath = QString());
+    /// Validates an OOXML package (.docx, .xlsx, .pptx)
+    static OoxmlValidationResult validatePackage(const QString& filePath, ConversionFormat format);
 
-    bool isAvailable() const;
-    QString executablePath() const;
-
-    /// Validates a PDF file against the requested PDF/A profile using veraPDF CLI
-    VeraPdfValidationReport validate(const QString& pdfFilePath, ConversionFormat profile, CancelToken* cancelToken = nullptr);
-
-private:
-    QString m_executablePath;
+    /// Extracts list of filenames stored in the ZIP archive
+    static QStringList listZipEntries(const QString& zipFilePath, QString* errorMessage = nullptr);
 };
 
 } // namespace vectorpdf::conversion
 
-#endif // VECTORPDF_VERAPDFWORKER_H
+#endif // VECTORPDF_OOXMLPACKAGEVALIDATOR_H

@@ -20,56 +20,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef VECTORPDF_VERAPDFWORKER_H
-#define VECTORPDF_VERAPDFWORKER_H
+#ifndef VECTORPDF_PDFACONFORMANCEANALYZER_H
+#define VECTORPDF_PDFACONFORMANCEANALYZER_H
 
-#include "conversionworkerprotocol.h"
-#include <QString>
-#include <QStringList>
+#include "../conversionglobal.h"
+#include "pdfaconformanceprofile.h"
+#include "pdfaconversionreport.h"
+
+namespace pdf
+{
+class PDFDocument;
+}
 
 namespace vectorpdf::conversion
 {
 
-enum class ValidationAvailability
-{
-    Available,
-    Unavailable,
-    FailedToRun
-};
-
-enum class ConformanceState
-{
-    Conformant,
-    NonConformant,
-    Unknown
-};
-
-struct VeraPdfValidationReport
-{
-    ValidationAvailability availability = ValidationAvailability::Unavailable;
-    ConformanceState conformance = ConformanceState::Unknown;
-    bool isValidated = false;
-    bool isCompliant = false;
-    QString profile;
-    QString statement;
-    QStringList failedRules;
-};
-
-class VECTORPDF_CONVERSION_EXPORT VeraPdfWorker
+class VECTORPDF_CONVERSION_EXPORT PdfAConformanceAnalyzer
 {
 public:
-    explicit VeraPdfWorker(const QString& executablePath = QString());
-
-    bool isAvailable() const;
-    QString executablePath() const;
-
-    /// Validates a PDF file against the requested PDF/A profile using veraPDF CLI
-    VeraPdfValidationReport validate(const QString& pdfFilePath, ConversionFormat profile, CancelToken* cancelToken = nullptr);
-
-private:
-    QString m_executablePath;
+    static PdfAAnalysisReport analyze(const pdf::PDFDocument* document, PdfAProfile profile);
 };
 
 } // namespace vectorpdf::conversion
 
-#endif // VECTORPDF_VERAPDFWORKER_H
+#endif // VECTORPDF_PDFACONFORMANCEANALYZER_H

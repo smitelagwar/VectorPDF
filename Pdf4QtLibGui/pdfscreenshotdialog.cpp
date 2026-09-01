@@ -25,33 +25,92 @@
 #include <QScreen>
 #include <QPainter>
 #include <QMouseEvent>
+#include <QKeyEvent>
 #include <QCursor>
 
 namespace vectorpdf::gui
 {
 
 PDFScreenshotDialog::PDFScreenshotDialog(QWidget* parent)
-    : QDialog(parent, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint)
+    : QDialog(parent, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::BypassWindowManagerHint)
 {
     setCursor(Qt::CrossCursor);
-    QScreen* screen = QGuiApplication::primaryScreen();
-    if (screen)
-    {
-        m_fullScreenPixmap = screen->grabWindow(0);
-        setGeometry(screen->geometry());
-    }
-
+    grabVirtualDesktop();
     m_rubberBand = new QRubberBand(QRubberBand::Rectangle, this);
 }
 
-QImage PDFScreenshotDialog::captureFullScreen()
+QStringList PDFScreenshotDialog::availableScreenNames()
 {
-    QScreen* screen = QGuiApplication::primaryScreen();
-    if (screen)
+    QStringList names;
+    const auto screens = QGuiApplication::screens();
+    for (int i = 0; i < screens.size(); ++i)
     {
-        return screen->grabWindow(0).toImage();
+        names.append(QStringLiteral("Monitor %1 (%2x%3)").arg(i + 1)
+                     .arg(screens[i]->geometry().width())
+                     .arg(screens[i]->geometry().height()));
     }
-    return QImage();
+    return names;
+}
+
+void PDFScreenshotDialog::grabVirtualDesktop()
+{
+    const auto screens = QGuiApplication::screens();
+    if (screens.isEmpty()) return;
+
+    QRect unionGeom = screens.first()->geometry();
+    for (QScreen* scr : screens)
+    {
+        unionGeom = unionGeom.united(scr->geometry());
+    }
+
+    m_virtualGeometry = unionGeom;
+    setGeometry(m_virtualGeometry);
+
+    QPixmap combined(m_virtualGeometry.size());
+    combined.fill(Qt::black);
+    QPainter p(&combined);
+
+    for (QScreen* scr : screens)
+    {
+        QPixmap sp = scr->grabWindow(0);
+        QPoint offset = scr->geometry().topLeft() - m_virtualGeometry.topLeft();
+        p.drawPixmap(offset, sp);
+    }
+    p.end();
+
+    m_virtualDesktopPixmap = combined;
+}
+
+QImage PDFScreenshotDialog::captureFullScreen(int monitorIndex)
+{
+    const auto screens = QGuiApplication::screens();
+    if (screens.isEmpty()) return QImage();
+
+    if (monitorIndex >= 0 && monitorIndex < screens.size())
+    {
+        return screens[monitorIndex]->grabWindow(0).toImage();
+    }
+
+    // Capture virtual desktop (all monitors)
+    QRect unionGeom = screens.first()->geometry();
+    for (QScreen* scr : screens)
+    {
+        unionGeom = unionGeom.united(scr->geometry());
+    }
+
+    QImage combined(unionGeom.size(), QImage::Format_RGB32);
+    combined.fill(Qt::black);
+    QPainter p(&combined);
+
+    for (QScreen* scr : screens)
+    {
+        QPixmap sp = scr->grabWindow(0);
+        QPoint offset = scr->geometry().topLeft() - unionGeom.topLeft();
+        p.drawPixmap(offset, sp);
+    }
+    p.end();
+
+    return combined;
 }
 
 QImage PDFScreenshotDialog::captureRegion(QWidget* parent)
@@ -100,7 +159,7 @@ void PDFScreenshotDialog::mouseReleaseEvent(QMouseEvent* event)
 
         if (rect.width() > 5 && rect.height() > 5)
         {
-            m_capturedImage = m_fullScreenPixmap.copy(rect).toImage();
+            m_capturedImage = m_virtualDesktopPixmap.copy(rect).toImage();
             accept();
         }
         else
@@ -110,13 +169,25 @@ void PDFScreenshotDialog::mouseReleaseEvent(QMouseEvent* event)
     }
 }
 
+void PDFScreenshotDialog::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() == Qt::Key_Escape)
+    {
+        reject();
+    }
+    else
+    {
+        QDialog::keyPressEvent(event);
+    }
+}
+
 void PDFScreenshotDialog::paintEvent(QPaintEvent* event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
-    if (!m_fullScreenPixmap.isNull())
+    if (!m_virtualDesktopPixmap.isNull())
     {
-        painter.drawPixmap(0, 0, m_fullScreenPixmap);
+        painter.drawPixmap(0, 0, m_virtualDesktopPixmap);
         // Dim the background slightly to highlight region selection
         painter.fillRect(rect(), QColor(0, 0, 0, 80));
     }

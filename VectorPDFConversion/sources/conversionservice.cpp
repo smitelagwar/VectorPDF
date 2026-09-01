@@ -22,6 +22,7 @@
 
 #include "conversionservice.h"
 #include <QMutexLocker>
+#include <QThread>
 
 namespace vectorpdf::conversion
 {
@@ -44,7 +45,7 @@ ConversionJob* ConversionService::enqueue(const ConversionRequest& request)
 
     {
         QMutexLocker locker(&m_mutex);
-        m_jobs[request.jobId] = job;
+        m_activeJobs[request.jobId] = job;
     }
 
     connect(job, &ConversionJob::stageChanged, this, [this, job](ConversionStage stage, const QString& message) {
@@ -60,6 +61,27 @@ ConversionJob* ConversionService::enqueue(const ConversionRequest& request)
     });
 
     connect(job, &ConversionJob::finished, this, [this, job](const ConversionResult& result) {
+        {
+            QMutexLocker locker(&m_mutex);
+            m_activeJobs.remove(job->request().jobId);
+
+            ConversionJobSummary summary;
+            summary.jobId = job->request().jobId;
+            summary.format = job->request().format;
+            summary.status = result.status;
+            summary.sourcePath = job->request().sourcePath;
+            summary.outputPath = result.outputPath;
+            summary.elapsedMs = result.elapsedMilliseconds;
+            summary.outputSizeBytes = result.outputSizeBytes;
+
+            m_history.append(summary);
+            // Cap history to 500 items
+            if (m_history.size() > 500)
+            {
+                m_history.removeFirst();
+            }
+        }
+
         emit jobFinished(job, result);
     });
 
@@ -79,7 +101,7 @@ ConversionResult ConversionService::executeSync(const ConversionRequest& request
 void ConversionService::cancelJob(const QString& jobId)
 {
     QMutexLocker locker(&m_mutex);
-    ConversionJob* job = m_jobs.value(jobId, nullptr);
+    ConversionJob* job = m_activeJobs.value(jobId, nullptr);
     if (job)
     {
         job->cancel();
@@ -89,7 +111,7 @@ void ConversionService::cancelJob(const QString& jobId)
 void ConversionService::cancelAll()
 {
     QMutexLocker locker(&m_mutex);
-    for (ConversionJob* job : m_jobs)
+    for (ConversionJob* job : m_activeJobs)
     {
         if (job)
         {
@@ -101,13 +123,19 @@ void ConversionService::cancelAll()
 QList<ConversionJob*> ConversionService::getActiveJobs() const
 {
     QMutexLocker locker(&m_mutex);
-    return m_jobs.values();
+    return m_activeJobs.values();
 }
 
 ConversionJob* ConversionService::getJob(const QString& jobId) const
 {
     QMutexLocker locker(&m_mutex);
-    return m_jobs.value(jobId, nullptr);
+    return m_activeJobs.value(jobId, nullptr);
+}
+
+QList<ConversionJobSummary> ConversionService::getJobHistory() const
+{
+    QMutexLocker locker(&m_mutex);
+    return m_history;
 }
 
 } // namespace vectorpdf::conversion

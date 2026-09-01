@@ -20,56 +20,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef VECTORPDF_VERAPDFWORKER_H
-#define VECTORPDF_VERAPDFWORKER_H
+#ifndef VECTORPDF_MULTIPAGETIFFWRITER_H
+#define VECTORPDF_MULTIPAGETIFFWRITER_H
 
-#include "conversionworkerprotocol.h"
+#include "../conversionglobal.h"
+#include <QImage>
+#include <QList>
 #include <QString>
-#include <QStringList>
 
 namespace vectorpdf::conversion
 {
 
-enum class ValidationAvailability
-{
-    Available,
-    Unavailable,
-    FailedToRun
-};
-
-enum class ConformanceState
-{
-    Conformant,
-    NonConformant,
-    Unknown
-};
-
-struct VeraPdfValidationReport
-{
-    ValidationAvailability availability = ValidationAvailability::Unavailable;
-    ConformanceState conformance = ConformanceState::Unknown;
-    bool isValidated = false;
-    bool isCompliant = false;
-    QString profile;
-    QString statement;
-    QStringList failedRules;
-};
-
-class VECTORPDF_CONVERSION_EXPORT VeraPdfWorker
+class VECTORPDF_CONVERSION_EXPORT MultiPageTiffWriter
 {
 public:
-    explicit VeraPdfWorker(const QString& executablePath = QString());
+    /// Writes multiple QImages as consecutive directories (pages) in a single TIFF file
+    static bool writeMultiPageTiff(const QList<QImage>& pages,
+                                   const QString& targetTiffPath,
+                                   int dpi = 300,
+                                   QString* errorMessage = nullptr);
 
-    bool isAvailable() const;
-    QString executablePath() const;
-
-    /// Validates a PDF file against the requested PDF/A profile using veraPDF CLI
-    VeraPdfValidationReport validate(const QString& pdfFilePath, ConversionFormat profile, CancelToken* cancelToken = nullptr);
-
-private:
-    QString m_executablePath;
+    /// Reads and counts the number of Image File Directories (pages) in a TIFF file
+    static int countDirectories(const QString& tiffPath, QString* errorMessage = nullptr);
 };
 
 } // namespace vectorpdf::conversion
 
-#endif // VECTORPDF_VERAPDFWORKER_H
+#endif // VECTORPDF_MULTIPAGETIFFWRITER_H

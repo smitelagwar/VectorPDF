@@ -1,0 +1,47 @@
+name: Windows 11 x64 Build & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: windows-2022
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Ninja
+        uses: ashley-taylor/configure-ninja@v1.0.3
+
+      - name: Install Qt6
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.6.2'
+          arch: 'win64_msvc2019_64'
+          modules: 'qtimageformats qtsvg qttools'
+
+      - name: Setup vcpkg dependencies
+        run: |
+          vcpkg install tbb openssl lcms zlib openjpeg freetype libjpeg-turbo libpng blend2d --triplet x64-windows
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -S . -G "Ninja" `
+            -DCMAKE_BUILD_TYPE=Release `
+            -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" `
+            -DPDF4QT_QT_ROOT="$env:Qt6_DIR" `
+            -DPDF4QT_BUILD_TESTS=ON
+
+      - name: Build VectorPDF Suite
+        run: |
+          cmake --build build --config Release -j8
+
+      - name: Run Full Unit & Conversion Tests
+        run: |
+          ctest --test-dir build -C Release --output-on-failure
