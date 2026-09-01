@@ -29,9 +29,10 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication a(argc, argv);
-    QCoreApplication::setOrganizationName("MelkaJ");
-    QCoreApplication::setApplicationName("PdfTool");
+    QCoreApplication::setOrganizationName("VectorPDF");
+    QCoreApplication::setApplicationName("VectorPDF CLI Tool");
     QCoreApplication::setApplicationVersion(pdf::PDF_LIBRARY_VERSION);
+
 
     QStringList arguments = QCoreApplication::arguments();
 

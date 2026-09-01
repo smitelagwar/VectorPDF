@@ -68,10 +68,11 @@ int main(int argc, char *argv[])
     QApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents, true);
     QApplication application(argc, argv);
 
-    QCoreApplication::setOrganizationName("MelkaJ");
-    QCoreApplication::setApplicationName("PDF4QT PageMaster");
+    QCoreApplication::setOrganizationName("VectorPDF");
+    QCoreApplication::setApplicationName("VectorPDF PageMaster");
     QCoreApplication::setApplicationVersion(pdf::PDF_LIBRARY_VERSION);
-    QApplication::setApplicationDisplayName(QApplication::translate("Application", "PDF4QT PageMaster"));
+    QApplication::setApplicationDisplayName(QApplication::translate("Application", "VectorPDF PageMaster"));
+
 
     QCommandLineOption noDrm("no-drm", "Disable DRM settings of documents.");
     QCommandLineOption lightGui("theme-light", "Use a light theme for the GUI.");

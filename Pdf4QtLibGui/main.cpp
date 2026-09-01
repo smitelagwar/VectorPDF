@@ -34,10 +34,11 @@ int main(int argc, char *argv[])
     QApplication::setAttribute(Qt::AA_DontCheckOpenGLContextThreadAffinity, true);
     QApplication application(argc, argv);
 
-    QCoreApplication::setOrganizationName("MelkaJ");
-    QCoreApplication::setApplicationName("PDF4QT Editor");
+    QCoreApplication::setOrganizationName("VectorPDF");
+    QCoreApplication::setApplicationName("VectorPDF Editor");
     QCoreApplication::setApplicationVersion("1.0.0");
-    QApplication::setApplicationDisplayName(QApplication::translate("Application", "PDF4QT Editor"));
+    QApplication::setApplicationDisplayName(QApplication::translate("Application", "VectorPDF Editor"));
+
     QCommandLineParser parser;
     QCommandLineOption configPath = pdf::PDFSettings::getConfigPathOption();
     parser.setApplicationDescription(QCoreApplication::applicationName());

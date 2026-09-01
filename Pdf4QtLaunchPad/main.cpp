@@ -37,9 +37,10 @@ int main(int argc, char *argv[])
     QApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents, true);
     QApplication application(argc, argv);
 
-    QCoreApplication::setOrganizationName("MelkaJ");
-    QCoreApplication::setApplicationName("PDF4QT LaunchPad");
-    QApplication::setApplicationDisplayName(QApplication::translate("Application", "PDF4QT LaunchPad"));
+    QCoreApplication::setOrganizationName("VectorPDF");
+    QCoreApplication::setApplicationName("VectorPDF LaunchPad");
+    QApplication::setApplicationDisplayName(QApplication::translate("Application", "VectorPDF LaunchPad"));
+
 
     QCommandLineParser parser;
     QCommandLineOption configPath = pdf::PDFSettings::getConfigPathOption();
